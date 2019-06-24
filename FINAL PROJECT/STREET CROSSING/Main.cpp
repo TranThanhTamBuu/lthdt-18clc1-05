@@ -4,4 +4,5 @@ int main()
 {
 	FixConsoleWindow();
 
+	cout << "Hello word!" << endl;
 }

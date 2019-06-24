@@ -24,7 +24,6 @@ unsigned int whereY() {
 	return csbi.dwCursorPosition.Y;
 }
 
-void textColor(const unsigned int& color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
+void setColor(int textColor, int bgColor) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (textColor + (bgColor * 16)));
 }
