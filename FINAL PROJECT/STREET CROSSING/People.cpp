@@ -1,6 +1,5 @@
 #include "People.h"
-#define STEP 5
-
+#define STEP 2
 
 People::People()
 	: Object(), state(true), model(1)  {

@@ -5,12 +5,6 @@
 
 using namespace std;
 
-void FixConsoleWindow();
-void gotoXY(const unsigned int &x, const unsigned int &y);
-unsigned int whereX();
-unsigned int whereY();
-void setColor(int textColor, int bgColor);
-
 /*
 Color          Text      Background
 -----------------------------------
@@ -31,3 +25,13 @@ Intense Magenta  13          -
 Yellow           14          -
 Intense White    15          -
 */
+
+void FixConsoleWindow();
+void FixSizeWindow(int width, int height);
+void RemoveScrollBar();
+void gotoXY(const unsigned int &x, const unsigned int &y);
+unsigned int whereX();
+unsigned int whereY();
+void setColor(int textColor, int bgColor);
+
+
