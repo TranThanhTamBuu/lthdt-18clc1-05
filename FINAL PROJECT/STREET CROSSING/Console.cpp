@@ -1,5 +1,5 @@
 #include "Console.h"
-#define X_max 155
+#define X_max 158
 #define Y_max 42
 
 
