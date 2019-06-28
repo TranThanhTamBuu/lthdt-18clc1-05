@@ -1,10 +1,8 @@
 #include "People.h"
-#include <conio.h>
-
 
 int main() {
 	FixConsoleWindow();
-	FixSizeWindow(1280, 720);
+	FixSizeWindow(WIDTH, HEIGHT);
 	RemoveScrollBar();
 	People player;
 	char key = ' ';

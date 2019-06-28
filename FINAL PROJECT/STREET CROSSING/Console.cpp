@@ -1,7 +1,4 @@
 #include "Console.h"
-#define X_max 158
-#define Y_max 42
-
 
 void FixConsoleWindow() {
 	HWND consoleWindow = GetConsoleWindow();

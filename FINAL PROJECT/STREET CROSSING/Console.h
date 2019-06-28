@@ -3,6 +3,11 @@
 #include <Windows.h>
 #include <conio.h>
 
+#define WIDTH 1280
+#define HEIGHT 720
+#define X_max 158
+#define Y_max 42
+
 using namespace std;
 
 /*
