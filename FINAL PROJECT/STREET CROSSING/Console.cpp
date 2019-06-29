@@ -43,6 +43,12 @@ unsigned int whereY() {
 	return csbi.dwCursorPosition.Y;
 }
 
+void printSpace(int num) {
+	for (int i = 0; i < num; i++) {
+		cout << " ";
+	}
+}
+
 void setColor(int textColor, int bgColor) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (textColor + (bgColor * 16)));
 }

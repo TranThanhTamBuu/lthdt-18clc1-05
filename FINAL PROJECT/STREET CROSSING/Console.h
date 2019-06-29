@@ -37,6 +37,7 @@ void RemoveScrollBar();
 void gotoXY(const unsigned int &x, const unsigned int &y);
 unsigned int whereX();
 unsigned int whereY();
+void printSpace(int num);
 void setColor(int textColor, int bgColor);
 
 
