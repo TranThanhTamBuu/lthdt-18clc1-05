@@ -3,9 +3,6 @@
 #include <string>
 
 
-
-
-
 class Vehicle
 {
 protected:
