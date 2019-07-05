@@ -8,8 +8,8 @@
 #include <io.h>
 #include <fcntl.h>
 
-#define WIDTH 1280
-#define HEIGHT 720
+#define WIDTH 158
+#define HEIGHT 42
 #define X_max 158
 #define Y_max 42
 

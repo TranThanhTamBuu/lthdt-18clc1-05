@@ -24,7 +24,7 @@ int main() {
 	}*/
 
 	// Test character movement
-	/*_setmode(_fileno(stdout), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	People p;
 	while (true) {
 		char key;
@@ -35,7 +35,7 @@ int main() {
 			p.updatePosPeople(key);
 			p.draw();
 		}
-	}*/
+	}
 
 	system("pause");
 	return 0;

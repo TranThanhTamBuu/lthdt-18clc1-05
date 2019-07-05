@@ -123,18 +123,26 @@
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="DirectionState.cpp" />
     <ClCompile Include="GAME.cpp" />
+    <ClCompile Include="Left.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="People.cpp" />
+    <ClCompile Include="Right.cpp" />
+    <ClCompile Include="Stay.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="DirectionState.h" />
     <ClInclude Include="GAME.h" />
+    <ClInclude Include="Left.h" />
     <ClInclude Include="People.h" />
+    <ClInclude Include="Right.h" />
+    <ClInclude Include="Stay.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Vehicle.h" />
   </ItemGroup>

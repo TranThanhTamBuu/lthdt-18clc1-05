@@ -3,7 +3,7 @@
 #include "Left.h"
 #include "Right.h"
 #include "Stay.h"
-#define STEP 4
+#define STEP 1
 #define Wi 7
 #define He 3
 
