@@ -8,6 +8,7 @@ int main() {
 	FixConsoleWindow();
 	FixSizeWindow(WIDTH, HEIGHT);
 	RemoveScrollBar();
+	ShowConsoleCursor(false);
 
 	/*Car c(-20, 0);
 	char key = ' ';
@@ -24,7 +25,7 @@ int main() {
 	}*/
 
 	// Test character movement
-	/*_setmode(_fileno(stdout), _O_U16TEXT);
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	People p;
 	while (true) {
 		char key;
@@ -35,7 +36,7 @@ int main() {
 			p.updatePosPeople(key);
 			p.draw();
 		}
-	}*/
+	}
 
 	system("pause");
 	return 0;
