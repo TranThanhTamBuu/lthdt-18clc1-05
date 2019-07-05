@@ -1,64 +1,48 @@
 #include "People.h"
-#define STEP 2
+#include "DirectionState.h"
+#include "Left.h"
+#include "Right.h"
+#include "Stay.h"
+#define STEP 4
+#define Wi 7
+#define He 3
 
 People::People()
 	: Object(), state(true), model(1)  {
+	currentDirectionState = new Stay();
 }
 
 People::~People()
 {
+	delete currentDirectionState;
 }
 
 void People::goUp(int step) {
-	clear();
-	y -= step;
-	gotoXY(x, y);
-	draw();
+	if (y >= 0 + 5) {
+		y -= step;
+	}
 }
 
 void People::goDown(int step) {
-	clear();
-	y += step;
-	gotoXY(x, y);
-	draw();
+	if (y <= Y_max - 3) {
+		y += step;
+	}
 }
 
 void People::goLeft(int step) {
-	clear();
-	x -= step;
-	gotoXY(x, y);
-	draw();
+	if (x >= 0 + STEP + (Wi-1)/2) {
+		x -= step;
+	}
 }
 
 void People::goRight(int step) {
-	clear();
-	x += step;
-	gotoXY(x, y);
-	draw();
+	if (x <= 165) {
+		x += step;
+	}
 }
 
 void People::draw() {
-	switch (model) {
-	case 0: {
-		cout << " () ";
-		gotoXY(x, y + 1);
-		cout << "/||\\";
-		gotoXY(x, y + 2);
-		cout << " /\\ ";
-		break;
-	}
-	case 1: {
-		cout << "  {~} ";
-		gotoXY(x, y + 1);
-		cout << " /###\\";
-		gotoXY(x, y + 2);
-		cout << "/ === \\";
-		gotoXY(x, y + 3);
-		cout << " || ||";
-		break;
-	}
-	}
-	
+	currentDirectionState->draw(this, x, y, model);
 }
 
 void People::clear() {
@@ -92,23 +76,48 @@ bool People::isDead() {
 	return state;
 }
 
-void People::move(char key) {
+void People::updatePosPeople(char key) {
 	switch (key) {
 	case 'W': case 'w': {
 		goUp(STEP);
+		changeDirectionState(STAY);
 		break;
 	}
 	case 'S': case 's': {
 		goDown(STEP);
+		changeDirectionState(STAY);
 		break;
 	}
 	case 'D': case 'd': {
 		goRight(STEP);
+		changeDirectionState(RIGHT);
 		break;
 	}
 	case 'A': case 'a': {
 		goLeft(STEP);
+		changeDirectionState(LEFT);
 		break;
 	}
+	}
+}
+
+void People::changeDirectionState(DState dSta) {
+	if (currentDirectionState->getCurrentState() != dSta) {
+		delete currentDirectionState;
+
+		switch (dSta) {
+		case STAY: {
+			currentDirectionState = new Stay();
+			break;
+		}
+		case LEFT: {
+			currentDirectionState = new Left();
+			break;
+		}
+		case RIGHT: {
+			currentDirectionState = new Right();
+			break;
+		}
+		}
 	}
 }

@@ -1,7 +1,12 @@
 #pragma once
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <Windows.h>
 #include <conio.h>
+#include <cwchar>
+#include <io.h>
+#include <fcntl.h>
 
 #define WIDTH 1280
 #define HEIGHT 720
@@ -39,5 +44,5 @@ unsigned int whereX();
 unsigned int whereY();
 void printSpace(int num);
 void setColor(int textColor, int bgColor);
-
+void clrscr();
 

@@ -2,6 +2,8 @@
 #include "People.h"
 #include "Car.h"
 #include "Train.h"
+#include <vector>
+#include "Console.h"
 
 class GAME
 {

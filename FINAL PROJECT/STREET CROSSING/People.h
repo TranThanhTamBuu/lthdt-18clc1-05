@@ -5,12 +5,18 @@
 using namespace std;
 
 
+class DirectionState;
+enum DState {
+	STAY, LEFT, RIGHT
+};
+
 class People: public Object
 {
 public:
 	People();
 	virtual ~People();
 
+	void changeDirectionState(DState);
 	void goUp(int step);
 	void goDown(int step);
 	void goLeft(int step);
@@ -20,10 +26,11 @@ public:
 	bool isFinish();
 	void draw();
 	void clear();
-	void move(char key);
+	void updatePosPeople(char key);
 
 private:
 	bool state;
 	unsigned int model;
+	DirectionState *currentDirectionState;
 };
 
