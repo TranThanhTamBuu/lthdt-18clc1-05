@@ -8,6 +8,7 @@ int main() {
 	FixConsoleWindow();
 	FixSizeWindow(WIDTH, HEIGHT);
 	RemoveScrollBar();
+	ShowConsoleCursor(false);
 
 	/*Car c(-20, 0);
 	char key = ' ';

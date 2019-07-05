@@ -38,6 +38,7 @@ void Left::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mod
 				}
 			}
 		}
+		gotoXY(x, y);
 		break;
 	}
 	}

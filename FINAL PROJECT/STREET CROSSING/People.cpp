@@ -18,25 +18,25 @@ People::~People()
 }
 
 void People::goUp(int step) {
-	if (y >= 0 + 5) {
+	if (y >= 0 + He - 1) {
 		y -= step;
 	}
 }
 
 void People::goDown(int step) {
-	if (y <= Y_max - 3) {
+	if (y <= Y_max - He) {
 		y += step;
 	}
 }
 
 void People::goLeft(int step) {
-	if (x >= 0 + STEP + (Wi-1)/2) {
+	if (x >= 0 + STEP + (Wi - 1) / 2) {
 		x -= step;
 	}
 }
 
 void People::goRight(int step) {
-	if (x <= 165) {
+	if (x <= X_max - ((Wi - 1) / 2) - 2) {
 		x += step;
 	}
 }

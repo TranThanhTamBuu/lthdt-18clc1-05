@@ -45,4 +45,4 @@ unsigned int whereY();
 void printSpace(int num);
 void setColor(int textColor, int bgColor);
 void clrscr();
-
+void ShowConsoleCursor(bool showFlag);

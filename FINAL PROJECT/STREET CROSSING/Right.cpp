@@ -39,6 +39,7 @@ void Right::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mo
 				}
 			}
 		}
+		gotoXY(x, y);
 		break;
 	}
 	}
