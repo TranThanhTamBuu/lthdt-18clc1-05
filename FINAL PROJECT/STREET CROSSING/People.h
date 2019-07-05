@@ -2,6 +2,7 @@
 #include "Object.h"
 #include "Console.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 
@@ -27,6 +28,7 @@ public:
 	void draw();
 	void clear();
 	void updatePosPeople(char key);
+	bool chooseModel();
 
 private:
 	bool state;

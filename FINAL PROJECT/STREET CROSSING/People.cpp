@@ -121,3 +121,7 @@ void People::changeDirectionState(DState dSta) {
 		}
 	}
 }
+
+//bool People::chooseModel() {
+//
+//}
