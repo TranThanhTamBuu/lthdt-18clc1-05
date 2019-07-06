@@ -1,5 +1,10 @@
 #include "Car.h"
 
+Car::Car() 
+{
+	pcar = car;
+}
+
 Car::Car(int x, int y) : Vehicle(x, y)
 {
 	pcar = car;
@@ -11,10 +16,6 @@ Car::~Car()
 }
 
 void Car::move(int step) {
-	string temp;
-	int length;
-
-
 	clear();
 	mX += step;
 
@@ -22,13 +23,18 @@ void Car::move(int step) {
 	if (flag < 0) {
 		mX = X_max - 1;
 	}
+}
+
+void Car::draw() {
+	wstring temp;
+	int length;
 
 	if (mX + pcar[0].length() >= X_max) {
 		length = X_max - mX;
 		for (int i = 0; i < 4; i++) {
 			temp = pcar[i].substr(0, length);
 			gotoXY(mX, mY + i);
-			cout << temp;
+			wcout << temp;
 		}
 	}
 
@@ -37,14 +43,14 @@ void Car::move(int step) {
 		for (int i = 0; i < 4; i++) {
 			temp = pcar[i].substr(pcar[0].length() - length, length);
 			gotoXY(0, mY + i);
-			cout << temp;
+			wcout << temp;
 		}
 	}
 
 	if (mX >= 0 && mX + pcar[0].length() < X_max) {
 		for (int i = 0; i < 4; i++) {
 			gotoXY(mX, mY + i);
-			cout << pcar[i];
+			wcout << pcar[i];
 		}
 	}
 }
@@ -63,9 +69,26 @@ void Car::clear() {
 	if (mX >= 0 && mX + pcar[0].length() < X_max) {
 		length = pcar[0].length();
 	}
-
+	
 	for (int i = 0; i < 4; i++) {
-		gotoXY(mX, mY + i);
+		gotoXY((mX<0)? 0:mX, mY + i);
 		printSpace(length);
 	}
+}
+
+Car** createCars(int yCar[], int lineCar, int *numCar) {
+	Car** carPtr = new Car*[lineCar];
+	for (int i = 0; i < lineCar; i++) {
+		carPtr[i] = new Car[numCar[i]];
+	}
+
+	for (int i = 0; i < lineCar; i++) {
+		int d = (X_max - car[0].length()*numCar[i]) / numCar[i];
+		for (int j = 0; j < numCar[i]; j++) {
+			int xCar = d / 2 + j * (d + car[0].length());
+			carPtr[i][j].set(xCar, yCar[i]);
+		}
+	}
+
+	return carPtr;
 }

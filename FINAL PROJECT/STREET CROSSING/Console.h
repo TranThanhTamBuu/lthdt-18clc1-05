@@ -7,6 +7,7 @@
 #include <cwchar>
 #include <io.h>
 #include <fcntl.h>
+#include <thread>
 
 #define WIDTH 158
 #define HEIGHT 42

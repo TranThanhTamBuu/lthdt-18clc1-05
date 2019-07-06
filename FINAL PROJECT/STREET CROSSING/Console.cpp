@@ -54,7 +54,7 @@ unsigned int whereY() {
 
 void printSpace(int num) {
 	for (int i = 0; i < num; i++) {
-		cout << " ";
+		wcout << " ";
 	}
 }
 

@@ -4,34 +4,39 @@
 #include "GAME.h"
 #include "Console.h"
 
-
 char MOVING = ' ';
 
 void SubThread(GAME &game);
 
 int main() {
+	_setmode(_fileno(stdout), _O_U16TEXT);
 	FixConsoleWindow();
 	FixSizeWindow(WIDTH, HEIGHT);
 	RemoveScrollBar();
 	ShowConsoleCursor(false);
-	
-	/*Car c(-20, 0);
+
+
+	/*Car c(0, 0);
 	char key = ' ';
 	while (true) {
-		c.move(-1);
+		c.move(-2);
+		c.draw();
 		Sleep(50);
 	}*/
 
 	/*Train t(158, 0);
 	char key = ' ';
 	while (true) {
-		t.move(1);
+		t.move(2);
+		t.draw();
 		Sleep(50);
 	}*/
 
 	
-	GAME game;
+	GAME game(1);
 	SubThread(game);
+
+	
 
 	system("pause");
 	return 0;
@@ -39,25 +44,20 @@ int main() {
 
 void SubThread(GAME &game)
 {
-	Train t(158, 0);
-	Car c(-20, 7);
-
 	while (true) {
-
-		//Viet cai di chuyen cua People vao day di dai
-		// Test character movement
-		_setmode(_fileno(stdout), _O_U16TEXT);
-		char key;
+		char key = ' ';
 		if (_kbhit())
 		{
 			int key = _getch();
 			clrscr();
 			game.updatePosPeople(key);
-			// game.updatePos...
-			// game.updatePos...
-			game.drawAll();
-		}
 
+		}
+		game.updatePosCars();
+		game.updatePosTrains();
+		// game.updatePos...
+		game.drawAll();
+		Sleep(100);
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
 		
 		/*MOVING = ' ';
@@ -71,9 +71,5 @@ void SubThread(GAME &game)
 		// wstring str;
 		// str = L"Test";
 		// wcout << str << endl;
-
-
-
-		
 	}
 }
