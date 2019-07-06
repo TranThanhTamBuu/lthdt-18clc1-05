@@ -76,31 +76,6 @@ bool People::isDead() {
 	return state;
 }
 
-void People::updatePosPeople(char key) {
-	switch (key) {
-	case 'W': case 'w': {
-		goUp(STEP);
-		changeDirectionState(STAY);
-		break;
-	}
-	case 'S': case 's': {
-		goDown(STEP);
-		changeDirectionState(STAY);
-		break;
-	}
-	case 'D': case 'd': {
-		goRight(STEP);
-		changeDirectionState(RIGHT);
-		break;
-	}
-	case 'A': case 'a': {
-		goLeft(STEP);
-		changeDirectionState(LEFT);
-		break;
-	}
-	}
-}
-
 void People::changeDirectionState(DState dSta) {
 	if (currentDirectionState->getCurrentState() != dSta) {
 		delete currentDirectionState;

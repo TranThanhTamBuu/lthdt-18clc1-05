@@ -15,5 +15,7 @@ private:
 public:
 	GAME();
 	~GAME();
+	void updatePosPeople(char);
+	void drawAll();
 };
 

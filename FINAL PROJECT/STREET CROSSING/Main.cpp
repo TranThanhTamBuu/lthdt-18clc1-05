@@ -4,9 +4,10 @@
 #include "GAME.h"
 #include "Console.h"
 
+
 char MOVING = ' ';
 
-void SubThread();
+void SubThread(GAME &game);
 
 int main() {
 	FixConsoleWindow();
@@ -28,39 +29,47 @@ int main() {
 		Sleep(50);
 	}*/
 
-	// Test character movement
-	/*_setmode(_fileno(stdout), _O_U16TEXT);
-	People p;
-	while (true) {
-		char key;
-		if (_kbhit())
-		{
-			int key = _getch();
-			clrscr();
-			p.updatePosPeople(key);
-			p.draw();
-		}
-	}*/
-
-	SubThread();
+	
+	GAME game;
+	SubThread(game);
 
 	system("pause");
 	return 0;
 }
 
-void SubThread()
+void SubThread(GAME &game)
 {
-	People p;
 	Train t(158, 0);
 	Car c(-20, 7);
 
 	while (true) {
 
 		//Viet cai di chuyen cua People vao day di dai
+		// Test character movement
+		_setmode(_fileno(stdout), _O_U16TEXT);
+		char key;
+		if (_kbhit())
+		{
+			int key = _getch();
+			clrscr();
+			game.updatePosPeople(key);
+			// game.updatePos...
+			// game.updatePos...
+			game.drawAll();
+		}
 
-		MOVING = ' ';
-		c.move(-1);
+		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
+		// tại phải xài wcout hết mới được, string thì wstring, cin thì wcin, char thì wchar_t
+		// ví dụ, phải thêm chữ L ngoài trước
+		// wstring str;
+		// str = L"Test";
+		// wcout << str << endl;
+
+
+
+		/*MOVING = ' ';
+		c.move(-1);					
 		t.move(1);
-		Sleep(50);
+		Sleep(50);*/
 	}
 }
