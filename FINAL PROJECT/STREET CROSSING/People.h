@@ -11,7 +11,7 @@ enum DState {
 	STAY, LEFT, RIGHT
 };
 
-class People: public Object
+class People : public Object
 {
 public:
 	People();
@@ -28,6 +28,7 @@ public:
 	void draw();
 	void clear();
 	bool chooseModel();
+	void test();
 
 private:
 	bool state;

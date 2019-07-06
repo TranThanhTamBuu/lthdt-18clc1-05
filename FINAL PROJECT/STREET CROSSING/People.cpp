@@ -100,3 +100,6 @@ void People::changeDirectionState(DState dSta) {
 //bool People::chooseModel() {
 //
 //}
+
+void People::test() {
+}
