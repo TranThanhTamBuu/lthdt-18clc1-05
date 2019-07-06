@@ -59,6 +59,13 @@ void SubThread(GAME &game)
 		}
 
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
+		
+		/*MOVING = ' ';
+		c.move(-1);
+		t.move(1);
+		Sleep(50);*/
+
+
 		// tại phải xài wcout hết mới được, string thì wstring, cin thì wcin, char thì wchar_t
 		// ví dụ, phải thêm chữ L ngoài trước
 		// wstring str;
@@ -67,9 +74,6 @@ void SubThread(GAME &game)
 
 
 
-		/*MOVING = ' ';
-		c.move(-1);					
-		t.move(1);
-		Sleep(50);*/
+		
 	}
 }
