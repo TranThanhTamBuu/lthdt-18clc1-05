@@ -27,6 +27,7 @@ public:
 	bool isFinish();
 	void draw();
 	void clear();
+	void updatePosPeople(char key);
 	bool chooseModel();
 	void test();
 
