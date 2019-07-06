@@ -8,14 +8,12 @@
 class GAME
 {
 private:
-	Car *Cars;
-	Train *Trains;
+	Car **Cars;
+	Train **Trains;
 	People people;
 
 public:
 	GAME();
 	~GAME();
-	void updatePosPeople(char);
-	void drawAll();
 };
 

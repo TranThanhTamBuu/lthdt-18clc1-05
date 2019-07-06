@@ -12,7 +12,7 @@ public:
 	virtual DState getCurrentState() = 0;
 	void randomColor(const wchar_t &ch) {
 		srand(time(NULL));
-		int z = rand() % 15 + 1;
+		int z = rand() % 15;
 
 		setColor(z, 0);
 		wcout << ch;
