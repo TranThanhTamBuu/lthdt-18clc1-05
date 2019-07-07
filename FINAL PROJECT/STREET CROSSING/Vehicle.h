@@ -15,6 +15,6 @@ public:
 	void set(int x, int y);
 	virtual void move(int) = 0;
 	virtual void draw() = 0;
-	virtual void clear() = 0;
+	//virtual void clear() = 0;
 };
 

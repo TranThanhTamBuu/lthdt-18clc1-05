@@ -16,7 +16,6 @@ Car::~Car()
 }
 
 void Car::move(int step) {
-	clear();
 	mX += step;
 
 	int flag = mX + pcar[0].length();
@@ -55,7 +54,7 @@ void Car::draw() {
 	}
 }
 
-void Car::clear() {
+/*void Car::clear() {
 	int length;
 
 	if (mX + pcar[0].length() >= X_max) {
@@ -74,7 +73,7 @@ void Car::clear() {
 		gotoXY((mX<0)? 0:mX, mY + i);
 		printSpace(length);
 	}
-}
+}*/
 
 Car** createCars(int yCar[], int lineCar, int *numCar) {
 	Car** carPtr = new Car*[lineCar];

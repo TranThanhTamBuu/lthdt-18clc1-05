@@ -45,11 +45,12 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
+		clrscr();
 		char key = ' ';
 		if (_kbhit())
 		{
 			int key = _getch();
-			clrscr();
+			
 			game.updatePosPeople(key);
 
 		}

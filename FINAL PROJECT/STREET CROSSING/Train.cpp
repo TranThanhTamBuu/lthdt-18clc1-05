@@ -15,7 +15,6 @@ Train::~Train()
 }
 
 void Train::move(int step) {
-	clear();
 	mX += step;
 
 	if (mX >= X_max) {
@@ -53,7 +52,7 @@ void Train::draw() {
 	}
 }
 
-void Train::clear() {
+/*void Train::clear() {
 	int length;
 	int test = ptrain[0].length();
 
@@ -73,7 +72,7 @@ void Train::clear() {
 		gotoXY(mX, mY + i);
 		printSpace(length);
 	}
-}
+}*/
 
 Train *createTrains(int yTrain[], int lineTrain) {
 	Train *trainPtr = new Train[lineTrain];
