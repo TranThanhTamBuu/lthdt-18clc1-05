@@ -26,7 +26,7 @@ void Train::draw() {
 	wstring temp;
 	int length;
 
-	if (mX < 0 && mX + ptrain[0].length() >= 0) {
+	if (mX < 0 && mX + ptrain[0].length() >= 0 && mX + ptrain[0].length() <= X_max) {
 		length = mX + ptrain[0].length();
 		for (int i = 0; i < 5; i++) {
 			temp = ptrain[i].substr(-mX - 1, length);
@@ -35,7 +35,7 @@ void Train::draw() {
 		}
 	}
 
-	if (mX <= X_max && ptrain[0].length() + mX >= X_max) {
+	if (mX >= 0 && mX <= X_max && ptrain[0].length() + mX >= X_max) {
 		length = X_max - mX;
 		for (int i = 0; i < 5; i++) {
 			temp = ptrain[i].substr(0, length);
@@ -44,10 +44,12 @@ void Train::draw() {
 		}
 	}
 
-	if (mX >= 0 && mX + ptrain[0].length() < X_max) {
+	if (mX < 0 && mX + ptrain[0].length() > X_max) {
+		length = X_max - 1;
 		for (int i = 0; i < 5; i++) {
-			gotoXY(mX, mY + i);
-			wcout << ptrain[i];
+			temp = ptrain[i].substr(-mX - 1, length);
+			gotoXY(0, mY + i);
+			wcout << temp;
 		}
 	}
 }

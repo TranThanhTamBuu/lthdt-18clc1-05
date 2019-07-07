@@ -24,7 +24,7 @@ int main() {
 		Sleep(50);
 	}*/
 
-	/*Train t(158, 0);
+	/*Train t(-2, 0);
 	char key = ' ';
 	while (true) {
 		t.move(2);
@@ -58,7 +58,7 @@ void SubThread(GAME &game)
 		game.updatePosTrains();
 		// game.updatePos...
 		game.drawAll();
-		Sleep(100);
+		Sleep(50);
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
 		
 		/*MOVING = ' ';
