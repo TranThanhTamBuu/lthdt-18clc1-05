@@ -15,3 +15,5 @@ void Vehicle::set(int x, int y, int spd) {
 	mY = y;
 	speed = spd;
 }
+
+

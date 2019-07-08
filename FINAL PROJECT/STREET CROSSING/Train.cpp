@@ -84,3 +84,4 @@ Train *createTrains(int yTrain[], int lineTrain, int *spdTrain) {
 	}
 	return trainPtr;
 }
+

@@ -74,3 +74,4 @@ void SubThread(GAME &game)
 		// wcout << str << endl;
 	}
 }
+

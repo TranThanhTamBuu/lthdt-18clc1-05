@@ -98,3 +98,4 @@ Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
 
 	return carPtr;
 }
+
