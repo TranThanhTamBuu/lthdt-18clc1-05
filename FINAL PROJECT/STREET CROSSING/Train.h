@@ -13,14 +13,15 @@ class Train : public Vehicle
 {
 private:
 	wstring *ptrain;
+	// speed > 0
 
 public:
 	Train();
-	Train(int x, int y);
+	Train(int x, int y, int speed);
 	~Train();
-	void move(int step); //step > 0
+	void move();
 	void draw();
-	//void clear();
+	void clear();
 };
 
-Train *createTrains(int yTrain[], int lineTrain);
+Train *createTrains(int yTrain[], int lineTrain, int *spdTrain);

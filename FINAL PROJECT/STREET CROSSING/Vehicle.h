@@ -6,15 +6,15 @@
 class Vehicle
 {
 protected:
-	int mX, mY;
+	int mX, mY, speed;
 
 public:
 	Vehicle();
-	Vehicle(int x, int y);
+	Vehicle(int x, int y, int spd);
 	virtual ~Vehicle();
-	void set(int x, int y);
-	virtual void move(int) = 0;
+	void set(int, int, int);
+	virtual void move() = 0;
 	virtual void draw() = 0;
-	//virtual void clear() = 0;
+	virtual void clear() = 0;
 };
 

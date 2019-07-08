@@ -12,14 +12,15 @@ class Car : public Vehicle
 {
 private:
 	wstring *pcar;
+	// speed < 0 
 
 public:
 	Car();
-	Car(int x, int y);
+	Car(int x, int y, int speed);
 	~Car();
-	void move(int step); // step < 0 
+	void move(); 
 	void draw();
-	//void clear();
+	void clear();
 };
 
-Car** createCars(int yCar[], int lineCar, int *numCar);
+Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar);

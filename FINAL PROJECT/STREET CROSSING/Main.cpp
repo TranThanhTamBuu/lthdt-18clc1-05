@@ -16,18 +16,18 @@ int main() {
 	ShowConsoleCursor(false);
 
 
-	/*Car c(0, 0);
+	/*Car c(1, 0, -5);
 	char key = ' ';
 	while (true) {
-		c.move(-2);
+		c.move();
 		c.draw();
 		Sleep(50);
 	}*/
 
-	/*Train t(-2, 0);
+	/*Train t(-5, 0, 1);
 	char key = ' ';
 	while (true) {
-		t.move(2);
+		t.move();
 		t.draw();
 		Sleep(50);
 	}*/
@@ -45,7 +45,7 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
-		clrscr();
+		//clrscr();
 		char key = ' ';
 		if (_kbhit())
 		{

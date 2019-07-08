@@ -11,13 +11,13 @@ GAME::GAME(int level)
 		int yCar[] = { 0, 11 };
 		numCar = new int[lineCar]{ 2,3 };
 		spdCar = new int[lineCar]{ -3,-2 };
-		Cars = createCars(yCar, lineCar, numCar);
+		Cars = createCars(yCar, lineCar, numCar, spdCar);
 		
 		//Train
 		lineTrain = 1;
 		int yTrain[] = { 5 };
 		spdTrain = new int[lineTrain] {5};
-		Trains = createTrains(yTrain, lineTrain);
+		Trains = createTrains(yTrain, lineTrain, spdTrain);
 		
 		//.....
 
@@ -85,14 +85,14 @@ void GAME::updatePosPeople(char key) {
 void GAME::updatePosCars() {
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
-			Cars[i][j].move(spdCar[i]);
+			Cars[i][j].move();
 		}
 	}
 }
 
 void GAME::updatePosTrains() {
 	for (int i = 0; i < lineTrain; i++) {
-		Trains[i].move(spdTrain[i]);
+		Trains[i].move();
 	}
 }
 
