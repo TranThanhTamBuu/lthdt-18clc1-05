@@ -1,5 +1,4 @@
 #include "GAME.h"
-#define STEP 1
 
 
 GAME::GAME(int level)
@@ -57,16 +56,20 @@ GAME::~GAME(){
 
 }
 
+bool GAME::chooseModel() {
+	return people.chooseModel();
+}
+
 void GAME::updatePosPeople(char key) {
 	switch (key) {
 	case 'W': case 'w': {
 		people.goUp(STEP);
-		people.changeDirectionState(STAY);
+		people.changeDirectionState(UP);
 		break;
 	}
 	case 'S': case 's': {
 		people.goDown(STEP);
-		people.changeDirectionState(STAY);
+		people.changeDirectionState(DOWN);
 		break;
 	}
 	case 'D': case 'd': {

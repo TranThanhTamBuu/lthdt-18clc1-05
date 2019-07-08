@@ -17,6 +17,7 @@ private:
 public:
 	GAME(int level);
 	~GAME();
+	bool chooseModel();
 	void updatePosPeople(char);
 	void updatePosTrains();
 	void updatePosCars();

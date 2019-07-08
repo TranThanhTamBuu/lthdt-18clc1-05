@@ -34,6 +34,7 @@ int main() {
 
 	
 	GAME game(1);
+	game.chooseModel();
 	SubThread(game);
 
 	
@@ -45,7 +46,7 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
-		clrscr();
+		// clrscr();
 		char key = ' ';
 		if (_kbhit())
 		{
