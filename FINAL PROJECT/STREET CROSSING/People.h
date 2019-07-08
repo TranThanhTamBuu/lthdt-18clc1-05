@@ -3,12 +3,16 @@
 #include "Console.h"
 #include <iostream>
 #include <string>
+#include <iomanip>
+#define Wi 7
+#define He 3
+#define STEP 5
 using namespace std;
 
 
 class DirectionState;
 enum DState {
-	STAY, LEFT, RIGHT
+	UP, DOWN, LEFT, RIGHT
 };
 
 class People : public Object
@@ -27,9 +31,7 @@ public:
 	bool isFinish();
 	void draw();
 	void clear();
-	void updatePosPeople(char key);
 	bool chooseModel();
-	void test();
 
 private:
 	bool state;

@@ -1,5 +1,4 @@
 #include "GAME.h"
-#define STEP 1
 
 
 GAME::GAME(int level)
@@ -11,13 +10,13 @@ GAME::GAME(int level)
 		int yCar[] = { 0, 11 };
 		numCar = new int[lineCar]{ 2,3 };
 		spdCar = new int[lineCar]{ -3,-2 };
-		Cars = createCars(yCar, lineCar, numCar, spdCar);
+		Cars = createCars(yCar, lineCar, numCar);
 		
 		//Train
 		lineTrain = 1;
 		int yTrain[] = { 5 };
 		spdTrain = new int[lineTrain] {5};
-		Trains = createTrains(yTrain, lineTrain, spdTrain);
+		Trains = createTrains(yTrain, lineTrain);
 		
 		//.....
 
@@ -57,16 +56,20 @@ GAME::~GAME(){
 
 }
 
+bool GAME::chooseModel() {
+	return people.chooseModel();
+}
+
 void GAME::updatePosPeople(char key) {
 	switch (key) {
 	case 'W': case 'w': {
 		people.goUp(STEP);
-		people.changeDirectionState(STAY);
+		people.changeDirectionState(UP);
 		break;
 	}
 	case 'S': case 's': {
 		people.goDown(STEP);
-		people.changeDirectionState(STAY);
+		people.changeDirectionState(DOWN);
 		break;
 	}
 	case 'D': case 'd': {
@@ -85,14 +88,14 @@ void GAME::updatePosPeople(char key) {
 void GAME::updatePosCars() {
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
-			Cars[i][j].move();
+			Cars[i][j].move(spdCar[i]);
 		}
 	}
 }
 
 void GAME::updatePosTrains() {
 	for (int i = 0; i < lineTrain; i++) {
-		Trains[i].move();
+		Trains[i].move(spdTrain[i]);
 	}
 }
 

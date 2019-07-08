@@ -2,10 +2,10 @@
 #include "DirectionState.h"
 
 
-class Left: public DirectionState {
+class Up: public DirectionState {
 public:
-	Left() = default;
-	virtual ~Left() = default;
+	Up() = default;
+	virtual ~Up() = default;
 
 	virtual void draw(People *const peoplePtr, unsigned int x, unsigned int y, int model) override;
 	virtual void clear(People *const peoplePtr, unsigned int x, unsigned int y, unsigned int step) override;

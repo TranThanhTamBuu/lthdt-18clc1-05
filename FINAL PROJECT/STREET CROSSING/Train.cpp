@@ -4,7 +4,7 @@ Train::Train() {
 	ptrain = train;
 }
 
-Train::Train(int x, int y, int speed) : Vehicle(x,y,speed)
+Train::Train(int x, int y) : Vehicle(x,y)
 {
 	ptrain = train;
 }
@@ -14,9 +14,8 @@ Train::~Train()
 	ptrain = NULL;
 }
 
-void Train::move() {
-	clear();
-	mX += speed;
+void Train::move(int step) {
+	mX += step;
 
 	if (mX >= X_max) {
 		mX = 0 - ptrain[0].length();
@@ -46,7 +45,7 @@ void Train::draw() {
 	}
 
 	if (mX < 0 && mX + ptrain[0].length() > X_max) {
-		length = X_max;
+		length = X_max - 1;
 		for (int i = 0; i < 5; i++) {
 			temp = ptrain[i].substr(-mX - 1, length);
 			gotoXY(0, mY + i);
@@ -55,32 +54,32 @@ void Train::draw() {
 	}
 }
 
-void Train::clear() {
-	int length = speed;
-	int x = mX;
-	if (mX <0 && mX+speed <= 0) {
-		return;
+/*void Train::clear() {
+	int length;
+	int test = ptrain[0].length();
+
+	if (mX <= 0 && mX + ptrain[0].length() >= 0) {
+		length = mX + ptrain[0].length();
 	}
 
-	if (mX < 0 && mX + speed > 0) {
-		length = mX + speed;
-		x = 0;
-	}
-
-	if (X_max - mX < length) {
+	if (mX <= X_max && ptrain[0].length() + mX >= X_max) {
 		length = X_max - mX;
 	}
 
+	if (mX > 0 && mX + ptrain[0].length() < X_max) {
+		length = ptrain[0].length();
+	}
+
 	for (int i = 0; i < 5; i++) {
-		gotoXY(x, mY + i);
+		gotoXY(mX, mY + i);
 		printSpace(length);
 	}
-}
+}*/
 
-Train *createTrains(int yTrain[], int lineTrain, int *spdTrain) {
+Train *createTrains(int yTrain[], int lineTrain) {
 	Train *trainPtr = new Train[lineTrain];
 	for (int i = 0; i < lineTrain; i++) {
-		trainPtr[i].set(X_max, yTrain[i], spdTrain[i]);
+		trainPtr[i].set(X_max, yTrain[i]);
 	}
 	return trainPtr;
 }

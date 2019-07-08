@@ -2,14 +2,13 @@
 #include "DirectionState.h"
 #include "Left.h"
 #include "Right.h"
-#include "Stay.h"
-#define STEP 1
-#define Wi 7
-#define He 3
+#include "Up.h"
+#include "Down.h"
+
 
 People::People()
-	: Object(), state(true), model(1)  {
-	currentDirectionState = new Stay();
+	: Object(), state(true), model(2)  {
+	currentDirectionState = new Up();
 }
 
 People::~People()
@@ -18,87 +17,36 @@ People::~People()
 }
 
 void People::goUp(int step) {
-	if (y >= 0 + He - 1) {
+	if (y > 0 + step + (He - 1) / 2) {
 		y -= step;
 	}
 }
 
 void People::goDown(int step) {
-	if (y <= Y_max - He) {
+	if (y < Y_max - step - (He-1)/2) {
 		y += step;
 	}
 }
 
 void People::goLeft(int step) {
-	if (x >= 0 + STEP + (Wi - 1) / 2) {
+	if (x > 0 + STEP + (Wi - 1) / 2) {
 		x -= step;
 	}
 }
 
 void People::goRight(int step) {
-	if (x <= X_max - ((Wi - 1) / 2) - 2) {
+	if (x < X_max - STEP - (Wi - 1) / 2) {
 		x += step;
 	}
 }
 
 void People::draw() {
 	currentDirectionState->draw(this, x, y, model);
-}
-
-void People::clear() {
-	switch (model) {
-	case 0: {
-		gotoXY(x, y);
-		cout << "          ";
-		gotoXY(x, y + 1);
-		cout << "          ";
-		gotoXY(x, y + 2);
-		cout << "          ";
-		gotoXY(x, y);
-		break;
-	}
-	case 1:
-		gotoXY(x, y);
-		cout << "          ";
-		gotoXY(x, y + 1);
-		cout << "          ";
-		gotoXY(x, y + 2);
-		cout << "          ";
-		gotoXY(x, y + 3);
-		cout << "          ";
-		gotoXY(x, y);
-		break;
-	}
-	
+	currentDirectionState->clear(this, x, y, STEP);
 }
 
 bool People::isDead() {
 	return state;
-}
-
-void People::updatePosPeople(char key) {
-	switch (key) {
-	case 'W': case 'w': {
-		goUp(STEP);
-		changeDirectionState(STAY);
-		break;
-	}
-	case 'S': case 's': {
-		goDown(STEP);
-		changeDirectionState(STAY);
-		break;
-	}
-	case 'D': case 'd': {
-		goRight(STEP);
-		changeDirectionState(RIGHT);
-		break;
-	}
-	case 'A': case 'a': {
-		goLeft(STEP);
-		changeDirectionState(LEFT);
-		break;
-	}
-	}
 }
 
 void People::changeDirectionState(DState dSta) {
@@ -106,25 +54,71 @@ void People::changeDirectionState(DState dSta) {
 		delete currentDirectionState;
 
 		switch (dSta) {
-		case STAY: {
-			currentDirectionState = new Stay();
+		case UP: {
+			currentDirectionState = new Up();
 			break;
 		}
-		case LEFT: {
-			currentDirectionState = new Left();
+		case DOWN: {
+			currentDirectionState = new Down();
 			break;
 		}
 		case RIGHT: {
 			currentDirectionState = new Right();
 			break;
 		}
+		case LEFT: {
+			currentDirectionState = new Left();
+			break;
+		}		
 		}
 	}
 }
 
-//bool People::chooseModel() {
-//
-//}
+bool People::chooseModel() {
+	wstring nameOpt[] = { L"MODEL 1", L"MODEL 2", L"MODEL 3"};
+	unsigned int currentChoice = 0,
+		max = 3,
+		xOri = 40, yOri = 20;
 
-void People::test() {
+	while (true) {
+		clrscr();
+		
+		for (int i = 0; i < max; i++) {
+			gotoXY(xOri + 20 * i, yOri);
+			currentDirectionState->draw(this, xOri + 20 * i, yOri, i);
+			gotoXY(xOri + 20 * i - 3, yOri + 5);
+			if (i == currentChoice) {
+				setColor(13, 7);
+				wcout << nameOpt[i];
+				setColor(13, 0);
+			}
+			else {
+				wcout << nameOpt[i];
+			}
+		}
+
+		int key = _getch();
+		switch (key) {
+		case 'D': case 'd': {
+			if (currentChoice < max-1) {
+				++currentChoice;
+			}
+			break;
+		}
+		case 'A': case 'a': {
+			if (currentChoice > 0) {
+				--currentChoice;
+			}
+			break;
+		}
+		case 13: {
+			model = currentChoice;
+
+			gotoXY(xOri + 20 * currentChoice - 3, yOri + 5);
+			wcout << nameOpt[currentChoice];
+			clrscr();
+			return true;
+		}
+		}
+	}
 }
