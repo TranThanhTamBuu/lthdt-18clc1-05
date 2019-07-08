@@ -8,16 +8,16 @@ GAME::GAME(int level)
 		//Car
 		lineCar = 2;
 		int yCar[] = { 0, 11 };
-		numCar = new int[lineCar]{ 2,3 };
-		spdCar = new int[lineCar]{ -3,-2 };
-		Cars = createCars(yCar, lineCar, numCar);
-		
+		numCar = new int[lineCar] { 2, 3 };
+		spdCar = new int[lineCar] { -3, -2 };
+		Cars = createCars(yCar, lineCar, numCar, spdCar);
+
 		//Train
 		lineTrain = 1;
 		int yTrain[] = { 5 };
 		spdTrain = new int[lineTrain] {5};
-		Trains = createTrains(yTrain, lineTrain);
-		
+		Trains = createTrains(yTrain, lineTrain, spdTrain);
+
 		//.....
 
 		break;
@@ -42,7 +42,7 @@ GAME::GAME(int level)
 }
 
 
-GAME::~GAME(){
+GAME::~GAME() {
 	//Car 
 	for (int i = 0; i < lineCar; i++) {
 		delete[]Cars[i];
@@ -55,7 +55,6 @@ GAME::~GAME(){
 	//........
 
 }
-
 bool GAME::chooseModel() {
 	return people.chooseModel();
 }
@@ -88,14 +87,14 @@ void GAME::updatePosPeople(char key) {
 void GAME::updatePosCars() {
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
-			Cars[i][j].move(spdCar[i]);
+			Cars[i][j].move();
 		}
 	}
 }
 
 void GAME::updatePosTrains() {
 	for (int i = 0; i < lineTrain; i++) {
-		Trains[i].move(spdTrain[i]);
+		Trains[i].move();
 	}
 }
 
@@ -117,7 +116,6 @@ void GAME::drawAll() {
 
 	// draw lane, river
 }
-
 
 
 
