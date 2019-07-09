@@ -32,6 +32,8 @@ public:
 	void draw();
 	void clear();
 	bool chooseModel();
+	unsigned int getX();
+	unsigned int getY();
 
 private:
 	bool state;
