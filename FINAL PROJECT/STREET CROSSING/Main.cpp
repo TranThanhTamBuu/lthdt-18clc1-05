@@ -34,7 +34,8 @@ int main() {
 
 	
 	GAME game(1);
-	game.chooseModel();
+	game.screenScroll();
+	//game.chooseModel();
 	SubThread(game);
 
 	

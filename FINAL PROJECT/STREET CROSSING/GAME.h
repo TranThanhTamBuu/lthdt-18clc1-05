@@ -22,6 +22,7 @@ public:
 	void updatePosTrains();
 	void updatePosCars();
 	void drawAll();
+	void screenScroll();
 };
 
 

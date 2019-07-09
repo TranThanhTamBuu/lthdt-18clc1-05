@@ -44,6 +44,7 @@ void gotoXY(const unsigned int &x, const unsigned int &y);
 unsigned int whereX();
 unsigned int whereY();
 void printSpace(int num);
+void printLine(int num);
 void setColor(int textColor, int bgColor);
 void clrscr();
 void ShowConsoleCursor(bool showFlag);

@@ -58,6 +58,12 @@ void printSpace(int num) {
 	}
 }
 
+void printLine(int num) {
+	for (int i = 0; i < num; i++) {
+		wcout << "=";
+	}
+}
+
 void setColor(int textColor, int bgColor) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), (textColor + (bgColor * 16)));
 }
@@ -88,3 +94,4 @@ void ShowConsoleCursor(bool showFlag)
 	cursorInfo.bVisible = showFlag; // set the cursor visibility
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
+

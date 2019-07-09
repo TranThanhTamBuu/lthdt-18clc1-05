@@ -16,4 +16,11 @@ void Vehicle::set(int x, int y, int spd) {
 	speed = spd;
 }
 
+int Vehicle::getY() {
+	return mY;
+}
+
+void Vehicle::setY(int y) {
+	mY = y;
+}
 
