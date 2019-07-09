@@ -16,6 +16,14 @@ People::~People()
 	delete currentDirectionState;
 }
 
+unsigned int People::getX() {
+	return x;
+}
+
+unsigned int People::getY() {
+	return y;
+}
+
 void People::goUp(int step) {
 	if (y > 0 + step + (He - 1) / 2) {
 		y -= step;
@@ -75,9 +83,9 @@ void People::changeDirectionState(DState dSta) {
 }
 
 bool People::chooseModel() {
-	wstring nameOpt[] = { L"MODEL 1", L"MODEL 2", L"MODEL 3"};
+	wstring nameOpt[] = { L"MODEL 1", L"MODEL 2", L"MODEL 3", L"MODEL 4"};
 	unsigned int currentChoice = 0,
-		max = 3,
+		max = 4,
 		xOri = 40, yOri = 20;
 
 	while (true) {
