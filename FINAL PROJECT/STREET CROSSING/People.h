@@ -7,7 +7,7 @@
 #define Wi 7
 #define He 3
 #define STEPUPDOWN 8
-#define STEPRIGHTLEFT 2
+#define STEPRIGHTLEFT 3
 using namespace std;
 
 
