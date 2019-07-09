@@ -7,7 +7,7 @@
 
 
 People::People()
-	: Object(), state(true), model(2)  {
+	: Object(X_max/2,36), state(true), model(2)  {
 	currentDirectionState = new Up();
 }
 
@@ -37,20 +37,20 @@ void People::goDown(int step) {
 }
 
 void People::goLeft(int step) {
-	if (x > 0 + STEP + (Wi - 1) / 2) {
+	if (x > 0 + STEPRIGHTLEFT + (Wi - 1) / 2) {
 		x -= step;
 	}
 }
 
 void People::goRight(int step) {
-	if (x < X_max - STEP - (Wi - 1) / 2) {
+	if (x < X_max - STEPRIGHTLEFT - (Wi - 1) / 2) {
 		x += step;
 	}
 }
 
 void People::draw() {
 	currentDirectionState->draw(this, x, y, model);
-	currentDirectionState->clear(this, x, y, STEP);
+	currentDirectionState->clear(this, x, y);
 }
 
 bool People::isDead() {

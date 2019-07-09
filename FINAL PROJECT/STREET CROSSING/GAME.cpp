@@ -63,22 +63,22 @@ bool GAME::chooseModel() {
 void GAME::updatePosPeople(char key) {
 	switch (key) {
 	case 'W': case 'w': {
-		people.goUp(STEP);
+		people.goUp(STEPUPDOWN);
 		people.changeDirectionState(UP);
 		break;
 	}
 	case 'S': case 's': {
-		people.goDown(STEP);
+		people.goDown(STEPUPDOWN);
 		people.changeDirectionState(DOWN);
 		break;
 	}
 	case 'D': case 'd': {
-		people.goRight(STEP);
+		people.goRight(STEPRIGHTLEFT);
 		people.changeDirectionState(RIGHT);
 		break;
 	}
 	case 'A': case 'a': {
-		people.goLeft(STEP);
+		people.goLeft(STEPRIGHTLEFT);
 		people.changeDirectionState(LEFT);
 		break;
 	}

@@ -6,7 +6,8 @@
 #include <iomanip>
 #define Wi 7
 #define He 3
-#define STEP 3
+#define STEPUPDOWN 8
+#define STEPRIGHTLEFT 2
 using namespace std;
 
 

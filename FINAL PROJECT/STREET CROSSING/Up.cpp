@@ -100,11 +100,11 @@ void Up::draw(People *const peoplePtr, unsigned int x, unsigned int y, int model
 	}
 }
 
-void Up::clear(People *const peoplePtr, unsigned int x, unsigned int y, unsigned int step) {
-	int min = step <= He ? step : He;
+void Up::clear(People *const peoplePtr, unsigned int x, unsigned int y) {
+	int min = STEPUPDOWN <= He ? STEPUPDOWN : He;
 	for (int i = min - 1; i >= 0; i--) {
 		for (int j = Wi -1; j >= 0; j--) {
-			gotoXY(x + (Wi - 1) / 2 - j, (y + step) + (He - 1) / 2 - i);
+			gotoXY(x + (Wi - 1) / 2 - j, (y + STEPUPDOWN) + (He - 1) / 2 - i);
 			wcout << " ";
 		}
 	}

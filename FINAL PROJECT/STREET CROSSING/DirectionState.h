@@ -9,7 +9,7 @@ public:
 	virtual ~DirectionState() = default;
 
 	virtual void draw(People *const peoplePtr, unsigned int x, unsigned int y, int model) = 0;
-	virtual void clear(People *const peoplePtr, unsigned int x, unsigned int y, unsigned int step) = 0;
+	virtual void clear(People *const peoplePtr, unsigned int x, unsigned int y) = 0;
 	virtual DState getCurrentState() = 0;
 	void randomColor(const wchar_t &ch) {
 		srand(time(NULL));
