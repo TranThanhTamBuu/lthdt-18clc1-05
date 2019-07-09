@@ -6,7 +6,7 @@
 #include <iomanip>
 #define Wi 7
 #define He 3
-#define STEP 5
+#define STEP 3
 using namespace std;
 
 

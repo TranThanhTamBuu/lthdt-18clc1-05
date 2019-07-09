@@ -64,7 +64,29 @@ void Down::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mod
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 7; j++) {
 				gotoXY(x - (w - 1) / 2 + j, y - (h - 1) / 2 + i);
-				if ((i == 0 && j == 1) || (i == 0 && j == 2) || (i == 0 && j == 3) || (i == 0 && j == 4) || (i == 1 && j == 1) || (i == 1 && j == 5)) {
+				if ((i == 0 && j == 1) || (i == 0 && j == 2) || (i == 0 && j == 4) || (i == 0 && j == 5) || (i == 1 && j == 1) || (i == 1 && j == 5)) {
+					randomColor(image[i][j]);
+				}
+				else {
+					wcout << image[i][j];
+				}
+			}
+		}
+		gotoXY(x, y);
+		break;
+	}
+
+	case 3: {
+		wchar_t image[3][7] = {
+			{ L' ',L' ',L',',L'_',L',',L' ',L' ' },
+			{ L' ',L'(',L'ὂ',L'ѵ',L'ὅ',L')',L' ' },
+			{ L'ʚ',L'{',L'ʃ',L'΅',L'ʅ',L'}',L'ɞ' }
+		};
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 7; j++) {
+				gotoXY(x - (w - 1) / 2 + j, y - (h - 1) / 2 + i);
+				if ((i == 2 && j == 0) || (i == 2 && j == 6) || (i == 0 && j == 2) || (i == 0 && j == 4)) {
 					randomColor(image[i][j]);
 				}
 				else {
