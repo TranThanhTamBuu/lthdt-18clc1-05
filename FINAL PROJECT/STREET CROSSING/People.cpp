@@ -8,7 +8,7 @@
 
 People::People()
 	: Object(X_max/2,36), state(true), model(2)  {
-	currentDirectionState = new Up();
+	currentDirectionState = new Down();
 }
 
 People::~People()
