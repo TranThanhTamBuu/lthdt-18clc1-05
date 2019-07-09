@@ -16,6 +16,14 @@ People::~People()
 	delete currentDirectionState;
 }
 
+unsigned int People::getX() {
+	return x;
+}
+
+unsigned int People::getY() {
+	return y;
+}
+
 void People::goUp(int step) {
 	if (y > 0 + step + (He - 1) / 2) {
 		y -= step;
