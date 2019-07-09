@@ -17,11 +17,11 @@ People::~People()
 }
 
 unsigned int People::getX() {
-	return x;
+	return x - (Wi-1)/2;
 }
 
 unsigned int People::getY() {
-	return y;
+	return y - (He-1)/2;
 }
 
 void People::goUp(int step) {
