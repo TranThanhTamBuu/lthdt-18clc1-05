@@ -148,8 +148,11 @@ bool GAME::isEndScr() {
 }
 
 void GAME::screenScroll() {
-	if (isEndScr() && people.getY() > 12) return;
+	if (isEndScr() && (people.getY() <= 12)) return;
 
+	if (people.getY() >= 20) return;
+
+	people.setY(20);
 
 	clrscr();
 

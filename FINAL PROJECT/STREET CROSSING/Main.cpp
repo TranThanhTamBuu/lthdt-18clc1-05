@@ -62,7 +62,7 @@ void SubThread(GAME &game)
 		// game.updatePos...
 		game.screenScroll();
 		game.drawAll();
-		Sleep(50);
+		Sleep(40);
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
 		
 		/*MOVING = ' ';
