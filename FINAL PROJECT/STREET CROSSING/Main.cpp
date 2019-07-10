@@ -34,8 +34,7 @@ int main() {
 
 	
 	GAME game(1);
-	game.screenScroll();
-	//game.chooseModel();
+	game.chooseModel();
 	SubThread(game);
 
 	
@@ -47,6 +46,7 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
+		
 		// clrscr();
 		char key = ' ';
 		if (_kbhit())
@@ -56,9 +56,11 @@ void SubThread(GAME &game)
 			game.updatePosPeople(key);
 
 		}
+
 		game.updatePosCars();
 		game.updatePosTrains();
 		// game.updatePos...
+		game.screenScroll();
 		game.drawAll();
 		Sleep(50);
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,

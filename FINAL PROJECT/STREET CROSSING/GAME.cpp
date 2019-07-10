@@ -7,14 +7,14 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { 3, 35 };
+		int yCar[] = { 27, -5 };
 		numCar = new int[lineCar] { 2, 3 };
 		spdCar = new int[lineCar] { -3, -2 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar);
 
 		//Train
 		lineTrain = 1;
-		int yTrain[] = { 18 };
+		int yTrain[] = { 10 };
 		spdTrain = new int[lineTrain] {5};
 		Trains = createTrains(yTrain, lineTrain, spdTrain);
 
@@ -100,6 +100,11 @@ void GAME::updatePosTrains() {
 }
 
 void GAME::drawAll() {
+	//draw line
+	for (int i = 0; i <= 5; i++) {
+		gotoXY(0, 0 + 8 * i);	printLine(WIDTH);
+	}
+
 	// draw people
 	people.draw();
 
@@ -122,14 +127,47 @@ void GAME::drawAll() {
 	// draw lane, river
 }
 
+bool GAME::isEndScr() {
+	int count = 0;
+	
+	//Car
+	for (int i = 0; i < lineCar; i++) {
+		if (Cars[i][0].getY() < 8) {
+			count++;
+		}
+	}
+
+	//Train
+	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() < 8) {
+			count++;
+		}
+	}
+
+	return (count == 0);
+}
+
 void GAME::screenScroll() {
+	if (people.getY() > 21) return;
+	if (isEndScr()) return;
+
 	clrscr();
 
 	for (int i = 0; i <= 5; i++) {
 		gotoXY(0, 0 + 8*i);	printLine(WIDTH);
 	}
 
+	//Car
+	for (int i = 0; i < lineCar; i++) {
+		for (int j = 0; j < numCar[i]; j++) {
+			Cars[i][j].setY(Cars[i][j].getY() + 8);
+		}
+	}
 
+	//Train
+	for (int i = 0; i < lineTrain; i++) {
+		Trains[i].setY(Trains[i].getY() + 8);
+	}
 
 }
 
