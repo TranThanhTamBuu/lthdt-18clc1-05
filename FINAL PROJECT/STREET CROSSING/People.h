@@ -35,6 +35,7 @@ public:
 	bool chooseModel();
 	unsigned int getX();
 	unsigned int getY();
+	void setY(unsigned int _y);
 
 private:
 	bool state;

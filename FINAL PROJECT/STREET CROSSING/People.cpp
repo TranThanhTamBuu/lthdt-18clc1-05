@@ -24,6 +24,10 @@ unsigned int People::getY() {
 	return y - (He-1)/2;
 }
 
+void People::setY(unsigned int _y) {
+	y = _y + (He - 1) / 2;
+}
+
 void People::goUp(int step) {
 	if (y > 0 + step + (He - 1) / 2) {
 		y -= step;
