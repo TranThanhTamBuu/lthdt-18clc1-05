@@ -7,14 +7,14 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { 0, 11 };
+		int yCar[] = { 27, -5 };
 		numCar = new int[lineCar] { 2, 3 };
 		spdCar = new int[lineCar] { -3, -2 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar);
 
 		//Train
 		lineTrain = 1;
-		int yTrain[] = { 5 };
+		int yTrain[] = { 10 };
 		spdTrain = new int[lineTrain] {5};
 		Trains = createTrains(yTrain, lineTrain, spdTrain);
 
@@ -55,6 +55,7 @@ GAME::~GAME() {
 	//........
 
 }
+
 bool GAME::chooseModel() {
 	return people.chooseModel();
 }
@@ -62,22 +63,22 @@ bool GAME::chooseModel() {
 void GAME::updatePosPeople(char key) {
 	switch (key) {
 	case 'W': case 'w': {
-		people.goUp(STEP);
+		people.goUp(STEPUPDOWN);
 		people.changeDirectionState(UP);
 		break;
 	}
 	case 'S': case 's': {
-		people.goDown(STEP);
+		people.goDown(STEPUPDOWN);
 		people.changeDirectionState(DOWN);
 		break;
 	}
 	case 'D': case 'd': {
-		people.goRight(STEP);
+		people.goRight(STEPRIGHTLEFT);
 		people.changeDirectionState(RIGHT);
 		break;
 	}
 	case 'A': case 'a': {
-		people.goLeft(STEP);
+		people.goLeft(STEPRIGHTLEFT);
 		people.changeDirectionState(LEFT);
 		break;
 	}
@@ -99,23 +100,77 @@ void GAME::updatePosTrains() {
 }
 
 void GAME::drawAll() {
+	//draw line
+	for (int i = 0; i <= 5; i++) {
+		gotoXY(0, 0 + 8 * i);	printLine(WIDTH);
+	}
+
 	// draw people
 	people.draw();
 
 	// draw car
 	for (int i = 0; i < lineCar; i++) {
-		for (int j = 0; j < numCar[i]; j++) {
-			Cars[i][j].draw();
+		if(Cars[i][0].getY() >=0 && Cars[i][0].getY() < Y_max) {
+			for (int j = 0; j < numCar[i]; j++) {
+				Cars[i][j].draw();
+			}
 		}
 	}
 
 	// draw train
 	for (int i = 0; i < lineTrain; i++) {
-		Trains[i].draw();
+		if (Trains[i].getY() >= 0 && Trains[i].getY() < Y_max) {
+			Trains[i].draw();
+		}
 	}
 
 	// draw lane, river
 }
 
+bool GAME::isEndScr() {
+	int count = 0;
+	
+	//Car
+	for (int i = 0; i < lineCar; i++) {
+		if (Cars[i][0].getY() < 8) {
+			count++;
+		}
+	}
 
+	//Train
+	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() < 8) {
+			count++;
+		}
+	}
+
+	return (count == 0);
+}
+
+void GAME::screenScroll() {
+	if (isEndScr() && (people.getY() <= 12)) return;
+
+	if (people.getY() >= 20) return;
+
+	people.setY(20);
+
+	clrscr();
+
+	for (int i = 0; i <= 5; i++) {
+		gotoXY(0, 0 + 8*i);	printLine(WIDTH);
+	}
+
+	//Car
+	for (int i = 0; i < lineCar; i++) {
+		for (int j = 0; j < numCar[i]; j++) {
+			Cars[i][j].setY(Cars[i][j].getY() + 8);
+		}
+	}
+
+	//Train
+	for (int i = 0; i < lineTrain; i++) {
+		Trains[i].setY(Trains[i].getY() + 8);
+	}
+
+}
 

@@ -6,7 +6,8 @@
 #include <iomanip>
 #define Wi 7
 #define He 3
-#define STEP 3
+#define STEPUPDOWN 8
+#define STEPRIGHTLEFT 3
 using namespace std;
 
 
@@ -32,6 +33,9 @@ public:
 	void draw();
 	void clear();
 	bool chooseModel();
+	unsigned int getX();
+	unsigned int getY();
+	void setY(unsigned int _y);
 
 private:
 	bool state;

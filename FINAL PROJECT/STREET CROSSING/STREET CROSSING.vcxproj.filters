@@ -48,7 +48,10 @@
     <ClCompile Include="Right.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Stay.cpp">
+    <ClCompile Include="Down.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Up.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Stay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Down.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Up.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

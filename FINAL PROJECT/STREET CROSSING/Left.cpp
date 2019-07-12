@@ -98,11 +98,11 @@ void Left::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mod
 	}
 }
 
-void Left::clear(People *const peoplePtr, unsigned int x, unsigned int y, unsigned int step) {
-	int min = step <= Wi ? step : Wi;
+void Left::clear(People *const peoplePtr, unsigned int x, unsigned int y) {
+	int min = STEPRIGHTLEFT <= Wi ? STEPRIGHTLEFT : Wi;
 	for (int i = 0; i < He; i++) {
 		for (int j = 0; j < min; j++) {
-			gotoXY((x+step) + (Wi - 1) / 2 - j, y - (He - 1) / 2 + i);
+			gotoXY((x+ STEPRIGHTLEFT) + (Wi - 1) / 2 - j, y - (He - 1) / 2 + i);
 			wcout << " ";
 		}
 	}
