@@ -3,6 +3,7 @@
 #include "Train.h"
 #include "GAME.h"
 #include "Console.h"
+#include "Menu.h"
 
 char MOVING = ' ';
 
@@ -33,13 +34,15 @@ int main() {
 	}*/
 
 	
-	GAME game(1);
+	/*GAME game(1);
 	game.chooseModel();
 	SubThread(game);
 
 	
 
-	system("pause");
+	system("pause");*/
+	Menu m;
+	m.mainMenu();
 	return 0;
 }
 
