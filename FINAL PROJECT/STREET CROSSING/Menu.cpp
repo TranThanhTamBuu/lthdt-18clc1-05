@@ -2,7 +2,7 @@
 
 Menu::Menu()
 {
-	title = t;
+	title = u;
 }
 
 void Menu::ShowTitle()
@@ -10,8 +10,9 @@ void Menu::ShowTitle()
 	while (!_kbhit())
 	{
 		setColor(12, 0);
-		gotoXY(25, 17);
-		for (int i = 0; i < 6; i++) {
+
+		for (int i = 0; i < 13; i++) {
+			gotoXY((X_max - title[0].length()) / 2, 10 + i);
 			wcout << title[i] << endl;
 		}
 		Sleep(300);
@@ -21,8 +22,8 @@ void Menu::ShowTitle()
 		Sleep(300);
 
 		setColor(11, 0);
-		gotoXY(25, 17);
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 13; i++) {
+			gotoXY((X_max - title[0].length()) / 2, 10 + i);
 			wcout << title[i] << endl;
 		}
 		Sleep(300);
