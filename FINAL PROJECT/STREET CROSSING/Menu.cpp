@@ -93,6 +93,8 @@ int Menu::Choice()
 			x = _getch();
 			switch (x) {
 			case 80:
+			case 83:
+			case 115:
 			{
 				gotoXY(67, line);
 				wcout << "  ";
@@ -103,6 +105,8 @@ int Menu::Choice()
 				break;
 			}
 			case 72:
+			case 87:
+			case 119:
 			{
 				gotoXY(67, line);
 				wcout << "  ";
