@@ -84,10 +84,7 @@ void SubThread(GAME &game)
 
 		game.updatePosCars();
 		game.updatePosTrains();
-
-		if (game.impactWoods() != 1) {
-			game.updatePosWoods();
-		}
+		game.updatePosWoods();
 
 		// game.updatePos...
 		game.screenScroll();
