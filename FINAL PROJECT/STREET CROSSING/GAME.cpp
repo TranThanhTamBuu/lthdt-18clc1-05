@@ -70,23 +70,27 @@ bool GAME::chooseModel() {
 }
 
 void GAME::updatePosPeople(char key) {
+	if (key == 224) {
+		key = _getch();
+	}
+
 	switch (key) {
-	case 'W': case 'w': {
+	case 'W': case 'w': case 72: {
 		people.goUp(STEPUPDOWN);
 		people.changeDirectionState(UP);
 		break;
 	}
-	case 'S': case 's': {
+	case 'S': case 's': case 80: {
 		people.goDown(STEPUPDOWN);
 		people.changeDirectionState(DOWN);
 		break;
 	}
-	case 'D': case 'd': {
+	case 'D': case 'd': case 77: {
 		people.goRight(STEPRIGHTLEFT);
 		people.changeDirectionState(RIGHT);
 		break;
 	}
-	case 'A': case 'a': {
+	case 'A': case 'a': case 75: {
 		people.goLeft(STEPRIGHTLEFT);
 		people.changeDirectionState(LEFT);
 		break;

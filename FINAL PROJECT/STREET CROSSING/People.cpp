@@ -87,10 +87,10 @@ void People::changeDirectionState(DState dSta) {
 }
 
 bool People::chooseModel() {
-	wstring nameOpt[] = { L"MODEL 1", L"MODEL 2", L"MODEL 3", L"MODEL 4"};
+	wstring nameOpt[] = { L"MODEL 1", L"MODEL 2", L"MODEL 3", L"MODEL 4", L"MODEL 5"};
 	unsigned int currentChoice = 0,
-		max = 4,
-		xOri = 40, yOri = 20;
+		max = 5,
+		xOri = 35, yOri = 20;
 
 	while (true) {
 		clrscr();
@@ -100,9 +100,9 @@ bool People::chooseModel() {
 			currentDirectionState->draw(this, xOri + 20 * i, yOri, i);
 			gotoXY(xOri + 20 * i - 3, yOri + 5);
 			if (i == currentChoice) {
-				setColor(13, 7);
+				setColor(12, 7);
 				wcout << nameOpt[i];
-				setColor(13, 0);
+				setColor(7, 0);
 			}
 			else {
 				wcout << nameOpt[i];
@@ -110,14 +110,17 @@ bool People::chooseModel() {
 		}
 
 		int key = _getch();
+		if (key == 224) {
+			key = _getch();
+		}
 		switch (key) {
-		case 'D': case 'd': {
+		case 'D': case 'd': case 77: {
 			if (currentChoice < max-1) {
 				++currentChoice;
 			}
 			break;
 		}
-		case 'A': case 'a': {
+		case 'A': case 'a': case 75: {
 			if (currentChoice > 0) {
 				--currentChoice;
 			}
