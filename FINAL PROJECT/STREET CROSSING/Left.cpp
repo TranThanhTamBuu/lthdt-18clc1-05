@@ -95,6 +95,28 @@ void Left::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mod
 		gotoXY(x, y);
 		break;
 	}
+
+	case 4: {
+		wchar_t image[3][7] = {
+			{ L' ',L'/',L'\\',L'*',L'/',L'\\',L' ' },
+			{ L'(',L'ᴓ',L'ᴥ',L'o',L'‟',L'=',L')' },
+			{ L'(',L'ṁ',L'♦',L'_',L'ṁ',L'_',L')' }
+		};
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 7; j++) {
+				gotoXY(x - (w - 1) / 2 + j, y - (h - 1) / 2 + i);
+				if ((i == 0 && j == 3) || (i == 2 && j == 2)) {
+					randomColor(image[i][j]);
+				}
+				else {
+					wcout << image[i][j];
+				}
+			}
+		}
+		gotoXY(x, y);
+		break;
+	}
 	}
 }
 
