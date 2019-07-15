@@ -89,9 +89,9 @@ Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
 	}
 
 	for (int i = 0; i < lineCar; i++) {
-		int d = (X_max - car[0].length()*numCar[i]) / numCar[i];
+		int d = (X_max - (numCar[i] - 1)*car[0].length()) / (numCar[i]);
 		for (int j = 0; j < numCar[i]; j++) {
-			int xCar = d / 2 + j * (d + car[0].length());
+			int xCar = (d - car[0].length()) / 2 + j * (d + car[0].length());
 			carPtr[i][j].set(xCar, yCar[i], spdCar[i]);
 		}
 	}

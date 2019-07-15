@@ -2,6 +2,7 @@
 #include "People.h"
 #include "Car.h"
 #include "Train.h"
+#include "Wood.h"
 #include <vector>
 #include "Console.h"
 
@@ -13,6 +14,8 @@ private:
 	Train *Trains;
 	int lineTrain, *spdTrain;
 	People people;
+	Wood **Woods;
+	int lineWood, *numWood, *spdWood;
 
 public:
 	GAME(int level);
@@ -21,6 +24,7 @@ public:
 	void updatePosPeople(char);
 	void updatePosTrains();
 	void updatePosCars();
+	void updatePosWoods();
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();

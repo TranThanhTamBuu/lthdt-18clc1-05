@@ -4,6 +4,7 @@
 #include "GAME.h"
 #include "Console.h"
 #include "Menu.h"
+#include "Wood.h"
 
 char MOVING = ' ';
 
@@ -17,10 +18,10 @@ int main() {
 	ShowConsoleCursor(false);
 
 
-	/*Car c(0, 0);
+	/*Car c(0, 0, -2);
 	char key = ' ';
 	while (true) {
-		c.move(-2);
+		c.move();
 		c.draw();
 		Sleep(50);
 	}*/
@@ -34,15 +35,22 @@ int main() {
 	}*/
 
 	
-	/*GAME game(1);
+	GAME game(1);
 	game.chooseModel();
 	SubThread(game);
 
 	
 
-	system("pause");*/
-	Menu m;
-	m.mainMenu();
+	system("pause");
+	//Menu m;
+	//m.mainMenu();
+	/*Wood w(90, 0, -3);
+	char key = ' ';
+	while (true) {
+		w.move();
+		w.draw();
+		Sleep(50);
+	}*/
 	return 0;
 }
 
@@ -62,10 +70,11 @@ void SubThread(GAME &game)
 
 		game.updatePosCars();
 		game.updatePosTrains();
+		game.updatePosWoods();
 		// game.updatePos...
 		game.screenScroll();
 		game.drawAll();
-		Sleep(40);
+		Sleep(0);
 		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
 		
 		/*MOVING = ' ';
