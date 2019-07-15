@@ -83,6 +83,17 @@ void Wood::clear() {
 	}
 }
 
+bool Wood::isImpact(People &people) {
+	int leftX = people.getX();
+	int rightX = leftX + Wi;
+
+	if (((mX <= leftX && (leftX <= mX + wood[0].length())) || (mX <= rightX && rightX <= mX + wood[0].length()))) {
+		return true;
+	}
+
+	return false;
+}
+
 Wood** createWoods(int yWood[], int lineWood, int *numWood, int *spdWood) {
 	Wood** woodPtr = new Wood*[lineWood];
 	for (int i = 0; i < lineWood; i++) {

@@ -62,6 +62,17 @@ void SubThread(GAME &game)
 			exit(0);
 		}
 
+		switch (game.impactWoods()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+
+			break;
+		case -1: // in river
+			exit(0);
+			break;
+		}
+
 		char key = ' ';
 		if (_kbhit())
 		{
@@ -73,7 +84,11 @@ void SubThread(GAME &game)
 
 		game.updatePosCars();
 		game.updatePosTrains();
-		game.updatePosWoods();
+
+		if (game.impactWoods() != 1) {
+			game.updatePosWoods();
+		}
+
 		// game.updatePos...
 		game.screenScroll();
 		game.drawAll();

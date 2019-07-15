@@ -140,6 +140,31 @@ bool GAME::impactVehicle() {
 	return false;
 }
 
+int GAME::sameLineWoods() {
+	for (int i = 0; i < lineWood; i++) {
+		if ((Woods[i][0].getY() <= people.getY()) && (people.getY() <= (Woods[i][0].getY() + 3))) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int GAME::impactWoods() {
+	int line = sameLineWoods();
+
+	if (line == -1) {
+		return 0;
+	}
+	
+	for (int j = 0; j < numWood[line]; j++) {
+		if (Woods[line][j].isImpact(people)) {
+			return 1;
+		}
+	}
+
+	return -1;
+}
+
 void GAME::drawAll() {
 	//draw line
 	for (int i = 0; i <= 5; i++) {

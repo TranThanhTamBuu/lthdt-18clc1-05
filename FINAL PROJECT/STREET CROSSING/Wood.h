@@ -16,6 +16,7 @@ public:
 	void move();
 	void draw();
 	void clear();
+	bool isImpact(People &people);
 	~Wood();
 
 private:

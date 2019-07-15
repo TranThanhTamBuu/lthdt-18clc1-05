@@ -26,6 +26,8 @@ public:
 	void updatePosCars();
 	void updatePosWoods();
 	bool impactVehicle();
+	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
+	int sameLineWoods();
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();

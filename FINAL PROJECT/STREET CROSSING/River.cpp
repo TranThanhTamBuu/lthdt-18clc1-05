@@ -4,7 +4,8 @@
 River::River(){
 }
 
-River::River(int x, int y, int spd) : mX(x), mY(y), speed(spd) {}
+River::River(int x, int y, int spd) : mX(x), mY(y), speed(spd) {
+}
 
 River::~River()
 {
