@@ -22,6 +22,7 @@ public:
 	void move();
 	void draw();
 	void clear();
+	bool isImpact(People &people);
 };
 
 Train *createTrains(int yTrain[], int lineTrain, int *spdTrain);

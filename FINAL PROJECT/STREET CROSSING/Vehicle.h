@@ -1,6 +1,7 @@
 #pragma once
 #include "Console.h"
 #include <string>
+#include "People.h"
 
 
 class Vehicle
@@ -16,6 +17,7 @@ public:
 	virtual void move() = 0;
 	virtual void draw() = 0;
 	virtual void clear() = 0;
+	virtual bool isImpact(People &people) = 0;
 	int getY();
 	void setY(int y);
 };

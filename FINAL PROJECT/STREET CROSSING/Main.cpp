@@ -58,7 +58,10 @@ void SubThread(GAME &game)
 {
 	while (true) {
 		
-		// clrscr();
+		if (game.impactVehicle()) {
+			exit(0);
+		}
+
 		char key = ' ';
 		if (_kbhit())
 		{
@@ -75,19 +78,8 @@ void SubThread(GAME &game)
 		game.screenScroll();
 		game.drawAll();
 		Sleep(0);
-		// Ông mở cái này ra chạy chung với cái di chuyển của tui ở trên là bị lỗi,
 		
-		/*MOVING = ' ';
-		c.move(-1);
-		t.move(1);
-		Sleep(50);*/
-
-
-		// tại phải xài wcout hết mới được, string thì wstring, cin thì wcin, char thì wchar_t
-		// ví dụ, phải thêm chữ L ngoài trước
-		// wstring str;
-		// str = L"Test";
-		// wcout << str << endl;
+		
 	}
 }
 

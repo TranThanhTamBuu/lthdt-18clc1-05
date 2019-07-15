@@ -82,6 +82,19 @@ void Car::clear() {
 	}
 }
 
+bool Car::isImpact(People &people) {
+	int leftX = people.getX();
+	int rightX = leftX + Wi;
+
+	if ((mY <= people.getY()) && (people.getY() <= (mY + 4))) {
+		if (((mX <= leftX && (leftX <= mX + car[0].length())) || (mX <= rightX && rightX <= mX + car[0].length()))) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
 	Car** carPtr = new Car*[lineCar];
 	for (int i = 0; i < lineCar; i++) {

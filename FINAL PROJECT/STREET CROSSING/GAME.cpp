@@ -116,6 +116,30 @@ void GAME::updatePosWoods() {
 	}
 }
 
+bool GAME::impactVehicle() {
+	//Ham isImpact() cua vehicle chi kiem tra khi people va vehicle da o cung line
+
+	//Car
+	for (int i = 0; i < lineCar; i++) {
+		if ((Cars[i][0].getY() <= people.getY()) && (people.getY() <= (Cars[i][0].getY() + 4))) {
+			for (int j = 0; j < numCar[i]; j++) {
+				if (Cars[i][j].isImpact(people)) {
+					return true;
+				}
+			}
+		}
+	}
+
+	//Train
+	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].isImpact(people)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 void GAME::drawAll() {
 	//draw line
 	for (int i = 0; i <= 5; i++) {

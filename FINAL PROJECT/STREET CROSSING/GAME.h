@@ -25,6 +25,7 @@ public:
 	void updatePosTrains();
 	void updatePosCars();
 	void updatePosWoods();
+	bool impactVehicle();
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();

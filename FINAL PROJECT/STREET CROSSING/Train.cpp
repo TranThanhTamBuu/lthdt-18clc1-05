@@ -77,6 +77,19 @@ void Train::clear() {
 	}
 }
 
+bool Train::isImpact(People &people) {
+	int leftX = people.getX();
+	int rightX = leftX + Wi;
+
+	if ((mY <= people.getY()) && (people.getY() <= (mY + 5))) {
+		if (((mX <= leftX && leftX <= mX + train[0].length()) || (mX <= rightX && rightX <= mX + train[0].length()))) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 Train *createTrains(int yTrain[], int lineTrain, int *spdTrain) {
 	Train *trainPtr = new Train[lineTrain];
 	for (int i = 0; i < lineTrain; i++) {

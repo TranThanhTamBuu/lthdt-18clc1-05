@@ -21,6 +21,7 @@ public:
 	void move(); 
 	void draw();
 	void clear();
+	bool isImpact(People &people);
 };
 
 Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar);
