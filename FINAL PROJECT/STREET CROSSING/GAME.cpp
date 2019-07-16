@@ -265,3 +265,7 @@ void GAME::screenScroll() {
 
 }
 
+void GAME::onWood() {
+	people.goLeft(-spdWood[sameLineWoods()]);
+	people.draw();
+}

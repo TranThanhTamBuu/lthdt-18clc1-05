@@ -66,7 +66,7 @@ void SubThread(GAME &game)
 		case 0: // not same line wood
 			break;
 		case 1: // on wood
-
+			game.onWood();
 			break;
 		case -1: // in river
 			exit(0);
