@@ -1,13 +1,23 @@
 #pragma once
+
+enum DState {
+	UP, DOWN, LEFT, RIGHT
+};
+
 class Object
 {
 public:
 	Object();
-	Object(unsigned int _x, unsigned int _y) : x(_x), y(_y) {}
+	Object(int _x, int _y) : x(_x), y(_y) {}
 	virtual ~Object();
 
+	unsigned int getXC();
+	unsigned int getYC();
+	void setXC(int _x);
+	void setYC(int _y);
+
 protected:
-	unsigned int x;
-	unsigned int y;
+	int x;
+	int y;
 };
 

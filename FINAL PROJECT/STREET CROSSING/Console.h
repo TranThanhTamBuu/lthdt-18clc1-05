@@ -48,3 +48,4 @@ void printLine(int num);
 void setColor(int textColor, int bgColor);
 void clrscr();
 void ShowConsoleCursor(bool showFlag);
+void randomColor(const wchar_t &ch);

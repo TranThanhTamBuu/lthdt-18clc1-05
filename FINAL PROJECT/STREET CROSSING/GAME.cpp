@@ -5,6 +5,9 @@ GAME::GAME(int level)
 {
 	switch (level) {
 	case 1: {
+		// Coin
+		nCoin = 10;
+		createCoins();
 		//Car
 		lineCar = 2;
 		int yCar[] = { 27, -13 };
@@ -202,6 +205,15 @@ void GAME::drawAll() {
 			}
 		}
 	}
+
+	// draw coin
+	for (int i = 0; i < coins.size(); ++i) {
+		coins[i].draw();
+	}
+
+	for (int i = 0; i < coinsOnWood.size(); ++i) {
+		coinsOnWood[i].onWood(abs(spdWood[sameLineWoods()]));
+	}
 }
 
 bool GAME::isEndScr() {
@@ -263,10 +275,70 @@ void GAME::screenScroll() {
 		}
 	}
 
+	// Coin
+	for (int i = 0; i < coins.size(); ++i) {
+		coins[i].setYC(coins[i].getYC() + 8);
+	}
+
+	// coinOnWood
+	for (int i = 0; i < coinsOnWood.size(); ++i) {
+		coinsOnWood[i].setYC(coinsOnWood[i].getYC() + 8);
+	}
+
 }
 
-void GAME::onWood() {
-	people.setY(Woods[sameLineWoods()][0].getY() - 1);
-	people.goLeft(-spdWood[sameLineWoods()]);
+void GAME::peopleOnWood() {
+	// people.setY(Woods[sameLineWoods()][0].getY() - 1);
+	people.goLeft(abs(spdWood[sameLineWoods()]));
 	people.draw();
+}
+
+void GAME::createCoins() {
+	unsigned totalLine = lineCar + lineTrain + lineWood,
+		randLine;
+	int randX, randY;
+
+	for (int i = 0; i < nCoin; ++i) {
+		randLine = rand() % 1;
+		switch (randLine) {
+		case 0: {	// Line car, train
+			vector<int> sampleY = { 29,-11,13 };
+			randY = sampleY[rand() % sampleY.size()];
+			randX = (rand() % X_max);
+
+			coins.push_back(Coin(randX, randY, LEFT));
+			break;
+		}
+
+		case 1: {	// Line wood
+			vector<int> sampleY = { 4 };
+			vector<int> sampleX = {};
+			randY = sampleY[rand() % sampleY.size()];
+			randX = sampleX[rand() % sampleX.size()];
+
+			coinsOnWood.push_back(Coin(randX, randY, LEFT));
+			break;
+		}
+		}
+	}
+}
+
+void GAME::handleCoinImpact() {
+	// People impact
+	for (int i = 0; i < coins.size(); ++i) {
+		if (coins[i].isImpact(people.getXC(), people.getYC())) {
+			people.changeMoney(COINVALUE);
+			coins[i].clearImage();
+			coins.erase(coins.begin() + i);
+			coins.shrink_to_fit();
+		}
+	}
+
+	// Reach edge when on wood
+	for (int i = 0; i < coinsOnWood.size(); ++i) {
+		if (coinsOnWood[i].isReachEdge()) {
+			coinsOnWood.erase(coins.begin() + i);
+			coinsOnWood.shrink_to_fit();
+		}
+	}
 }

@@ -95,3 +95,11 @@ void ShowConsoleCursor(bool showFlag)
 	SetConsoleCursorInfo(out, &cursorInfo);
 }
 
+void randomColor(const wchar_t &ch) {
+	srand(time(NULL));
+	int z = rand() % 15 + 1;
+
+	setColor(z, 0);
+	wcout << ch;
+	setColor(7, 0);
+}
