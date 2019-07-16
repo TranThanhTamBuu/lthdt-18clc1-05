@@ -312,8 +312,9 @@ void GAME::createCoins() {
 
 		case 1: {	// Line wood
 			vector<int> sampleY = { 4 };
-			vector<int> sampleX = xLineWood();
-			randY = sampleY[rand() % sampleY.size()];
+			int iY = rand() % sampleY.size();
+			vector<int> sampleX = xLineWoods(iY);
+			randY = sampleY[iY];
 			randX = sampleX[rand() % sampleX.size()];
 
 			coinsOnWood.push_back(Coin(randX, randY, LEFT));
