@@ -23,4 +23,3 @@ int Vehicle::getY() {
 void Vehicle::setY(int y) {
 	mY = y;
 }
-

@@ -19,4 +19,3 @@ public:
 protected:
 	int mX, mY, speed;
 };
-
