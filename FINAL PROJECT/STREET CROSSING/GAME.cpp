@@ -5,9 +5,6 @@ GAME::GAME(int level)
 {
 	switch (level) {
 	case 1: {
-		// Coin
-		nCoin = 10;
-		createCoins();
 		//Car
 		lineCar = 2;
 		int yCar[] = { 27, -13 };
@@ -27,6 +24,10 @@ GAME::GAME(int level)
 		numWood = new int [lineWood] { 4 };
 		spdWood = new int [lineWood] { -1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
+
+		// Coin
+		nCoin = 10;
+		createCoins();
 
 		break;
 	}
