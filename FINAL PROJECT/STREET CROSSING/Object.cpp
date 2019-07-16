@@ -9,11 +9,11 @@ Object::~Object()
 {
 }
 
-unsigned int Object::getXC() {
+int Object::getXC() {
 	return x;
 }
 
-unsigned int Object::getYC() {
+int Object::getYC() {
 	return y;
 }
 

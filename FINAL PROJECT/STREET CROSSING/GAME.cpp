@@ -213,7 +213,7 @@ void GAME::drawAll() {
 	}
 	// draw coinOnWood
 	for (int i = 0; i < coinsOnWood.size(); ++i) {
-		coinsOnWood[i].onWood(abs(spdWood[sameLineWoods()]));
+		coinsOnWood[i].onWood(1);
 	}
 }
 
@@ -300,9 +300,9 @@ void GAME::createCoins() {
 	int randX, randY;
 
 	for (int i = 0; i < nCoin; ++i) {
-		randLine = rand() % 2;
+		randLine = rand() % 5;
 		switch (randLine) {
-		case 0: {	// Line car, train
+		case 0: case 2: case 3: case 4: {	// Line car, train
 			vector<int> sampleY = { 29,-11,13 };
 			randY = sampleY[rand() % sampleY.size()];
 			randX = (rand() % X_max);
@@ -336,10 +336,20 @@ void GAME::handleCoinImpact() {
 		}
 	}
 
+	for (int i = 0; i < coinsOnWood.size(); ++i) {
+		if (coinsOnWood[i].isImpact(people.getXC(), people.getYC())) {
+			people.changeMoney(COINVALUE);
+			coinsOnWood[i].clearImage();
+			coinsOnWood.erase(coinsOnWood.begin() + i);
+			coinsOnWood.shrink_to_fit();
+		}
+	}
+
 	// Reach edge when on wood
 	for (int i = 0; i < coinsOnWood.size(); ++i) {
 		if (coinsOnWood[i].isReachEdge()) {
-			coinsOnWood.erase(coins.begin() + i);
+			coinsOnWood[i].clearImage();
+			coinsOnWood.erase(coinsOnWood.begin() + i);
 			coinsOnWood.shrink_to_fit();
 		}
 	}

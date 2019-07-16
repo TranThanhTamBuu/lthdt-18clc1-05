@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
+#include <cmath>
 #define Wi 7
 #define He 3
 #define STEPUPDOWN 8

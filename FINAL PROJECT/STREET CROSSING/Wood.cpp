@@ -103,7 +103,7 @@ Wood** createWoods(int yWood[], int lineWood, int *numWood, int *spdWood) {
 	for (int i = 0; i < lineWood; i++) {
 		int d = (X_max - (numWood[i] - 1)*wood[0].length()) / (numWood[i]);
 		for (int j = 0; j < numWood[i]; j++) {
-			int xwood = (d - wood[0].length()) / 2 + j * (d + wood[0].length());
+			int xwood = (d - (int)wood[0].length()) / 2 + j * (d + (int)wood[0].length());
 			woodPtr[i][j].set(xwood, yWood[i], spdWood[i]);
 		}
 	}

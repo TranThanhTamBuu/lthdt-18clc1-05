@@ -11,8 +11,8 @@ public:
 	Object(int _x, int _y) : x(_x), y(_y) {}
 	virtual ~Object();
 
-	unsigned int getXC();
-	unsigned int getYC();
+	int getXC();
+	int getYC();
 	void setXC(int _x);
 	void setYC(int _y);
 
