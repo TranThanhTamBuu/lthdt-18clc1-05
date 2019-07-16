@@ -343,9 +343,8 @@ void GAME::handleCoinImpact() {
 	}
 }
 
-vector <int> GAME::xLineWood() {
+vector <int> GAME::xLineWoods(int line) {
 	vector <int> result;
-	int line = sameLineWoods();
 
 	for (int i = 0; i < numWood[line]; i++) {
 		int x = Woods[line][i].getX() + 12;
