@@ -270,3 +270,15 @@ void GAME::onWood() {
 	people.goLeft(-spdWood[sameLineWoods()]);
 	people.draw();
 }
+
+vector <int> GAME::xLineWood() {
+	vector <int> result;
+	int line = sameLineWoods();
+
+	for (int i = 0; i < numWood[line]; i++) {
+		int x = Woods[line][i].getX() + 12;
+		result.push_back(x);
+	}
+
+	return result;
+}

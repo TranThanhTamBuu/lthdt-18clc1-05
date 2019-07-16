@@ -13,6 +13,7 @@ public:
 	virtual void clear() = 0;
 	virtual bool isImpact(People &people) = 0;
 	int getY();
+	int getX();
 	void setY(int y);
 	virtual ~River();
 protected:

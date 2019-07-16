@@ -32,7 +32,9 @@ public:
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();
+	vector <int> xLineWood();
 };
+
 
 
 

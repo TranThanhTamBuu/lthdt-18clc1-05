@@ -24,3 +24,7 @@ int River::getY() {
 void River::setY(int y) {
 	mY = y;
 }
+
+int River::getX() {
+	return mX;
+}
