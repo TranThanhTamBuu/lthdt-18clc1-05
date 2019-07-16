@@ -210,7 +210,7 @@ void GAME::drawAll() {
 	for (int i = 0; i < coins.size(); ++i) {
 		coins[i].draw();
 	}
-
+	// draw coinOnWood
 	for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].onWood(abs(spdWood[sameLineWoods()]));
 	}
@@ -299,7 +299,7 @@ void GAME::createCoins() {
 	int randX, randY;
 
 	for (int i = 0; i < nCoin; ++i) {
-		randLine = rand() % 1;
+		randLine = rand() % 2;
 		switch (randLine) {
 		case 0: {	// Line car, train
 			vector<int> sampleY = { 29,-11,13 };
@@ -312,7 +312,7 @@ void GAME::createCoins() {
 
 		case 1: {	// Line wood
 			vector<int> sampleY = { 4 };
-			vector<int> sampleX = {};
+			vector<int> sampleX = xLineWood();
 			randY = sampleY[rand() % sampleY.size()];
 			randX = sampleX[rand() % sampleX.size()];
 
