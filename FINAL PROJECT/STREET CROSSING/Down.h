@@ -11,4 +11,3 @@ public:
 	virtual void clear(People *const peoplePtr, unsigned int x, unsigned int y) override;
 	virtual DState getCurrentState() override;
 };
-

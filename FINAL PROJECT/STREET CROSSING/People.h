@@ -42,4 +42,3 @@ private:
 	unsigned int model;
 	DirectionState *currentDirectionState;
 };
-

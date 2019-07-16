@@ -13,3 +13,4 @@ CoinMachine::~CoinMachine() {
 unsigned* CoinMachine::randomPos() {
 	return 0;
 }
+

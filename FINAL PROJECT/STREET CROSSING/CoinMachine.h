@@ -13,4 +13,3 @@ public:
 private:
 	vector<Coin> coins;
 };
-

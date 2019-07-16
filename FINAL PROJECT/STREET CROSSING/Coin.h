@@ -24,4 +24,3 @@ private:
 	unsigned h = 3, w = 3;
 
 };
-

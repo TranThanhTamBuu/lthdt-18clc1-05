@@ -96,4 +96,3 @@ void SubThread(GAME &game)
 		
 	}
 }
-

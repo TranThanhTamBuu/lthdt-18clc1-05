@@ -21,3 +21,4 @@ public:
 	int getY();
 	void setY(int y);
 };
+

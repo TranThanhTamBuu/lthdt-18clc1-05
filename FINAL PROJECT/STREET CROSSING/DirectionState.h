@@ -12,4 +12,3 @@ public:
 	virtual void clear(People *const peoplePtr, unsigned int x, unsigned int y) = 0;
 	virtual DState getCurrentState() = 0;
 };
-
