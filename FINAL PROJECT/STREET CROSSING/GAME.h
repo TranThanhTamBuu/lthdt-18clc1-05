@@ -5,6 +5,9 @@
 #include "Wood.h"
 #include <vector>
 #include "Console.h"
+#include "Coin.h"
+#define COINVALUE 150
+
 
 class GAME
 {
@@ -16,6 +19,9 @@ private:
 	People people;
 	Wood **Woods;
 	int lineWood, *numWood, *spdWood;
+	vector<Coin> coins;
+	vector<Coin> coinsOnWood;
+	unsigned nCoin;
 
 public:
 	GAME(int level);
@@ -28,13 +34,17 @@ public:
 	bool impactVehicle();
 	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
 	int sameLineWoods();
-	void onWood();
+	void peopleOnWood();
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();
-	vector <int> xLineWood();
-};
 
+	//Coin machine
+	void createCoins();
+	void handleCoinImpact();
+
+	// // // // //
+};
 
 
 

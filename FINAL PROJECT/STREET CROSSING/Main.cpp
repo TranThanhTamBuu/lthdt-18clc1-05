@@ -58,6 +58,21 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
+		
+		if (game.impactVehicle()) {
+			exit(0);
+		}
+
+		switch (game.impactWoods()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+			game.peopleOnWood();
+			break;
+		case -1: // in river
+			exit(0);
+			break;
+		}
 
 		char key = ' ';
 		if (_kbhit())
@@ -75,22 +90,10 @@ void SubThread(GAME &game)
 		// game.updatePos...
 		game.screenScroll();
 		game.drawAll();
+		game.handleCoinImpact();
 		Sleep(0);
-
-		if (game.impactVehicle()) {
-			exit(0);
-		}
-
-		switch (game.impactWoods()) {
-		case 0: // not same line wood
-			break;
-		case 1: // on wood
-			game.onWood();
-			break;
-		case -1: // in river
-			exit(0);
-			break;
-		}
+		
+		
 	}
 }
 

@@ -12,9 +12,6 @@ using namespace std;
 
 
 class DirectionState;
-enum DState {
-	UP, DOWN, LEFT, RIGHT
-};
 
 class People : public Object
 {
@@ -35,9 +32,12 @@ public:
 	bool chooseModel();
 	unsigned int getX();
 	unsigned int getY();
+	unsigned long getMoney();
+	void changeMoney(int amount);
 	void setY(unsigned int _y);
 
 private:
+	unsigned long money;
 	bool state;
 	unsigned int model;
 	DirectionState *currentDirectionState;

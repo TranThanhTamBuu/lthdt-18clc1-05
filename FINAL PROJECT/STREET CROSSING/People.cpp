@@ -7,7 +7,7 @@
 
 
 People::People()
-	: Object(X_max/2, 37), state(true), model(2)  {
+	: Object(X_max/2, 37), state(true), model(2), money(0)  {
 	currentDirectionState = new Down();
 }
 
@@ -20,8 +20,18 @@ unsigned int People::getX() {
 	return x - (Wi-1)/2;
 }
 
+
+
 unsigned int People::getY() {
 	return y - (He-1)/2;
+}
+
+unsigned long People::getMoney() {
+	return money;
+}
+
+void People::changeMoney(int amount) {
+	money += amount;
 }
 
 void People::setY(unsigned int _y) {
