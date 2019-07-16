@@ -1,12 +1,13 @@
 #include "Coin.h"
 
 
+unsigned Coin::nCoin = 0;
 
-Coin::Coin()
-{
+Coin::Coin() {
+	++nCoin;
 }
 
 
-Coin::~Coin()
-{
+Coin::~Coin() {
+	--nCoin;
 }

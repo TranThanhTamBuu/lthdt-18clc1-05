@@ -11,6 +11,7 @@ char MOVING = ' ';
 void SubThread(GAME &game);
 
 int main() {
+	srand(time(NULL));
 	_setmode(_fileno(stdout), _O_U16TEXT);
 	FixConsoleWindow();
 	FixSizeWindow(WIDTH, HEIGHT);
@@ -57,21 +58,6 @@ int main() {
 void SubThread(GAME &game)
 {
 	while (true) {
-		
-		if (game.impactVehicle()) {
-			exit(0);
-		}
-
-		switch (game.impactWoods()) {
-		case 0: // not same line wood
-			break;
-		case 1: // on wood
-			game.onWood();
-			break;
-		case -1: // in river
-			exit(0);
-			break;
-		}
 
 		char key = ' ';
 		if (_kbhit())
@@ -90,8 +76,21 @@ void SubThread(GAME &game)
 		game.screenScroll();
 		game.drawAll();
 		Sleep(0);
-		
-		
+
+		if (game.impactVehicle()) {
+			exit(0);
+		}
+
+		switch (game.impactWoods()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+			game.onWood();
+			break;
+		case -1: // in river
+			exit(0);
+			break;
+		}
 	}
 }
 

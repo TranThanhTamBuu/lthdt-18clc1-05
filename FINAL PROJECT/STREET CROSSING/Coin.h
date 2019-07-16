@@ -8,6 +8,9 @@ public:
 	Coin();
 	~Coin();
 
+	void draw();
+
 private:
+	static unsigned nCoin;
 };
 
