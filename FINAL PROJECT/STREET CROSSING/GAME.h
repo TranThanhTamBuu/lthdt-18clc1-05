@@ -34,6 +34,7 @@ public:
 	bool impactVehicle();
 	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
 	int sameLineWoods();
+	vector <int> xLineWood();
 	void peopleOnWood();
 	void drawAll();
 	bool isEndScr();
@@ -43,7 +44,6 @@ public:
 	void createCoins();
 	void handleCoinImpact();
 
-	// // // // //
 };
 
 
