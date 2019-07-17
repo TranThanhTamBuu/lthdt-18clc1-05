@@ -29,7 +29,7 @@ public:
 	bool isDead();
 	bool isFinish();
 	void draw();
-	void clear();
+	void clearImage();
 	bool chooseModel();
 	unsigned int getX();
 	unsigned int getY();

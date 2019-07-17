@@ -26,7 +26,7 @@ GAME::GAME(int level)
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
-		nCoin = 20;
+		nCoin = 10;
 		createCoins();
 
 		break;
@@ -80,12 +80,24 @@ void GAME::updatePosPeople(char key) {
 
 	switch (key) {
 	case 'W': case 'w': case 72: {
-		people.goUp(STEPUPDOWN);
+		if (sameLineWoods() != -1) {
+			people.clearImage();
+			people.goUp(STEPUPDOWN - 1);
+		}
+		else {
+			people.goUp(STEPUPDOWN);
+		}
 		people.changeDirectionState(UP);
 		break;
 	}
 	case 'S': case 's': case 80: {
-		people.goDown(STEPUPDOWN);
+		if (sameLineWoods() != -1) {
+			people.clearImage();
+			people.goDown(STEPUPDOWN + 1);	
+		}
+		else {
+			people.goDown(STEPUPDOWN);
+		}
 		people.changeDirectionState(DOWN);
 		break;
 	}
@@ -181,6 +193,9 @@ void GAME::drawAll() {
 
 	// draw people
 	people.draw();
+	if (sameLineWoods() != -1) {
+		people.clearImage();
+	}
 
 	// draw car
 	for (int i = 0; i < lineCar; i++) {
@@ -302,18 +317,18 @@ void GAME::createCoins() {
 	int randX, randY;
 
 	for (int i = 0; i < nCoin; ++i) {
-		randLine = rand() % 5;
+		randLine = rand() % 3;
 		switch (randLine) {
-		case 0: case 2: case 3: {	// Line car, train
+		case 0: case 2: {	// Line car, train
 			vector<int> sampleY = { 29,-11,13 };
 			randY = sampleY[rand() % sampleY.size()];
-			randX = ((rand() % (X_max - 1)) + 1);
+			randX = ((rand() % (X_max - 2)) + 2);
 
 			coins.push_back(Coin(randX, randY, LEFT));
 			break;
 		}
 
-		case 1: case 4: {	// Line wood
+		case 1: {	// Line wood
 			vector<int> sampleY = { 4 };
 			int iY = rand() % sampleY.size();
 			vector<int> sampleX = xLineWoods(iY);
@@ -351,7 +366,9 @@ void GAME::handleCoinImpact() {
 	for (int i = 0; i < coinsOnWood.size(); ++i) {
 		if (coinsOnWood[i].isReachEdge()) {
 			coinsOnWood[i].clearImage();
-			coinsOnWood[i].setXC(coinsOnWood[i].getXC() + ((rand() % 10) + 1)*(45 + (rand() % 2)));;
+			vector<int> sampleX = xLineWoods(coinsOnWood[i].getiY());
+			int randX = sampleX[rand() % sampleX.size()];
+			coinsOnWood[i].setXC(randX);
 		}
 	}
 }

@@ -67,6 +67,16 @@ void People::draw() {
 	currentDirectionState->clear(this, x, y);
 }
 
+void People::clearImage() {
+	for (int i = 0; i < He; ++i) {
+		for (int j = 0; j < Wi; ++j) {
+			gotoXY(x - (Wi - 1) / 2 + j, y - (He - 1) / 2 + i);
+			wcout << ' ';
+		}
+	}
+	gotoXY(x, y);
+}
+
 bool People::isDead() {
 	return state;
 }
