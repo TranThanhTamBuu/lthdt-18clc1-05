@@ -176,13 +176,8 @@ void Menu::Do() {
 			gotoXY(78, 15);
 			wcout << "Bye";
 			Sleep(500);
-			if (_kbhit()) {
-				char z = _getch();
-				if (z == 27) {
-					control();
-				}
-			}
 			break;
+		}
 		}
 		if (_kbhit()) {
 			char z = _getch();
@@ -190,11 +185,8 @@ void Menu::Do() {
 				control();
 			}
 		}
-		}
-		
 	}
 }
-
 
 void SubThread(GAME &game)
 {
@@ -237,7 +229,6 @@ void SubThread(GAME &game)
 
 	}
 }
-
 
 void Menu::control()
 {
