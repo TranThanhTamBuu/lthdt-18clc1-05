@@ -247,7 +247,7 @@ bool GAME::isEndScr() {
 void GAME::screenScroll() {
 	if (isEndScr() && (people.getY() <= 12)) return;
 
-	if (people.getY() >= 20) return;
+	if (people.getY() >= 19) return;
 
 	people.setY(20);
 
@@ -289,8 +289,7 @@ void GAME::screenScroll() {
 }
 
 void GAME::peopleOnWood() {
-	/*int i = sameLineWoods();
-	people.setYC(Woods[i][0].getY());*/
+	people.setYC(Woods[sameLineWoods()][0].getY());
 	people.goLeft(abs(spdWood[sameLineWoods()]));
 	people.draw();
 }
