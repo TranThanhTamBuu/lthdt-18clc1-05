@@ -5,6 +5,10 @@ Car::Car()
 	pcar = car;
 }
 
+Car::Car(wstring *pcar, int x, int y, int speed) : Vehicle(x, y, speed) {
+	this->pcar = pcar;
+}
+
 Car::Car(int x, int y, int speed) : Vehicle(x, y, speed)
 {
 	pcar = car;

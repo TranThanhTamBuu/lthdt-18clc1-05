@@ -16,6 +16,7 @@ private:
 
 public:
 	Car();
+	Car(wstring *pcar, int x, int y, int speed);
 	Car(int x, int y, int speed);
 	~Car();
 	void move(); 
