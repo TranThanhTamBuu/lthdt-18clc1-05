@@ -130,6 +130,19 @@ void Menu::Do() {
 	c = Choice();
 	while (true) {
 		switch (c) {
+		case 29: {
+			//New game
+			break;
+		}
+		case 30:
+		{
+			//continue
+			break;
+		}
+		case 31: {
+			//setting
+			break;
+		}
 		case 32:
 		{
 			system("cls");
