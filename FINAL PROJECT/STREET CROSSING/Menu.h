@@ -5,6 +5,7 @@
 #include <string>
 #include <ostream>
 #include <Windows.h>
+#include "GAME.h"
 
 using namespace std;
 
@@ -50,3 +51,5 @@ private:
 	wstring *title;
 	int c;
 };
+
+void SubThread(GAME &game);

@@ -150,7 +150,7 @@ bool GAME::impactVehicle() {
 
 int GAME::sameLineWoods() {
 	for (int i = 0; i < lineWood; i++) {
-		if ((Woods[i][0].getY() <= people.getY()) && (people.getY() <= (Woods[i][0].getY() + 3))) {
+		if ((Woods[i][0].getY() - 4 <= people.getY()) && (people.getY() <= (Woods[i][0].getY() + 4))) {
 			return i;
 		}
 	}
