@@ -129,8 +129,7 @@ int Menu::Choice()
 	}
 }
 
-void Menu::Do() {
-	GAME game(1);
+int Menu::Do(GAME &game) {
 	char key = ' ';
 	switch (c) {
 	case 29: {
@@ -172,11 +171,10 @@ void Menu::Do() {
 
 	case 34:{
 		system("cls");
-		game.~GAME();
 		gotoXY(78, 15);
 		wcout << "Bye";
 		Sleep(500);
-		exit(0);
+		return 0;
 		break;
 	}
 
@@ -187,6 +185,7 @@ void Menu::Do() {
 			key = _getch();
 		}
 	}
+	return 1;
 }
 
 void SubThread(GAME &game)
@@ -240,23 +239,7 @@ void Menu::control()
 	c = Choice();
 }
 
-void Menu::mainMenu() {
-	Menu m;
-	m.ShowTitle();
-	while (true) {
-		m.control();
-		m.Do();
-		if (_kbhit()) {
-			char z = _getch();
-			if (z == 27) {
-				break;
-			}
-		}
-	}
-
-}
-
 Menu::~Menu()
 {
-	delete[]title;
+
 }

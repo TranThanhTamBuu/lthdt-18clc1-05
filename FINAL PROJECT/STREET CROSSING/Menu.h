@@ -41,8 +41,7 @@ public:
 	void ShowTitle();
 	void printMenu(wstring menu[], int n);
 	int Choice();
-	void Do();
-	void mainMenu();
+	int Do(GAME &game);
 	void control();
 	~Menu();
 

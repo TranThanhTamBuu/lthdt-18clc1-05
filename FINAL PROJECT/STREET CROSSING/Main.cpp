@@ -42,16 +42,19 @@ int main() {
 	
 
 	//system("pause");
+
+
+
+	// menu work
+	GAME game(1);
 	Menu m;
-	m.mainMenu();
-	/*Wood w(90, 0, -3);
-	char key = ' ';
-	while (true) {
-		w.move();
-		w.draw();
-		Sleep(50);
-	}*/
-	return 0;
+	m.ShowTitle();
+	int key = 1;
+	while (key != 0) {
+		m.control();
+		key = m.Do(game);
+	}
+
 }
 
 
