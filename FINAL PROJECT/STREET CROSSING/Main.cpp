@@ -8,7 +8,6 @@
 
 char MOVING = ' ';
 
-void SubThread(GAME &game);
 
 int main() {
 	srand(time(NULL));
@@ -36,15 +35,15 @@ int main() {
 	}*/
 
 	
-	GAME game(1);
+	/*GAME game(1);
 	game.chooseModel();
-	SubThread(game);
+	SubThread(game);*/
 
 	
 
-	system("pause");
-	//Menu m;
-	//m.mainMenu();
+	//system("pause");
+	Menu m;
+	m.mainMenu();
 	/*Wood w(90, 0, -3);
 	char key = ' ';
 	while (true) {
@@ -55,45 +54,4 @@ int main() {
 	return 0;
 }
 
-void SubThread(GAME &game)
-{
-	while (true) {
-		
-		if (game.impactVehicle()) {
-			exit(0);
-		}
 
-		switch (game.impactWoods()) {
-		case 0: // not same line wood
-			break;
-		case 1: // on wood
-			game.peopleOnWood();
-			break;
-		case -1: // in river
-			exit(0);
-			break;
-		}
-
-		char key = ' ';
-		if (_kbhit())
-		{
-			int key = _getch();
-			
-			game.updatePosPeople(key);
-
-		}
-
-		game.updatePosCars();
-		game.updatePosTrains();
-		game.updatePosWoods();
-
-		// game.updatePos...
-		game.screenScroll();
-		game.handleCoinImpact();
-		game.drawAll();
-		
-		Sleep(0);
-		
-		
-	}
-}
