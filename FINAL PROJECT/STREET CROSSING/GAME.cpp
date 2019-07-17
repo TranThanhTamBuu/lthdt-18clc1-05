@@ -249,6 +249,8 @@ void GAME::screenScroll() {
 
 	if (people.getY() >= 19) return;
 
+	if (sameLineWoods() != -1 && people.getY() >= 19) return;
+
 	people.setY(20);
 
 	clrscr();
