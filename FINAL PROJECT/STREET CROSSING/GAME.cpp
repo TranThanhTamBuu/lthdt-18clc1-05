@@ -307,7 +307,7 @@ void GAME::createCoins() {
 		case 0: case 2: case 3: {	// Line car, train
 			vector<int> sampleY = { 29,-11,13 };
 			randY = sampleY[rand() % sampleY.size()];
-			randX = (rand() % X_max);
+			randX = ((rand() % (X_max - 1)) + 1);
 
 			coins.push_back(Coin(randX, randY, LEFT));
 			break;
