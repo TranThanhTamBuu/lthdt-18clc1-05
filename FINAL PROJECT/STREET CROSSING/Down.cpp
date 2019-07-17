@@ -122,7 +122,7 @@ void Down::draw(People *const peoplePtr, unsigned int x, unsigned int y, int mod
 	}
 }
 
-void Down::clear(People *const peoplePtr, unsigned int x, unsigned int y) {
+void Down::clear(People *const peoplePtr, unsigned x, unsigned y) {
 	int min = STEPUPDOWN <= He ? STEPUPDOWN : He;
 	for (int i = 0; i < min; i++) {
 		for (int j = 0; j < Wi; j++) {

@@ -4,19 +4,19 @@
 
 
 unsigned Coin::nCoin = 0;
-const wchar_t Coin::image[3][3] = {
-	{ L'✶',L'✶',L'✶' },
-	{ L'✶',L'$',L'✶' },
-	{ L'✶',L'✶',L'✶' }
+const wchar_t Coin::image[3][5] = {
+	{ L' ',L'_',L'☼',L'_',L' ' },
+	{ L'.',L'\\',L'$',L'/',L'.' },
+	{ L'(',L']',L'$',L'[',L')' }
 };
 
 Coin::Coin()
-	: stateOnWood(LEFT) {
+	: stateOnWood(LEFT), iY(0) {
 	++nCoin;
 }
 
-Coin::Coin(int _x, int _y, DState state)
-	: Object(_x,_y), stateOnWood(state) {
+Coin::Coin(int _x, int _y, DState state, int _iY)
+	: Object(_x,_y), stateOnWood(state), iY(_iY) {
 	++nCoin;
 }
 
@@ -24,25 +24,26 @@ Coin::~Coin() {
 	--nCoin;
 }
 
+int Coin::getiY() {
+	return iY;
+}
+
+void Coin::setiY(int _iY) {
+	iY = _iY;
+}
+
 void Coin::draw() {
 	if (x < 0 || y < 0 || x > X_max || y > Y_max) return;
-	
+
+	setColor(14, 0);
 	for (int i = 0; i < h; ++i) {
 		for (int j = 0; j < w; ++j) {
 			gotoXY(x - (w - 1) / 2 + j, y - (h - 1) / 2 + i);
-			if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 0 && j == 2) || (i == 1 && j == 0) || (i == 1 && j == 2) || (i == 2 && j == 0) || (i == 2 && j == 1) || (i == 2 && j == 2)) {
-				int z = rand() % 15 + 1;
-
-				setColor(z, 0);
-				wcout << image[i][j];
-				setColor(7, 0);
-			}
-			else {
-				wcout << image[i][j];
-			}
+			wcout << image[i][j];
 		}
 	}
 	gotoXY(x, y);
+	setColor(7, 0);
 }
 
 void Coin::clear(unsigned step) {
@@ -88,7 +89,7 @@ void Coin::onWood(unsigned step) {
 }
 
 bool Coin::isImpact(int hX, int hY) {
-	if (abs(x - hX) < 5 && abs(y - hY) < 3) return true;
+	if (abs(x - hX) < 6 && abs(y - hY) < 3) return true;
 	return false;
 }
 
