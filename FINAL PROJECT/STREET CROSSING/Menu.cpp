@@ -127,11 +127,14 @@ int Menu::Choice()
 }
 
 void Menu::Do() {
+	GAME game(1);
+	char key = ' ';
 	c = Choice();
 	while (true) {
 		switch (c) {
 		case 29: {
 			//New game
+			SubThread(game);
 			break;
 		}
 		case 30:
@@ -141,6 +144,7 @@ void Menu::Do() {
 		}
 		case 31: {
 			//setting
+			game.chooseModel();
 			break;
 		}
 		case 32:
@@ -163,12 +167,7 @@ void Menu::Do() {
 			gotoXY(78, 15);
 			wcout << "group 5";
 			Sleep(500);
-			if (_kbhit()) {
-				char z = _getch();
-				if (z == 27) {
-					control();
-				}
-			}
+			
 			break;
 		}
 		case 34:
@@ -185,10 +184,60 @@ void Menu::Do() {
 			}
 			break;
 		}
+		if (_kbhit()) {
+			char z = _getch();
+			if (z == 27) {
+				control();
+			}
+		}
 		}
 		
 	}
 }
+
+
+void SubThread(GAME &game)
+{
+	while (true) {
+
+		if (game.impactVehicle()) {
+			exit(0);
+		}
+
+		switch (game.impactWoods()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+			game.peopleOnWood();
+			break;
+		case -1: // in river
+			exit(0);
+			break;
+		}
+
+		char key = ' ';
+		if (_kbhit())
+		{
+			int key = _getch();
+
+			game.updatePosPeople(key);
+
+		}
+
+		game.updatePosCars();
+		game.updatePosTrains();
+		game.updatePosWoods();
+
+		// game.updatePos...
+		game.screenScroll();
+		game.drawAll();
+		game.handleCoinImpact();
+		Sleep(0);
+
+
+	}
+}
+
 
 void Menu::control()
 {
