@@ -152,6 +152,10 @@ void Coin::drawMove(int step) {
 	int length;
 	setColor(14, 0);
 
+	if(x >= X_max) {
+		return;
+	}
+
 	if (x + w >= X_max) {
 		length = X_max - x;
 		for (int i = 0; i < 3; i++) {
