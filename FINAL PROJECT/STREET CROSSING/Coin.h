@@ -4,9 +4,6 @@
 #include "Object.h"
 #include "Console.h"
 
-
-
-
 static wstring coin[3] = {
 	L" _☼_ ",
 	L".\\$/.",

@@ -230,20 +230,20 @@ void GAME::drawAll() {
 	}*/
 
 	// draw coinsOnWood
-<<<<<<< HEAD
+
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]); 
 			coinsOnWood[i][j].drawMove(-1);
 		}
 	}
-=======
+
 
 	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].move(-1);
 		coinsOnWood[i].drawMove(-1);
 	}*/
->>>>>>> 4df2df04ab3e450fd1832de559f1710e71deaea7
+
 }
 
 bool GAME::isEndScr() {
@@ -313,18 +313,18 @@ void GAME::screenScroll() {
 	}*/
 
 	// coinOnWood
-<<<<<<< HEAD
+
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			coinsOnWood[i][j].setYC(coinsOnWood[i][j].getYC() + 8);
 		}
 	}
-=======
+
 	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].setYC(coinsOnWood[i].getYC() + 8);
 	}*/
 
->>>>>>> 4df2df04ab3e450fd1832de559f1710e71deaea7
+
 }
 
 void GAME::peopleOnWood() {
