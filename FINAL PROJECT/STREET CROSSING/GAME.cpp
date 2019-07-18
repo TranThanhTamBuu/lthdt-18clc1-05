@@ -26,10 +26,10 @@ GAME::GAME(int level)
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
-		nCoin = 25;
+		/*nCoin = 25;
 		vector<int> countNCoin_temp(1, 0);
 		countNCoin = countNCoin_temp;
-		createCoins();
+		createCoins();*/
 
 		break;
 	}
@@ -192,53 +192,49 @@ int GAME::impactWoods() {
 }
 
 void GAME::drawAll() {
-	//draw line
-	/*for (int i = 0; i <= 5; i++) {
-		gotoXY(0, 0 + 8 * i);	printLine(WIDTH);
-	}*/
 
 	// draw people
-	/*people.draw();
+	people.draw();
 	if (sameLineWoods() != -1) {
 		people.clearImage();
-	}*/
+	}
 
 	// draw car
-	/*for (int i = 0; i < lineCar; i++) {
+	for (int i = 0; i < lineCar; i++) {
 		if(Cars[i][0].getY() >=0 && Cars[i][0].getY() < Y_max) {
 			for (int j = 0; j < numCar[i]; j++) {
 				Cars[i][j].draw();
 			}
 		}
-	}*/
+	}
 
 	// draw train
-	/*for (int i = 0; i < lineTrain; i++) {
+	for (int i = 0; i < lineTrain; i++) {
 		if (Trains[i].getY() >= 0 && Trains[i].getY() < Y_max) {
 			Trains[i].draw();
 		}
-	}*/
+	}
 
 	// draw wood
-	/*for (int i = 0; i < lineWood; i++) {
+	for (int i = 0; i < lineWood; i++) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
 			for (int j = 0; j < numWood[i]; j++) {
 				Woods[i][j].draw();
 			}
 		}
-	}*/
+	}
 
 	// draw coin
-	for (int i = 0; i < coins.size(); ++i) {
+	/*for (int i = 0; i < coins.size(); ++i) {
 		coins[i].draw();
-	}
+	}*/
 
 	// draw coinsOnWood
 
-	for (int i = 0; i < coinsOnWood.size(); ++i) {
+	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].move(-1);
 		coinsOnWood[i].drawMove(-1);
-	}
+	}*/
 }
 
 bool GAME::isEndScr() {
@@ -303,14 +299,14 @@ void GAME::screenScroll() {
 	}
 
 	// Coin
-	for (int i = 0; i < coins.size(); ++i) {
+	/*for (int i = 0; i < coins.size(); ++i) {
 		coins[i].setYC(coins[i].getYC() + 8);
-	}
+	}*/
 
 	// coinOnWood
-	for (int i = 0; i < coinsOnWood.size(); ++i) {
+	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].setYC(coinsOnWood[i].getYC() + 8);
-	}
+	}*/
 
 }
 

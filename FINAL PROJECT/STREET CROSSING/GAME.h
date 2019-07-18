@@ -14,11 +14,15 @@ class GAME
 private:
 	Car **Cars;
 	int lineCar, *numCar, *spdCar;
+
 	Train *Trains;
 	int lineTrain, *spdTrain;
+
 	People people;
+
 	Wood **Woods;
 	int lineWood, *numWood, *spdWood;
+
 	vector<Coin> coins;
 	vector<Coin> coinsOnWood;
 	unsigned nCoin;

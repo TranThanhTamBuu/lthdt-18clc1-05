@@ -190,6 +190,11 @@ int Menu::Do(GAME &game) {
 
 void SubThread(GAME &game)
 {
+	//draw line
+	for (int i = 0; i <= 5; i++) {
+		gotoXY(0, 0 + 8 * i);	printLine(X_max);
+	}
+
 	while (true) {
 
 		if (game.impactVehicle()) {
@@ -218,16 +223,16 @@ void SubThread(GAME &game)
 
 		}
 
-		//game.updatePosCars();
-		//game.updatePosTrains();
-		//game.updatePosWoods();
+		game.updatePosCars();
+		game.updatePosTrains();
+		game.updatePosWoods();
 
 		// game.updatePos...
 		game.screenScroll();
-		game.handleCoinImpact();
+		//game.handleCoinImpact();
 		game.drawAll();
 
-		Sleep(500);
+		Sleep(0);
 
 
 	}
