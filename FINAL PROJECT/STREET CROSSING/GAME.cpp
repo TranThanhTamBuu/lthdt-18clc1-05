@@ -416,9 +416,9 @@ void GAME::handleCoinImpact() {
 				people.changeMoney(COINVALUE);
 				coinsOnWood[i][j].clearImage();
 				--countNCoin[coinsOnWood[i][j].getiY()];
-				coinsOnWood[i].erase(coinsOnWood[i].begin() + i);
+				coinsOnWood[i].erase(coinsOnWood[i].begin() + j);
 				coinsOnWood[i].shrink_to_fit();
-				--i;
+				--j;
 			}
 		}
 	}
