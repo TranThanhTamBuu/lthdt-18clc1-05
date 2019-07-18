@@ -10,6 +10,8 @@ const wchar_t Coin::image[3][5] = {
 	{ L'(',L']',L'$',L'[',L')' }
 };
 
+
+
 Coin::Coin()
 	: stateOnWood(LEFT), iY(0) {
 	++nCoin;
@@ -120,4 +122,74 @@ void Coin::clearImage() {
 		}
 	}
 	gotoXY(x, y);
+}
+
+
+void Coin::move(int step) {
+	x += step;
+
+	int flag = x + w;
+	if (flag < 0) {
+		clearMove(step);
+		x = X_max - 1;
+	}
+}
+
+void Coin::drawMove(int step) {
+	wstring temp;
+	int length;
+	setColor(14, 0);
+
+	if (x + w >= X_max) {
+		length = X_max - x;
+		for (int i = 0; i < 3; i++) {
+			temp = coin[i].substr(0, length);
+			gotoXY(x, y + i);
+			wcout << temp;
+		}
+	}
+
+	if (x < 0 && x + w >= 0) {
+		length = x + w;
+		for (int i = 0; i < 3; i++) {
+			temp = coin[i].substr(w - length, length);
+			gotoXY(0, y + i);
+			wcout << temp;
+		}
+	}
+
+	if (x >= 0 && x + w < X_max) {
+		for (int i = 0; i < h; i++) {
+			gotoXY(x, y + i);
+			wcout << coin[i];
+		}
+	}
+
+	setColor(7, 0);
+	clearMove(step);
+}
+
+void Coin::clearMove(int step) {
+	int length = abs(step);
+	int x;
+
+	int flag = x + w;
+	if (flag >= X_max) {
+		return;
+	}
+
+	if (X_max - x + w < length && x + w < X_max) {
+		length = X_max - x + w;
+	}
+
+	x = x + w;
+	if (x < 0) {
+		length += x;
+		x = 0;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		gotoXY(x, y + i);
+		printSpace(length);
+	}
 }
