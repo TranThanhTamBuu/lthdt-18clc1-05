@@ -17,7 +17,7 @@ void River::set(int x, int y, int spd) {
 	speed = spd;
 }
 
-int River::getY() {
+int River::getY() const {
 	return mY;
 }
 
@@ -25,6 +25,6 @@ void River::setY(int y) {
 	mY = y;
 }
 
-int River::getX() {
+int River::getX() const {
 	return mX;
 }

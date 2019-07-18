@@ -11,7 +11,6 @@ const wchar_t Coin::image[3][5] = {
 };
 
 
-
 Coin::Coin()
 	: stateOnWood(LEFT), iY(0) {
 	++nCoin;
@@ -32,6 +31,14 @@ int Coin::getiY() {
 
 void Coin::setiY(int _iY) {
 	iY = _iY;
+}
+
+void Coin::setiX(int _iX) {
+	iX = _iX;
+}
+
+int Coin::getiX() {
+	return iX;
 }
 
 void Coin::draw() {
@@ -125,14 +132,18 @@ void Coin::clearImage() {
 }
 
 
-void Coin::move(int step) {
+void Coin::moveOnRiver(int step, Wood wo) {
 	x += step;
 
 	int flag = x + w;
 	if (flag < 0) {
 		clearMove(step);
-		x = X_max - 1;
+		x = X_max - 1 + (wood[0].length() -  getDistanceFromWood(wo) - w) + getDistanceFromWood(wo);
 	}
+}
+
+int Coin::getDistanceFromWood(Wood wo) {
+	return ((x - (w - 1) / 2) - wo.getX());
 }
 
 void Coin::drawMove(int step) {

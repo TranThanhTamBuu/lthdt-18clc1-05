@@ -218,9 +218,9 @@ void SubThread(GAME &game)
 
 		}
 
-		//game.updatePosCars();
-		//game.updatePosTrains();
-		//game.updatePosWoods();
+		game.updatePosCars();
+		game.updatePosTrains();
+		game.updatePosWoods();
 
 		// game.updatePos...
 		game.screenScroll();

@@ -1,7 +1,11 @@
 ﻿#pragma once
+#include <string>
+#include "Wood.h"
 #include "Object.h"
 #include "Console.h"
-#include <string>
+
+
+
 
 static wstring coin[3] = {
 	L" _☼_ ",
@@ -24,10 +28,12 @@ public:
 	bool isReachEdge();
 	void setY(int _y);
 	void setiY(int _iY);
+	void setiX(int _iX);
+	int getiX();
 	int getiY();
-	static unsigned getNCoin();
-
-	void move(int step); // step < 0
+	// static unsigned getNCoin();
+	int getDistanceFromWood(Wood wo);
+	void moveOnRiver(int step, Wood wo); // step < 0
 	void drawMove(int step);
 	void clearMove(int step);
 
@@ -37,5 +43,5 @@ private:
 	static const wchar_t image[3][5];
 	unsigned h = 3, w = 5;
 	int iY;
-	
+	int iX;
 };

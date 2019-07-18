@@ -20,7 +20,7 @@ private:
 	Wood **Woods;
 	int lineWood, *numWood, *spdWood;
 	vector<Coin> coins;
-	vector<Coin> coinsOnWood;
+	vector<vector<Coin>> coinsOnWood;
 	unsigned nCoin;
 	vector<int> countNCoin;
 

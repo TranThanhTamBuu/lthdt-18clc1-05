@@ -12,8 +12,8 @@ public:
 	virtual void draw() = 0;
 	virtual void clear() = 0;
 	virtual bool isImpact(People &people) = 0;
-	int getY();
-	int getX();
+	int getY() const;
+	int getX() const;
 	void setY(int y);
 	virtual ~River();
 protected:
