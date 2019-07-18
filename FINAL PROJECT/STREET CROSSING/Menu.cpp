@@ -229,7 +229,7 @@ void SubThread(GAME &game)
 
 		// game.updatePos...
 		game.screenScroll();
-		//game.handleCoinImpact();
+		game.handleCoinImpact();
 		game.drawAll();
 
 		Sleep(0);
