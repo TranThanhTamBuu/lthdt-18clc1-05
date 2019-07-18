@@ -171,7 +171,7 @@ void Coin::drawMove(int step) {
 
 void Coin::clearMove(int step) {
 	int length = abs(step);
-	int x;
+	int x = Object::getXC() - 1 + coin[0].length();
 
 	int flag = x + w;
 	if (flag >= X_max) {
