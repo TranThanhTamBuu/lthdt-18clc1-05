@@ -1,6 +1,13 @@
 ﻿#pragma once
 #include "Object.h"
 #include "Console.h"
+#include <string>
+
+static wstring coin[3] = {
+	L" _☼_ ",
+	L".\\$/.",
+	L"(]$[)",
+};
 
 class Coin: public Object
 {
@@ -19,6 +26,10 @@ public:
 	void setiY(int _iY);
 	int getiY();
 	static unsigned getNCoin();
+
+	void move(int step); // step < 0
+	void drawMove(int step);
+	void clearMove(int step);
 
 private:
 	DState stateOnWood;

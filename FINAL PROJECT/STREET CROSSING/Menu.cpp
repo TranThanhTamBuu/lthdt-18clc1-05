@@ -18,7 +18,7 @@ void Menu::ShowTitle()
 		Sleep(300);
 		gotoXY(66, 32);
 		setColor(14, 0);
-		wcout << "\tPRESS ENTER TO PLAY!";
+		wcout << "\tPRESS ANY KEY TO START!";
 		Sleep(300);
 
 		setColor(11, 0);
@@ -29,9 +29,12 @@ void Menu::ShowTitle()
 		Sleep(300);
 		gotoXY(66, 32);
 		setColor(11, 0);
-		wcout << "\tPRESS ENTER TO PLAY!";
+		wcout << "\tPRESS ANY KEY TO START!";
 		Sleep(300);
+
 	};
+	
+	int key = _getch();
 }
 
 void Menu::printMenu(wstring menu[], int n)
@@ -126,66 +129,63 @@ int Menu::Choice()
 	}
 }
 
-void Menu::Do() {
-	GAME game(1);
+int Menu::Do(GAME &game) {
 	char key = ' ';
-	c = Choice();
-	while (true) {
-		switch (c) {
-		case 29: {
-			//New game
-			SubThread(game);
-			break;
-		}
-		case 30:
-		{
-			//continue
-			break;
-		}
-		case 31: {
-			//setting
-			game.chooseModel();
-			break;
-		}
-		case 32:
-		{
-			system("cls");
-			gotoXY(78, 15);
-			wcout << "Use A, S, D, E to play";
-			Sleep(500);
-			if (_kbhit()) {
-				char z = _getch();
-				if (z == 27) {
-					control();
-				}
-			}
-			break;
-		}
-		case 33:
-		{
-			system("cls");
-			gotoXY(78, 15);
-			wcout << "group 5";
-			Sleep(500);
-			
-			break;
-		}
-		case 34:
-		{
-			system("cls");
-			gotoXY(78, 15);
-			wcout << "Bye";
-			Sleep(500);
-			break;
-		}
-		}
-		if (_kbhit()) {
-			char z = _getch();
-			if (z == 27) {
-				control();
-			}
+	switch (c) {
+	case 29: {
+		//New game
+		system("cls");
+		SubThread(game);
+		break;
+	}
+
+	case 30:{
+		system("cls");
+		//continue
+		break;
+	}
+
+	case 31: {
+		//setting
+		system("cls");
+		game.chooseModel();
+		key = 27;
+		break;
+	}
+		
+	case 32:{
+		system("cls");
+		gotoXY(78, 15);
+		wcout << "Use A, S, D, E to play";
+		Sleep(500);
+		break;
+	}
+	case 33:
+	{
+		system("cls");
+		gotoXY(78, 15);
+		wcout << "group 5";
+		Sleep(500);
+		break;
+	}
+
+	case 34:{
+		system("cls");
+		gotoXY(78, 15);
+		wcout << "Bye";
+		Sleep(500);
+		return 0;
+		break;
+	}
+
+	}
+
+	while (key != 27) {
+		if(_kbhit()) {
+			key = _getch();
 		}
 	}
+	return 1;
 }
 
 void SubThread(GAME &game)
@@ -193,6 +193,7 @@ void SubThread(GAME &game)
 	while (true) {
 
 		if (game.impactVehicle()) {
+			game.~GAME();
 			exit(0);
 		}
 
@@ -203,6 +204,7 @@ void SubThread(GAME &game)
 			game.peopleOnWood();
 			break;
 		case -1: // in river
+			game.~GAME();
 			exit(0);
 			break;
 		}
@@ -222,8 +224,9 @@ void SubThread(GAME &game)
 
 		// game.updatePos...
 		game.screenScroll();
-		game.drawAll();
 		game.handleCoinImpact();
+		game.drawAll();
+
 		Sleep(0);
 
 
@@ -236,14 +239,7 @@ void Menu::control()
 	c = Choice();
 }
 
-void Menu::mainMenu() {
-	Menu m;
-	m.ShowTitle();
-	m.control();
-	m.Do();
-}
-
 Menu::~Menu()
 {
-	delete[]title;
+
 }
