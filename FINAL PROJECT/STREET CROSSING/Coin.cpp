@@ -18,7 +18,7 @@ Coin::Coin()
 }
 
 Coin::Coin(int _x, int _y, DState state, int _iY)
-	: Object(_x,_y), stateOnWood(state), iY(_iY) {
+	: Object(_x, _y), stateOnWood(state), iY(_iY) {
 	++nCoin;
 }
 
@@ -124,11 +124,6 @@ void Coin::clearImage() {
 	gotoXY(x, y);
 }
 
-<<<<<<< HEAD
-unsigned Coin::getNCoin() {
-	return nCoin;
-}
-=======
 
 void Coin::move(int step) {
 	x += step;
@@ -198,4 +193,3 @@ void Coin::clearMove(int step) {
 		printSpace(length);
 	}
 }
->>>>>>> a6b0a66a508380c966ff4d1f7547791b8ee6eea2
