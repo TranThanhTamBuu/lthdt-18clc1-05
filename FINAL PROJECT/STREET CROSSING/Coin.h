@@ -37,5 +37,5 @@ private:
 	static const wchar_t image[3][5];
 	unsigned h = 3, w = 5;
 	int iY;
-
+	
 };

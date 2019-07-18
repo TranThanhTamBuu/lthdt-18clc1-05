@@ -1,5 +1,6 @@
 #pragma once
 #include "River.h"
+#include "Coin.h"
 
 static wstring wood[3] = {
 	L" _____________________ ",

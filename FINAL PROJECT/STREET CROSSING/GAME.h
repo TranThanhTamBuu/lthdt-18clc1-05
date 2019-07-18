@@ -32,6 +32,7 @@ public:
 	void updatePosTrains();
 	void updatePosCars();
 	void updatePosWoods();
+	void updatePosCoinOnWoods();
 	bool impactVehicle();
 	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
 	int sameLineWoods();
