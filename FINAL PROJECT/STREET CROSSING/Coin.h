@@ -5,7 +5,7 @@
 #include "Console.h"
 
 
-
+class Wood;
 
 static wstring coin[3] = {
 	L" _☼_ ",
@@ -32,8 +32,8 @@ public:
 	int getiX();
 	int getiY();
 	// static unsigned getNCoin();
-	int getDistanceFromWood(Wood wo);
-	void moveOnRiver(int step, Wood wo); // step < 0
+	int getDistanceFromWood(const Wood &wo);
+	void moveOnRiver(int step, const Wood &wo); // step < 0
 	void drawMove(int step);
 	void clearMove(int step);
 

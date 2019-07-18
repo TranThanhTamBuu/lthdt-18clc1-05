@@ -26,10 +26,14 @@ GAME::GAME(int level)
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
-		/*nCoin = 25;
+		nCoin = 10;
 		vector<int> countNCoin_temp(1, 0);
 		countNCoin = countNCoin_temp;
-		createCoins();*/
+		for (int i = 0; i < lineWood; ++i) {
+			vector<Coin> temp;
+			coinsOnWood.push_back(temp);
+		}
+		createCoins();
 
 		break;
 	}
@@ -230,20 +234,17 @@ void GAME::drawAll() {
 	}*/
 
 	// draw coinsOnWood
-<<<<<<< HEAD
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]); 
 			coinsOnWood[i][j].drawMove(-1);
 		}
 	}
-=======
 
 	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].move(-1);
 		coinsOnWood[i].drawMove(-1);
 	}*/
->>>>>>> 4df2df04ab3e450fd1832de559f1710e71deaea7
 }
 
 bool GAME::isEndScr() {
@@ -313,18 +314,15 @@ void GAME::screenScroll() {
 	}*/
 
 	// coinOnWood
-<<<<<<< HEAD
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			coinsOnWood[i][j].setYC(coinsOnWood[i][j].getYC() + 8);
 		}
 	}
-=======
 	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].setYC(coinsOnWood[i].getYC() + 8);
 	}*/
 
->>>>>>> 4df2df04ab3e450fd1832de559f1710e71deaea7
 }
 
 void GAME::peopleOnWood() {
@@ -356,14 +354,14 @@ void GAME::createCoins() {
 	for (int i = 0; i < nCoin; ++i) {
 		randLine = rand() % 3;
 		switch (randLine) {
-		//case 0: case 2: {	// Line car, train
-		//	vector<int> sampleY = { 29,-11,13 };
-		//	randY = sampleY[rand() % sampleY.size()];
-		//	randX = ((rand() % (X_max - 2)) + 2);
+		case 0: case 2: {	// Line car, train
+			vector<int> sampleY = { 29,-11,13 };
+			randY = sampleY[rand() % sampleY.size()];
+			randX = ((rand() % (X_max - 2)) + 2);
 
-		//	coins.push_back(Coin(randX, randY, LEFT));
-		//	break;
-		//}
+			coins.push_back(Coin(randX, randY, LEFT));
+			break;
+		}
 
 		case 1: {	// Line wood
 			int iY = rand() % sampleYWood.size();
@@ -377,7 +375,7 @@ void GAME::createCoins() {
 				sampleXWood[iY].erase(sampleXWood[iY].begin() + iX);
 				sampleXWood[iY].shrink_to_fit();
 
-				coinsOnWood[iY].push_back(Coin(randX - 1, randY, LEFT, iY));
+				coinsOnWood[iY].push_back(Coin(randX - 1, randY-1, LEFT, iY));
 				// Count nCoin on one line
 				++countNCoin[iY];
 				break;
@@ -389,9 +387,9 @@ void GAME::createCoins() {
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			for (int k = 0; k < numWood[i]; ++k) {
-				if (coinsOnWood[i][j].getXC() == sampleXWood_temp[i][k]
-					|| coinsOnWood[i][j].getXC() == sampleXWood_temp[i][k] - 6
-					|| coinsOnWood[i][j].getXC() == sampleXWood_temp[i][k] + 6) {
+				if (coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k]
+					|| coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k] - 6
+					|| coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k] + 6) {
 					coinsOnWood[i][j].setiX(k);
 					break;
 				}

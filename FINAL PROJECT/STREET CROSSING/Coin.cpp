@@ -132,17 +132,18 @@ void Coin::clearImage() {
 }
 
 
-void Coin::moveOnRiver(int step, Wood wo) {
+void Coin::moveOnRiver(int step, const Wood &wo) {
 	x += step;
 
 	int flag = x + w;
 	if (flag < 0) {
 		clearMove(step);
-		x = X_max - 1 + (wood[0].length() -  getDistanceFromWood(wo) - w) + getDistanceFromWood(wo);
+		int d = getDistanceFromWood(wo);
+		x = X_max - 1 + (wood[0].length() -  d - w) + d;
 	}
 }
 
-int Coin::getDistanceFromWood(Wood wo) {
+int Coin::getDistanceFromWood(const Wood &wo) {
 	return ((x - (w - 1) / 2) - wo.getX());
 }
 
