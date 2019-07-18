@@ -18,6 +18,7 @@ public:
 	void setY(int _y);
 	void setiY(int _iY);
 	int getiY();
+	static unsigned getNCoin();
 
 private:
 	DState stateOnWood;

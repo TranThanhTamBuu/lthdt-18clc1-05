@@ -22,6 +22,7 @@ private:
 	vector<Coin> coins;
 	vector<Coin> coinsOnWood;
 	unsigned nCoin;
+	vector<int> countNCoin;
 
 public:
 	GAME(int level);

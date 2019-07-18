@@ -121,3 +121,7 @@ void Coin::clearImage() {
 	}
 	gotoXY(x, y);
 }
+
+unsigned Coin::getNCoin() {
+	return nCoin;
+}
