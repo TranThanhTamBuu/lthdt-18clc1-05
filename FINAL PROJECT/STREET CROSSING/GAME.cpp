@@ -229,9 +229,9 @@ void GAME::drawAll() {
 	}
 
 	// draw coin
-	/*for (int i = 0; i < coins.size(); ++i) {
+	for (int i = 0; i < coins.size(); ++i) {
 		coins[i].draw();
-	}*/
+	}
 
 	// draw coinsOnWood
 	for (int i = 0; i < lineWood; ++i) {
@@ -309,9 +309,9 @@ void GAME::screenScroll() {
 	}
 
 	// Coin
-	/*for (int i = 0; i < coins.size(); ++i) {
+	for (int i = 0; i < coins.size(); ++i) {
 		coins[i].setYC(coins[i].getYC() + 8);
-	}*/
+	}
 
 	// coinOnWood
 	for (int i = 0; i < lineWood; ++i) {
