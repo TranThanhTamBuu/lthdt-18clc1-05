@@ -20,7 +20,7 @@ GAME::GAME(int level)
 
 		//Wood
 		lineWood = 1;
-		int yWood[] = { 4 };
+		int yWood[] = { -4 };
 		numWood = new int [lineWood] { 4 };
 		spdWood = new int [lineWood] { -1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
@@ -336,7 +336,7 @@ void GAME::createCoins() {
 		randLine;
 	int randX, randY;
 
-	vector<int> sampleYWood = { 4 };
+	vector<int> sampleYWood = { -4 };
 	vector<vector<int>> sampleXWood;
 	for (int i = 0; i < lineWood; ++i) {
 		sampleXWood.push_back(xLineWoods(i));
