@@ -225,15 +225,16 @@ void SubThread(GAME &game)
 
 		game.updatePosCars();
 		game.updatePosTrains();
-		game.updatePosWoods();
 		game.updatePosCoinOnWoods();
+		game.updatePosWoods();
+
 
 		// game.updatePos...
 		game.screenScroll();
 		game.handleCoinImpact();
 		game.drawAll();
 
-		Sleep(70);
+		Sleep(25);
 
 
 	}

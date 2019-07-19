@@ -22,10 +22,10 @@ public:
 	void draw();
 	void clear(unsigned step);
 	void clearImage();
-	void Coin::clearImageOnWood();
+	void clearImageOnWood();
 	void onWood(unsigned step);
 	bool isImpact(int hX, int hY);
-	bool Coin::isImpactOnWood(int hX, int hY);
+	bool isImpactOnWood(int hX, int hY);
 	bool isReachEdge();
 	void setY(int _y);
 	void setiY(int _iY);

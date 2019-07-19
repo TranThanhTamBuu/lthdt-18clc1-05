@@ -6,24 +6,23 @@ GAME::GAME(int level)
 	switch (level) {
 	case 1: {
 		//Car
-		/*lineCar = 2;
-		int yCar[] = { 27, -13 };
-		numCar = new int[lineCar] { 4, 3 };
-		spdCar = new int[lineCar] { -1, -2 };
-		Cars = createCars(yCar, lineCar, numCar, spdCar);*/
+		lineCar = 2;
+		int yCar[] = { -13, 26 };
+		numCar = new int[lineCar] { 4, 2 };
+		spdCar = new int[lineCar] { -1, 1 };
+		Cars = createCars(yCar, lineCar, numCar, spdCar);
 
 		//Train
-		/*lineTrain = 1;
+		lineTrain = 1;
 		int yTrain[] = { 10 };
 		spdTrain = new int[lineTrain] {1};
-		Trains = createTrains(yTrain, lineTrain, spdTrain);*/
+		Trains = createTrains(yTrain, lineTrain, spdTrain);
 
 		//Wood
 		lineWood = 1;
 		int yWood[] = { -4 };
 		numWood = new int [lineWood] { 4 };
-		numWood = new int [lineWood] { 3 };
-		spdWood = new int [lineWood] { -1 };
+		spdWood = new int [lineWood] { 1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
@@ -154,7 +153,7 @@ void GAME::updatePosWoods() {
 void GAME::updatePosCoinOnWoods() {
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-			coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]);
+			coinsOnWood[i][j].moveOnRiver(1, Woods[i][(coinsOnWood[i][j].getiX())]);
 		}
 	}
 }
@@ -210,23 +209,6 @@ int GAME::impactWoods() {
 
 void GAME::drawAll() {
 
-
-	// draw car
-	for (int i = 0; i < lineCar; i++) {
-		if(Cars[i][0].getY() >=0 && Cars[i][0].getY() < Y_max) {
-			for (int j = 0; j < numCar[i]; j++) {
-				Cars[i][j].draw();
-			}
-		}
-	}
-
-	// draw train
-	for (int i = 0; i < lineTrain; i++) {
-		if (Trains[i].getY() >= 0 && Trains[i].getY() < Y_max) {
-			Trains[i].draw();
-		}
-	}
-
 	// draw wood
 	for (int i = 0; i < lineWood; i++) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
@@ -245,10 +227,27 @@ void GAME::drawAll() {
 	for (int i = 0; i < lineWood; ++i) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
 			for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-				coinsOnWood[i][j].drawMove(-1);
+				coinsOnWood[i][j].drawMove(1);
 			}
 		}
 	}
+
+	// draw car
+	for (int i = 0; i < lineCar; i++) {
+		if (Cars[i][0].getY() >= 0 && Cars[i][0].getY() < Y_max) {
+			for (int j = 0; j < numCar[i]; j++) {
+				Cars[i][j].draw();
+			}
+		}
+	}
+
+	// draw train
+	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() >= 0 && Trains[i].getY() < Y_max) {
+			Trains[i].draw();
+		}
+	}
+
 
 	// draw people
 	people.draw();
