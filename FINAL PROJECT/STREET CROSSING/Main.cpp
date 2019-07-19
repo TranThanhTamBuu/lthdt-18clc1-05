@@ -18,13 +18,13 @@ int main() {
 	ShowConsoleCursor(false);
 
 
-	/*Car c(0, 0, -2);
+	Wood c(-10, 0, -1);
 	char key = ' ';
 	while (true) {
 		c.move();
 		c.draw();
 		Sleep(50);
-	}*/
+	}
 
 	/*Train t(-2, 0);
 	char key = ' ';
@@ -37,8 +37,8 @@ int main() {
 	
 
 
-	GAME game(1);
-	SubThread(game);
+	/*GAME game(1);
+	SubThread(game);*/
 
 	
 	

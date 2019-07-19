@@ -21,11 +21,7 @@ GAME::GAME(int level)
 		//Wood
 		lineWood = 1;
 		int yWood[] = { -4 };
-<<<<<<< HEAD
 		numWood = new int [lineWood] { 4 };
-=======
-		numWood = new int [lineWood] { 3 };
->>>>>>> 4187e40ac000f18fa377090062b5b13607d22c83
 		spdWood = new int [lineWood] { -1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 

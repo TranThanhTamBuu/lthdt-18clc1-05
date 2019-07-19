@@ -17,34 +17,66 @@ Wood::~Wood()
 }
 
 void Wood::move() {
+	if (speed > 0) {
+		clear();
+	}
 	mX += speed;
 
-	int flag = mX + pwood[0].length();
-	if (flag < 0) {
-		clear();
-		mX = X_max - 1;
+	if (speed < 0) {
+		int flag = mX + pwood[0].length();
+		if (flag < 0) {
+			clear();
+			mX = X_max - 1;
+		}
 	}
+	else {
+		if (mX >= X_max) {
+			mX = 0 - pwood[0].length();
+		}
+	}
+	
 }
 
 void Wood::draw() {
 	wstring temp;
 	int length;
 
-	if (mX + pwood[0].length() >= X_max) {
-		length = X_max - mX;
-		for (int i = 0; i < 3; i++) {
-			temp = pwood[i].substr(0, length);
-			gotoXY(mX, mY + i);
-			wcout << temp;
+	if (speed < 0) {
+		if (mX + pwood[0].length() >= X_max) {
+			length = X_max - mX;
+			for (int i = 0; i < 3; i++) {
+				temp = pwood[i].substr(0, length);
+				gotoXY(mX, mY + i);
+				wcout << temp;
+			}
+		}
+
+		if (mX < 0 && mX + pwood[0].length() >= 0) {
+			length = mX + pwood[0].length();
+			for (int i = 0; i < 3; i++) {
+				temp = pwood[i].substr(pwood[0].length() - length, length);
+				gotoXY(0, mY + i);
+				wcout << temp;
+			}
 		}
 	}
+	else {
+		if (mX < 0 && mX + pwood[0].length() >= 0) {
+			length = mX + pwood[0].length();
+			for (int i = 0; i < 3; i++) {
+				temp = pwood[i].substr(-mX , length);
+				gotoXY(0, mY + i);
+				wcout << temp;
+			}
+		}
 
-	if (mX < 0 && mX + pwood[0].length() >= 0) {
-		length = mX + pwood[0].length();
-		for (int i = 0; i < 3; i++) {
-			temp = pwood[i].substr(pwood[0].length() - length, length);
-			gotoXY(0, mY + i);
-			wcout << temp;
+		if (mX <= X_max && pwood[0].length() + mX >= X_max) {
+			length = X_max - mX;
+			for (int i = 0; i < 3; i++) {
+				temp = pwood[i].substr(0, length);
+				gotoXY(mX, mY + i);
+				wcout << temp;
+			}
 		}
 	}
 
@@ -55,26 +87,45 @@ void Wood::draw() {
 		}
 	}
 
-	clear();
+	if (speed < 0) {
+		clear();
+	}
 }
 
 void Wood::clear() {
 	int length = abs(speed);
 	int x;
 
-	int flag = mX + pwood[0].length();
-	if (flag >= X_max) {
-		return;
-	}
+	if (speed < 0) {
+		int flag = mX + pwood[0].length();
+		if (flag >= X_max) {
+			return;
+		}
 
-	if (X_max - mX + pwood[0].length() < length && mX + pwood[0].length() < X_max) {
-		length = X_max - mX + pwood[0].length();
-	}
+		if (X_max - mX + pwood[0].length() < length && mX + pwood[0].length() < X_max) {
+			length = X_max - mX + pwood[0].length();
+		}
 
-	x = mX + pwood[0].length();
-	if (x < 0) {
-		length += x;
-		x = 0;
+		x = mX + pwood[0].length();
+		if (x < 0) {
+			length += x;
+			x = 0;
+		}
+	}
+	else {
+		x = mX;
+		if (mX < 0 && mX + speed <= 0) {
+			return;
+		}
+
+		if (mX < 0 && mX + speed > 0) {
+			length = mX + speed;
+			x = 0;
+		}
+
+		if (X_max - mX < length) {
+			length = X_max - mX;
+		}
 	}
 
 	for (int i = 0; i < 3; i++) {
