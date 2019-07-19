@@ -7,7 +7,7 @@
 
 
 People::People()
-	: Object(X_max/2, 37), state(true), model(2), money(0)  {
+	: Object(X_max/2, 37, Wi), state(true), model(4), money(0)  {
 	currentDirectionState = new Down();
 }
 
@@ -64,7 +64,35 @@ void People::goRight(int step) {
 
 void People::draw() {
 	currentDirectionState->draw(this, x, y, model);
+}
+
+void People::clear() {
 	currentDirectionState->clear(this, x, y);
+}
+
+void People::clearOnWood(DState state, unsigned step) {
+	int min = step <= Wi ? step : Wi;
+	switch (state) {
+	case LEFT: {
+		for (int i = 0; i < He; i++) {
+			for (int j = 0; j < min; j++) {
+				gotoXY((x + step) + (Wi - 1) / 2 - j, y - (He - 1) / 2 + i);
+				wcout << " ";
+			}
+		}
+		break;
+	}
+
+	case RIGHT: {
+		for (int i = 0; i < He; i++) {
+			for (int j = 0; j < min; j++) {
+				gotoXY((x - step) - (Wi - 1) / 2 + j, y - (He - 1) / 2 + i);
+				wcout << " ";
+			}
+		}
+		break;
+	}
+	}
 }
 
 void People::clearImage() {

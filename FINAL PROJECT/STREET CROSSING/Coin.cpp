@@ -1,4 +1,5 @@
 ﻿#include "Coin.h"
+
 #define W 3
 #define H 3
 
@@ -17,7 +18,7 @@ Coin::Coin()
 }
 
 Coin::Coin(int _x, int _y, DState state, int _iY)
-	: Object(_x, _y), stateOnWood(state), iY(_iY) {
+	: Object(_x, _y, W), stateOnWood(state), iY(_iY) {
 	++nCoin;
 }
 
@@ -98,7 +99,14 @@ void Coin::onWood(unsigned step) {
 }
 
 bool Coin::isImpact(int hX, int hY) {
-	if (abs(x - hX) < 6 && abs(y - hY) < 3) return true;
+	if (absValue(x - hX) < 6 && absValue(y - hY) < 3) return true;
+	return false;
+}
+
+bool Coin::isImpactOnWood(int hX, int hY) {
+	if (absValue((int)(x + (int)(w - 1) / 2 - hX)) < 6 && absValue((int)(y + (int)(h - 1) / 2 - hY)) < 3) {
+		return true;
+	}
 	return false;
 }
 
@@ -125,7 +133,17 @@ void Coin::clearImage() {
 	for (int i = 0; i < h; ++i) {
 		for (int j = 0; j < w; ++j) {
 			gotoXY(x - (w - 1) / 2 + j, y - (h - 1) / 2 + i);
-			wcout << ' ';
+			wcout << " ";
+		}
+	}
+	gotoXY(x, y);
+}
+
+void Coin::clearImageOnWood() {
+	for (int i = 0; i < h; ++i) {
+		for (int j = 0; j < w; ++j) {
+			gotoXY(x - (w - 1) / 2 + j + 3, y - (h - 1) / 2 + i + 1);
+			wcout << " ";
 		}
 	}
 	gotoXY(x, y);

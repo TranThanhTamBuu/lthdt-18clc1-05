@@ -103,3 +103,7 @@ void randomColor(const wchar_t &ch) {
 	wcout << ch;
 	setColor(7, 0);
 }
+
+int absValue(int a) {
+	return a < 0 ? -1 * a : a;
+}
