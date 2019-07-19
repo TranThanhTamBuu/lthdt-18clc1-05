@@ -6,22 +6,26 @@ GAME::GAME(int level)
 	switch (level) {
 	case 1: {
 		//Car
-		lineCar = 2;
+		/*lineCar = 2;
 		int yCar[] = { 27, -13 };
-		numCar = new int[lineCar] { 2, 3 };
-		spdCar = new int[lineCar] { -3, -2 };
-		Cars = createCars(yCar, lineCar, numCar, spdCar);
+		numCar = new int[lineCar] { 4, 3 };
+		spdCar = new int[lineCar] { -1, -2 };
+		Cars = createCars(yCar, lineCar, numCar, spdCar);*/
 
 		//Train
-		lineTrain = 1;
+		/*lineTrain = 1;
 		int yTrain[] = { 10 };
-		spdTrain = new int[lineTrain] {5};
-		Trains = createTrains(yTrain, lineTrain, spdTrain);
+		spdTrain = new int[lineTrain] {1};
+		Trains = createTrains(yTrain, lineTrain, spdTrain);*/
 
 		//Wood
 		lineWood = 1;
 		int yWood[] = { -4 };
+<<<<<<< HEAD
 		numWood = new int [lineWood] { 4 };
+=======
+		numWood = new int [lineWood] { 3 };
+>>>>>>> 4187e40ac000f18fa377090062b5b13607d22c83
 		spdWood = new int [lineWood] { -1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
@@ -235,9 +239,11 @@ void GAME::drawAll() {
 
 	// draw coinsOnWood
 	for (int i = 0; i < lineWood; ++i) {
-		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-			coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]); 
-			coinsOnWood[i][j].drawMove(-1);
+		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
+			for (int j = 0; j < coinsOnWood[i].size(); ++j) {
+				coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]);
+				coinsOnWood[i][j].drawMove(-1);
+			}
 		}
 	}
 
@@ -275,13 +281,19 @@ bool GAME::isEndScr() {
 }
 
 void GAME::screenScroll() {
-	if (isEndScr() && (people.getY() <= 12)) return;
+	if (isEndScr() && (people.getY() <= 12) && sameLineWoods() == -1) return;
 
-	if (people.getY() >= 19) return;
+	if (people.getY() >= 18) return;
 
-	if (sameLineWoods() != -1 && people.getY() >= 19) return;
+	if (sameLineWoods() != -1 && people.getY() >= 18) return;
 
-	people.setY(20);
+	if (sameLineWoods() != -1 && people.getY() >= 18) {
+		people.setY(18);
+	}
+	else {
+		people.setY(20);
+	}
+	
 
 	clrscr();
 
