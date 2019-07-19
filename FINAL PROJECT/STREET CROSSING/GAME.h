@@ -33,6 +33,7 @@ public:
 	~GAME();
 	bool chooseModel();
 	void updatePosPeople(char);
+	void peopleClear();
 	void updatePosTrains();
 	void updatePosCars();
 	void updatePosWoods();

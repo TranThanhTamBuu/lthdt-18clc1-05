@@ -2,7 +2,7 @@
 
 
 Object::Object()
-	: x(70), y(20) {
+	: x(70), y(20), length(3) {
 }
 
 Object::~Object()

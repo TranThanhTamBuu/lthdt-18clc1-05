@@ -22,11 +22,12 @@ GAME::GAME(int level)
 		lineWood = 1;
 		int yWood[] = { -4 };
 		numWood = new int [lineWood] { 4 };
+		numWood = new int [lineWood] { 3 };
 		spdWood = new int [lineWood] { -1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
-		nCoin = 10;
+		nCoin = 30;
 		vector<int> countNCoin_temp(1, 0);
 		countNCoin = countNCoin_temp;
 		for (int i = 0; i < lineWood; ++i) {
@@ -94,6 +95,7 @@ void GAME::updatePosPeople(char key) {
 			people.goUp(STEPUPDOWN);
 		}
 		people.changeDirectionState(UP);
+		people.clear();
 		break;
 	}
 	case 'S': case 's': case 80: {
@@ -105,19 +107,26 @@ void GAME::updatePosPeople(char key) {
 			people.goDown(STEPUPDOWN);
 		}
 		people.changeDirectionState(DOWN);
+		people.clear();
 		break;
 	}
 	case 'D': case 'd': case 77: {
 		people.goRight(STEPRIGHTLEFT);
 		people.changeDirectionState(RIGHT);
+		people.clear();
 		break;
 	}
 	case 'A': case 'a': case 75: {
 		people.goLeft(STEPRIGHTLEFT);
 		people.changeDirectionState(LEFT);
+		people.clear();
 		break;
 	}
 	}
+}
+
+void GAME::peopleClear() {
+	people.clear();
 }
 
 void GAME::updatePosCars() {
@@ -143,7 +152,11 @@ void GAME::updatePosWoods() {
 }
 
 void GAME::updatePosCoinOnWoods() {
-	
+	for (int i = 0; i < lineWood; ++i) {
+		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
+			coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]);
+		}
+	}
 }
 
 bool GAME::impactVehicle() {
@@ -197,11 +210,6 @@ int GAME::impactWoods() {
 
 void GAME::drawAll() {
 
-	// draw people
-	people.draw();
-	if (sameLineWoods() != -1) {
-		people.clearImage();
-	}
 
 	// draw car
 	for (int i = 0; i < lineCar; i++) {
@@ -237,11 +245,16 @@ void GAME::drawAll() {
 	for (int i = 0; i < lineWood; ++i) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
 			for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-				coinsOnWood[i][j].moveOnRiver(-1, Woods[i][(coinsOnWood[i][j].getiX())]);
 				coinsOnWood[i][j].drawMove(-1);
 			}
 		}
 	}
+
+	// draw people
+	people.draw();
+	/*if (sameLineWoods() != -1) {
+		people.clearImage();
+	}*/
 
 	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
 		coinsOnWood[i].move(-1);
@@ -279,17 +292,11 @@ bool GAME::isEndScr() {
 void GAME::screenScroll() {
 	if (isEndScr() && (people.getY() <= 12) && sameLineWoods() == -1) return;
 
-	if (people.getY() >= 18) return;
+	if (people.getY() >= 19) return;
 
-	if (sameLineWoods() != -1 && people.getY() >= 18) return;
+	if (sameLineWoods() != -1 && people.getY() >= 19) return;
 
-	if (sameLineWoods() != -1 && people.getY() >= 18) {
-		people.setY(18);
-	}
-	else {
-		people.setY(20);
-	}
-	
+	people.setY(20);	
 
 	clrscr();
 
@@ -315,6 +322,7 @@ void GAME::screenScroll() {
 			Woods[i][j].setY(Woods[i][j].getY() + 8);
 		}
 	}
+	if (sameLineWoods() != -1) people.setYC(Woods[sameLineWoods()][0].getY());
 
 	// Coin
 	for (int i = 0; i < coins.size(); ++i) {
@@ -337,6 +345,7 @@ void GAME::peopleOnWood() {
 	people.setYC(Woods[sameLineWoods()][0].getY());
 	people.goLeft(abs(spdWood[sameLineWoods()]));
 	people.draw();
+	people.clearOnWood(LEFT, 1);
 }
 
 void GAME::createCoins() {
@@ -344,6 +353,20 @@ void GAME::createCoins() {
 		randLine;
 	int randX, randY;
 
+	// coin
+	vector<int> sampleY = { 29,-11,13 };
+	vector<vector<int>> sampleX;
+	vector<int> sampleX_temp;
+	int a=0;
+	for (int i = 0; i < X_max / 6-1; ++i) {
+		a += 6;
+		sampleX_temp.push_back(a);
+	}
+	for (int i = 0; i < sampleY.size(); ++i) {
+		sampleX.push_back(sampleX_temp);
+	}
+
+	// coins on wood 
 	vector<int> sampleYWood = { -4 };
 	vector<vector<int>> sampleXWood;
 	for (int i = 0; i < lineWood; ++i) {
@@ -363,9 +386,16 @@ void GAME::createCoins() {
 		randLine = rand() % 3;
 		switch (randLine) {
 		case 0: case 2: {	// Line car, train
-			vector<int> sampleY = { 29,-11,13 };
-			randY = sampleY[rand() % sampleY.size()];
-			randX = ((rand() % (X_max - 2)) + 2);
+			int iY = rand() % sampleY.size();
+			randY = sampleY[iY];
+			randX = sampleX[iY][rand() % sampleX[iY].size()];
+			for (int i = 0; i < sampleX[iY].size(); ++i) {
+				if (sampleX[iY][i] == randX) {
+					sampleX[iY].erase(sampleX[iY].begin() + i);
+					sampleX[iY].shrink_to_fit();
+					break;
+				}
+			}
 
 			coins.push_back(Coin(randX, randY, LEFT));
 			break;
@@ -373,7 +403,7 @@ void GAME::createCoins() {
 
 		case 1: {	// Line wood
 			int iY = rand() % sampleYWood.size();
-			if (countNCoin[iY] > 3) {
+			if (countNCoin[iY] > 5) {
 				--i;
 			}
 			else {
@@ -383,8 +413,8 @@ void GAME::createCoins() {
 				sampleXWood[iY].erase(sampleXWood[iY].begin() + iX);
 				sampleXWood[iY].shrink_to_fit();
 
-				coinsOnWood[iY].push_back(Coin(randX - 1, randY-1, LEFT, iY));
-				// Count nCoin on one line
+				coinsOnWood[iY].push_back(Coin(randX - 3, randY-1, LEFT, iY));
+				// Count nCoin on one line	
 				++countNCoin[iY];
 				break;
 			}
@@ -395,9 +425,9 @@ void GAME::createCoins() {
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			for (int k = 0; k < numWood[i]; ++k) {
-				if (coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k]
-					|| coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k] - 6
-					|| coinsOnWood[i][j].getXC() + 1 == sampleXWood_temp[i][k] + 6) {
+				if (coinsOnWood[i][j].getXC() + 3 == sampleXWood_temp[i][k]
+					|| coinsOnWood[i][j].getXC() + 3 == sampleXWood_temp[i][k] - 6
+					|| coinsOnWood[i][j].getXC() + 3 == sampleXWood_temp[i][k] + 6) {
 					coinsOnWood[i][j].setiX(k);
 					break;
 				}
@@ -409,20 +439,24 @@ void GAME::createCoins() {
 void GAME::handleCoinImpact() {
 	// People impact
 	for (int i = 0; i < coins.size(); ++i) {
-		if (coins[i].isImpact(people.getXC(), people.getYC())) {
-			people.changeMoney(COINVALUE);
-			coins[i].clearImage();
-			coins.erase(coins.begin() + i);
-			coins.shrink_to_fit();
-			--i;
+		if (coins[i].getYC() < 0 || coins[i].getYC() > Y_max) {}
+		else {
+			if (coins[i].isImpact(people.getXC(), people.getYC())) {
+				people.changeMoney(COINVALUE);
+				coins[i].clearImage();
+				coins.erase(coins.begin() + i);
+				coins.shrink_to_fit();
+				--i;
+			}
 		}
 	}
 
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-			if (coinsOnWood[i][j].isImpact(people.getXC(), people.getYC())) {
+			if (coinsOnWood[i][0].getYC() < 0 || coinsOnWood[i][0].getYC() > Y_max) break;
+			if (coinsOnWood[i][j].isImpactOnWood(people.getXC(), people.getYC())) {
 				people.changeMoney(COINVALUE);
-				coinsOnWood[i][j].clearImage();
+				coinsOnWood[i][j].clearImageOnWood();
 				--countNCoin[coinsOnWood[i][j].getiY()];
 				coinsOnWood[i].erase(coinsOnWood[i].begin() + j);
 				coinsOnWood[i].shrink_to_fit();

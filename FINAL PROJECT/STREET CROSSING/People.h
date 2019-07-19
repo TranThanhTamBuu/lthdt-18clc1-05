@@ -29,6 +29,8 @@ public:
 	bool isDead();
 	bool isFinish();
 	void draw();
+	void clear();
+	void clearOnWood(DState, unsigned step);
 	void clearImage();
 	bool chooseModel();
 	unsigned int getX();
