@@ -14,7 +14,6 @@ public:
 	Vehicle(int x, int y, int spd);
 	virtual ~Vehicle();
 	void set(int, int, int);
-	virtual void move() = 0;
 	virtual void draw() = 0;
 	virtual void clear() = 0;
 	virtual bool isImpact(People &people) = 0;

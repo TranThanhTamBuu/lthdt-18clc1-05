@@ -7,10 +7,10 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { -13, 26 };
-		numCar = new int[lineCar] { 4, 2 };
+		int yCar[] = { -12, 26 };
+		numCar = new int[lineCar] { 4, 4 };
 		spdCar = new int[lineCar] { -1, 1 };
-		Cars = createCars(yCar, lineCar, numCar, spdCar);
+		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
 
 		//Train
 		lineTrain = 1;
@@ -26,7 +26,7 @@ GAME::GAME(int level)
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		// Coin
-		nCoin = 30;
+		nCoin = 5;
 		vector<int> countNCoin_temp(1, 0);
 		countNCoin = countNCoin_temp;
 		for (int i = 0; i < lineWood; ++i) {
@@ -129,9 +129,18 @@ void GAME::peopleClear() {
 }
 
 void GAME::updatePosCars() {
+	int pre;
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
-			Cars[i][j].move();
+			if (spdCar[i] < 0) {
+				pre = j - 1;
+				if (pre == -1) pre = numCar[i] - 1;
+			}
+			else {
+				pre = j + 1;
+				if (pre == numCar[i]) pre = 0;
+			}
+			Cars[i][j].move(Cars[i][pre], distance[i]);
 		}
 	}
 }

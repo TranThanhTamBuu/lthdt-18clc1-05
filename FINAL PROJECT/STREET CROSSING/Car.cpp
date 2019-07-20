@@ -32,13 +32,33 @@ int Car::getLength() {
 
 void Car::setSpd(int spd) {
 	speed = spd;
+	h = 5;
+	int random = rand() % 3;
 	if (spd < 0) {
-		pcar = car;
-		h = 4;
+		switch (random) {
+		case 0:
+			pcar = car;
+			break;
+		case 1:
+			pcar = car_0;
+			break;
+		case 2:
+			pcar = car_1;
+			break;
+		}
 	}
 	else {
-		pcar = truck;
-		h = 5;
+		switch (random) {
+		case 0:
+			pcar = truck;
+			break;
+		case 1:
+			pcar = truck_0;
+			break;
+		case 2:
+			pcar = truck_1;
+			break;
+		}
 	}
 }
 
@@ -47,7 +67,7 @@ void Car::set(int x, int y) {
 	mY = y;
 }
 
-void Car::move() {
+void Car::move(Car &pre, int d) {
 	if (speed > 0) {
 		clear();
 	}
@@ -57,12 +77,23 @@ void Car::move() {
 		int flag = mX + pcar[0].length();
 		if (flag < 0) {
 			clear();
-			mX = X_max - 1;
+			int subflag = pre.mX + pre.getLength() - X_max;
+			if (subflag <= 0) {
+				mX = X_max - 1;
+			}
+			else {
+				mX = X_max - 1 + (pre.mX + pre.getLength() - X_max) + d;
+			}
 		}
 	}
 	else {
 		if (mX >= X_max) {
-			mX = 0 - pcar[0].length();
+			if ((pre.mX < 0) && (pre.mX + pre.getLength() >= 0)) {
+				mX = 0 - (0 - pre.mX + d) - pcar[0].length();
+			}
+			else {
+				mX = 0 - pcar[0].length();
+			}
 		}
 	}
 }
@@ -72,6 +103,10 @@ void Car::draw() {
 	int length;
 
 	if (speed < 0) {
+		if (mX > X_max) {
+			return;
+		}
+
 		if (mX + pcar[0].length() >= X_max) {
 			length = X_max - mX;
 			for (int i = 0; i < h; i++) {
@@ -91,6 +126,11 @@ void Car::draw() {
 		}
 	}
 	else {
+		int flag = mX + pcar[0].length();
+		if (flag < 0) {
+			return;
+		}
+
 		if (mX < 0 && mX + pcar[0].length() >= 0) {
 			length = mX + pcar[0].length();
 			for (int i = 0; i < h; i++) {
@@ -132,7 +172,7 @@ void Car::clear() {
 
 	if (speed < 0) {
 		int flag = mX + pcar[0].length();
-		if (flag >= X_max) {
+		if (flag >= X_max || mX >= X_max) {
 			return;
 		}
 
@@ -182,8 +222,9 @@ bool Car::isImpact(People &people) {
 	return false;
 }
 
-Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
+Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar, int *&distance) {
 	int *totalCarLength = new int[lineCar];
+	distance = new int[lineCar];
 	Car** carPtr = new Car*[lineCar];
 	for (int i = 0; i < lineCar; i++) {
 		carPtr[i] = new Car[numCar[i]];
@@ -200,10 +241,11 @@ Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
 	for (int i = 0; i < lineCar; i++) {
 		//int d = (X_max - (numCar[i] - 1)*car[0].length()) / (numCar[i]);
 		int d = (X_max - totalCarLength[i] + carPtr[i][0].getLength()) / (numCar[i]);
+		distance[i] = d;
 		int xCar = (d - carPtr[i][0].getLength()) / 2;
 		for (int j = 0; j < numCar[i]; j++) {
 			if (j != 0) {
-				xCar += d + carPtr[i][j].getLength();
+				xCar += d + carPtr[i][j - 1].getLength();
 			}
 			carPtr[i][j].set(xCar, yCar[i]);
 		}

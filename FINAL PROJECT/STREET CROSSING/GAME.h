@@ -13,7 +13,7 @@ class GAME
 {
 private:
 	Car **Cars;
-	int lineCar, *numCar, *spdCar;
+	int lineCar, *numCar, *spdCar, *distance;
 
 	Train *Trains;
 	int lineTrain, *spdTrain;

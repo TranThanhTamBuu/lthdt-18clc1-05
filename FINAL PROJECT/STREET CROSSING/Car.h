@@ -1,11 +1,36 @@
 #pragma once
 #include "Vehicle.h"
 
-static wstring car[4] = {
+static wstring car[5] = {
+	L"                  ",
 	L"      .---;-,     ",
 	L"   __/_,{)|__;._  ",
 	L".*` _     :  _  `.",
-	L"'--(_)------(_)--'",
+	L"'--(o)------(o)--'",
+};
+
+static wstring car_0[5] = {
+	L"   ____________________________ ",
+	L"  /    | |     |     |     |   |",
+	L" /____ |_|_____|_____|_____|___| ",
+	L"[___.=._______________.====.___|",
+	L"'--'(o)'-------------'(o)(o)'--'",
+};
+
+static wstring car_1[5] = {
+	L"           ",
+	L"    _      ",
+	L"  D/_      ",
+	L"  /(_`._,-.",
+	L"(o) `--'(o)",
+};
+
+static wstring truck_0[5] = {
+	L"_,..=xxxxxxxxxxxx,     ",
+	L"/L_Y.-“”“”“”“””`,--n.  ",
+	L"|--'[=======]|L]J: []\\ ",
+	L"|/ _ ''_ “ ” ||[ -_ 4 |",
+	L"'-(o)-(o)----'v'-(o)--'",
 };
 
 static wstring truck[5] = {
@@ -13,7 +38,15 @@ static wstring truck[5] = {
 	L"|                       |h_ __   ",
 	L"|                       ||=|##L_ ",
 	L"|_.====._________.====._||_|_.=.]",
-	L" '(_)(_)'       '(_)(_)'””='=(_) ",
+	L" '(o)(o)'       '(o)(o)'””='=(o) ",
+};
+
+static wstring truck_1[5] = {
+	L"                 ",
+	L".--------.__     ",
+	L"|::::::::|[_I___,",
+	L"|_.=.____I__.-~;|",
+	L" '(o)'------'(o)'",
 };
 
 class Car : public Vehicle
@@ -30,11 +63,11 @@ public:
 	void setSpd(int spd);
 	void set(int x, int y);
 	int getLength();
-	void move(); 
+	void move(Car &pre, int d); 
 	void draw();
 	void clear();
 	bool isImpact(People &people);
 };
 
-Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar);
+Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar, int *&distance);
 
