@@ -26,8 +26,12 @@ Car::~Car()
 	pcar = NULL;
 }
 
-void Car::set(int x, int y, int spd) {
-	Vehicle::set(x, y, spd);
+int Car::getLength() {
+	return pcar[0].length();
+}
+
+void Car::setSpd(int spd) {
+	speed = spd;
 	if (spd < 0) {
 		pcar = car;
 		h = 4;
@@ -36,6 +40,11 @@ void Car::set(int x, int y, int spd) {
 		pcar = truck;
 		h = 5;
 	}
+}
+
+void Car::set(int x, int y) {
+	mX = x;
+	mY = y;
 }
 
 void Car::move() {
@@ -100,7 +109,6 @@ void Car::draw() {
 			}
 		}
 	}
-	
 
 	if (mX >= 0 && mX + pcar[0].length() < X_max) {
 		for (int i = 0; i < h; i++) {
@@ -115,6 +123,10 @@ void Car::draw() {
 }
 
 void Car::clear() {
+	if (mY < 0) {
+		return;
+	}
+
 	int length = abs(speed);
 	int x;
 
@@ -171,16 +183,29 @@ bool Car::isImpact(People &people) {
 }
 
 Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar) {
+	int *totalCarLength = new int[lineCar];
 	Car** carPtr = new Car*[lineCar];
 	for (int i = 0; i < lineCar; i++) {
 		carPtr[i] = new Car[numCar[i]];
+		totalCarLength[i] = 0;
 	}
 
 	for (int i = 0; i < lineCar; i++) {
-		int d = (X_max - (numCar[i] - 1)*car[0].length()) / (numCar[i]);
 		for (int j = 0; j < numCar[i]; j++) {
-			int xCar = (d - car[0].length()) / 2 + j * (d + car[0].length());
-			carPtr[i][j].set(xCar, yCar[i], spdCar[i]);
+			carPtr[i][j].setSpd(spdCar[i]);
+			totalCarLength[i] += carPtr[i][j].getLength();
+		}
+	}
+
+	for (int i = 0; i < lineCar; i++) {
+		//int d = (X_max - (numCar[i] - 1)*car[0].length()) / (numCar[i]);
+		int d = (X_max - totalCarLength[i] + carPtr[i][0].getLength()) / (numCar[i]);
+		int xCar = (d - carPtr[i][0].getLength()) / 2;
+		for (int j = 0; j < numCar[i]; j++) {
+			if (j != 0) {
+				xCar += d + carPtr[i][j].getLength();
+			}
+			carPtr[i][j].set(xCar, yCar[i]);
 		}
 	}
 

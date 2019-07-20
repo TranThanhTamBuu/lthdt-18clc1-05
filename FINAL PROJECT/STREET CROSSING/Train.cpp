@@ -56,6 +56,10 @@ void Train::draw() {
 }
 
 void Train::clear() {
+	if (mY < 0) {
+		return;
+	}
+
 	int length = speed;
 	int x = mX;
 	if (mX <0 && mX + speed <= 0) {

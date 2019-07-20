@@ -21,14 +21,15 @@ class Car : public Vehicle
 private:
 	wstring *pcar;
 	int h;
-	// speed < 0 
 
 public:
 	Car();
 	Car(wstring *pcar, int x, int y, int speed);
 	Car(int x, int y, int speed);
 	~Car();
-	void set(int x, int y, int spd);
+	void setSpd(int spd);
+	void set(int x, int y);
+	int getLength();
 	void move(); 
 	void draw();
 	void clear();

@@ -149,7 +149,6 @@ void Coin::clearImageOnWood() {
 	gotoXY(x, y);
 }
 
-
 void Coin::moveOnRiver(int step, const Wood &wo) {
 	if (step > 0) {
 		clearMove(step);
@@ -184,6 +183,7 @@ void Coin::drawMove(int step) {
 
 	if (step < 0) {
 		if (x >= X_max) {
+			setColor(7, 0);
 			return;
 		}
 
@@ -207,6 +207,7 @@ void Coin::drawMove(int step) {
 	}
 	else {
 		if (x < 0) {
+			setColor(7, 0);
 			return;
 		}
 
@@ -244,6 +245,10 @@ void Coin::drawMove(int step) {
 }
 
 void Coin::clearMove(int step) {
+	if (y < 0) {
+		return;
+	}
+
 	int length = abs(step);
 	int _x;
 

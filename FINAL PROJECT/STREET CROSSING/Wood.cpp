@@ -93,6 +93,10 @@ void Wood::draw() {
 }
 
 void Wood::clear() {
+	if (mY < 0) {
+		return;
+	}
+
 	int length = abs(speed);
 	int x;
 
