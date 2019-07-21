@@ -7,7 +7,7 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { -12, 26 };
+		int yCar[] = { -14, 26 };
 		numCar = new int[lineCar] { 4, 4 };
 		spdCar = new int[lineCar] { -1, 1 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
@@ -227,20 +227,6 @@ void GAME::drawAll() {
 		}
 	}
 
-	// draw coin
-	for (int i = 0; i < coins.size(); ++i) {
-		coins[i].draw();
-	}
-
-	// draw coinsOnWood
-	for (int i = 0; i < lineWood; ++i) {
-		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
-			for (int j = 0; j < coinsOnWood[i].size(); ++j) {
-				coinsOnWood[i][j].drawMove(1);
-			}
-		}
-	}
-
 	// draw car
 	for (int i = 0; i < lineCar; i++) {
 		if (Cars[i][0].getY() >= 0 && Cars[i][0].getY() < Y_max) {
@@ -257,6 +243,19 @@ void GAME::drawAll() {
 		}
 	}
 
+	// draw coin
+	for (int i = 0; i < coins.size(); ++i) {
+		coins[i].draw();
+	}
+
+	// draw coinsOnWood
+	for (int i = 0; i < lineWood; ++i) {
+		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
+			for (int j = 0; j < coinsOnWood[i].size(); ++j) {
+				coinsOnWood[i][j].drawMove(1);
+			}
+		}
+	}
 
 	// draw people
 	people.draw();

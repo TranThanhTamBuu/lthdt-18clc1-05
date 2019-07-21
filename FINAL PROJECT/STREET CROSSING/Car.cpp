@@ -79,7 +79,13 @@ void Car::move(Car &pre, int d) {
 			clear();
 			int subflag = pre.mX + pre.getLength() - X_max;
 			if (subflag <= 0) {
-				mX = X_max - 1;
+				if (X_max - (pre.mX + pre.getLength()) <= d) {
+					mX = pre.mX + pre.getLength() + d;
+				}
+				else {
+					mX = X_max - 1;
+				}
+				
 			}
 			else {
 				mX = X_max - 1 + (pre.mX + pre.getLength() - X_max) + d;
@@ -92,7 +98,12 @@ void Car::move(Car &pre, int d) {
 				mX = 0 - (0 - pre.mX + d) - pcar[0].length();
 			}
 			else {
-				mX = 0 - pcar[0].length();
+				if (pre.mX <= d) {
+					mX = pre.mX - pcar[0].length() - d;
+				}
+				else {
+					mX = 0 - pcar[0].length();
+				}
 			}
 		}
 	}
