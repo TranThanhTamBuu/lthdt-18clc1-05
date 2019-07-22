@@ -1,5 +1,9 @@
 #pragma once
 #include "Vehicle.h"
+#include <time.h>
+#define TRF_GREEN 0
+#define TRF_YELLOW 1
+#define TRF_RED 2
 
 static wstring train[5] = {
 	L"                  _________                                              _____                  _________                                              _____       . . . . . o o o o o o O O O O     ",
@@ -9,20 +13,34 @@ static wstring train[5] = {
 	L"   oo       oo ' oo      oo '  oo      oo ' oo         oo ' oo     oo ' oo    oo ' oo     oo ' oo      oo '  oo      oo ' oo         oo ' oo     oo ' oo    oo ' oo     oo ' oo    oo 'oo 0000---ooz_",
 };
 
+static wstring trafficlight[1] = {
+	L"--|_[#]_[#]_[#]_|--",
+};
+
 class Train : public Vehicle
 {
 private:
 	wstring *ptrain;
-	// speed > 0
+	time_t start;
+	time_t end;
+	wstring *traffic;
+	bool stop;
+	int coreSpd;
+	int mode; // 0: normal 1:crazy
+	// speed > 2 && step%2 == 0
 
 public:
 	Train();
-	Train(int x, int y, int speed);
+	Train(int x, int y, int speed, int mode);
 	~Train();
+	void set(int x, int y, int spd, int mode);
 	void move();
 	void draw();
 	void clear();
 	bool isImpact(People &people);
+	void drawTraffic(int color);
+	int updateTraffic();
 };
 
-Train *createTrains(int yTrain[], int lineTrain, int *spdTrain);
+Train *createTrains(int yTrain[], int lineTrain, int *spdTrain, int *modeTrain);
+

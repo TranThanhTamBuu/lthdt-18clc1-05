@@ -16,7 +16,8 @@ private:
 	int lineCar, *numCar, *spdCar, *distance;
 
 	Train *Trains;
-	int lineTrain, *spdTrain;
+	int lineTrain, *spdTrain, *modeTrain;
+	// speed >=2 && speed%2=0 | mode 0: normal, 1:crazy
 
 	People people;
 

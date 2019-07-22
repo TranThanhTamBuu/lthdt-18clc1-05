@@ -13,10 +13,11 @@ GAME::GAME(int level)
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
 
 		//Train
-		lineTrain = 1;
-		int yTrain[] = { 10 };
-		spdTrain = new int[lineTrain] {1};
-		Trains = createTrains(yTrain, lineTrain, spdTrain);
+		lineTrain = 2;
+		int yTrain[] = { 10, - 30 };
+		spdTrain = new int[lineTrain] { 6, 6 };
+		modeTrain = new int[lineTrain] { 0, 1 };
+		Trains = createTrains(yTrain, lineTrain, spdTrain, modeTrain);
 
 		//Wood
 		lineWood = 1;

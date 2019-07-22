@@ -26,10 +26,10 @@ int main() {
 		Sleep(50);
 	}*/
 
-	/*Train t(-2, 0);
+	/*Train t(158, 1, 4, 0);
 	char key = ' ';
 	while (true) {
-		t.move(2);
+		t.move();
 		t.draw();
 		Sleep(50);
 	}*/
