@@ -1,6 +1,7 @@
 #include "Wood.h"
 
 
+
 Wood::Wood()
 {
 	pwood = wood;
@@ -34,7 +35,7 @@ void Wood::move() {
 			mX = 0 - pwood[0].length();
 		}
 	}
-	
+
 }
 
 void Wood::draw() {
@@ -64,7 +65,7 @@ void Wood::draw() {
 		if (mX < 0 && mX + pwood[0].length() >= 0) {
 			length = mX + pwood[0].length();
 			for (int i = 0; i < 3; i++) {
-				temp = pwood[i].substr(-mX , length);
+				temp = pwood[i].substr(-mX, length);
 				gotoXY(0, mY + i);
 				wcout << temp;
 			}
