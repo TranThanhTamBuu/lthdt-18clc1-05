@@ -8,6 +8,7 @@
 #include <io.h>
 #include <fcntl.h>
 #include <thread>
+#include <time.h>
 
 #define WIDTH 158
 #define HEIGHT 42

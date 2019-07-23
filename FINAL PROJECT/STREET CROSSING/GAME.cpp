@@ -14,14 +14,14 @@ GAME::GAME(int level)
 
 		//Train
 		lineTrain = 2;
-		int yTrain[] = { 10, - 30 };
+		int yTrain[] = { 10, -30 };
 		spdTrain = new int[lineTrain] { 6, 6 };
 		modeTrain = new int[lineTrain] { 0, 1 };
 		Trains = createTrains(yTrain, lineTrain, spdTrain, modeTrain);
 
 		//Wood
 		lineWood = 1;
-		int yWood[] = { -4 };
+		int yWood[] = { -5 };
 		numWood = new int [lineWood] { 4 };
 		spdWood = new int [lineWood] { 1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
@@ -101,7 +101,7 @@ void GAME::updatePosPeople(char key) {
 	case 'S': case 's': case 80: {
 		if (sameLineWoods() != -1) {
 			people.clearImage();
-			people.goDown(STEPUPDOWN + 1);	
+			people.goDown(STEPUPDOWN + 1);
 		}
 		else {
 			people.goDown(STEPUPDOWN);
@@ -188,6 +188,7 @@ bool GAME::impactVehicle() {
 
 	//Train
 	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() > Y_max) continue;
 		if (Trains[i].isImpact(people)) {
 			return true;
 		}
@@ -211,7 +212,7 @@ int GAME::impactWoods() {
 	if (line == -1) {
 		return 0;
 	}
-	
+
 	for (int j = 0; j < numWood[line]; j++) {
 		if (Woods[line][j].isImpact(people)) {
 			return 1;
@@ -226,6 +227,7 @@ void GAME::drawAll() {
 	// draw wood
 	for (int i = 0; i < lineWood; i++) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
+			Woods[i][0].drawWave(3);
 			for (int j = 0; j < numWood[i]; j++) {
 				Woods[i][j].draw();
 			}
@@ -275,45 +277,44 @@ void GAME::drawAll() {
 }
 
 bool GAME::isEndScr() {
-	int count = 0;
-	
+
 	//Car
 	for (int i = 0; i < lineCar; i++) {
 		if (Cars[i][0].getY() < 8) {
-			count++;
+			return false;
 		}
 	}
 
 	//Train
 	for (int i = 0; i < lineTrain; i++) {
 		if (Trains[i].getY() < 8) {
-			count++;
+			return false;
 		}
 	}
 
 	//Wood
 	for (int i = 0; i < lineWood; i++) {
 		if (Woods[i][0].getY() < 8) {
-			count++;
+			return false;
 		}
 	}
 
-	return (count == 0);
+	return true;
 }
 
 void GAME::screenScroll() {
 	if (isEndScr() && (people.getY() <= 12) && sameLineWoods() == -1) return;
 
-	if (people.getY() >= 19) return;
+	if (people.getY() >= 18) return;
 
-	if (sameLineWoods() != -1 && people.getY() >= 19) return;
+	if (sameLineWoods() != -1 && people.getY() >= 18) return;
 
-	people.setY(20);	
+	people.setY(20);
 
 	clrscr();
 
 	for (int i = 0; i <= 5; i++) {
-		gotoXY(0, 0 + 8*i);	printLine(WIDTH);
+		gotoXY(0, 0 + 8 * i);	printLine(WIDTH);
 	}
 
 	//Car
@@ -365,7 +366,7 @@ void GAME::peopleOnWood(DState dst) {
 		break;
 	}
 	}
-	
+
 	people.draw();
 	people.clearOnWood(dst, 1);
 }
@@ -379,8 +380,8 @@ void GAME::createCoins() {
 	vector<int> sampleY = { 29,-11,13 };
 	vector<vector<int>> sampleX;
 	vector<int> sampleX_temp;
-	int a=0;
-	for (int i = 0; i < X_max / 6-1; ++i) {
+	int a = 0;
+	for (int i = 0; i < X_max / 6 - 1; ++i) {
 		a += 6;
 		sampleX_temp.push_back(a);
 	}
@@ -435,7 +436,7 @@ void GAME::createCoins() {
 				sampleXWood[iY].erase(sampleXWood[iY].begin() + iX);
 				sampleXWood[iY].shrink_to_fit();
 
-				coinsOnWood[iY].push_back(Coin(randX - 3, randY-1, LEFT, iY));
+				coinsOnWood[iY].push_back(Coin(randX - 3, randY - 1, LEFT, iY));
 				// Count nCoin on one line	
 				++countNCoin[iY];
 				break;

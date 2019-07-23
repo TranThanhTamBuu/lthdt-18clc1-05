@@ -1,6 +1,5 @@
 #pragma once
 #include "Vehicle.h"
-#include <time.h>
 #define TRF_GREEN 0
 #define TRF_YELLOW 1
 #define TRF_RED 2
