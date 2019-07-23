@@ -349,11 +349,21 @@ void GAME::screenScroll() {
 
 }
 
-void GAME::peopleOnWood() {
+void GAME::peopleOnWood(DState dst) {
 	people.setYC(Woods[sameLineWoods()][0].getY());
-	people.goLeft(abs(spdWood[sameLineWoods()]));
+	switch (dst) {
+	case LEFT: {
+		people.goLeft(abs(spdWood[sameLineWoods()]));
+		break;
+	}
+	case RIGHT: {
+		people.goRight(abs(spdWood[sameLineWoods()]));
+		break;
+	}
+	}
+	
 	people.draw();
-	people.clearOnWood(LEFT, 1);
+	people.clearOnWood(dst, 1);
 }
 
 void GAME::createCoins() {

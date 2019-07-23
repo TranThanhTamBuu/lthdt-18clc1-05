@@ -206,7 +206,7 @@ void SubThread(GAME &game)
 		case 0: // not same line wood
 			break;
 		case 1: // on wood
-			game.peopleOnWood();
+			game.peopleOnWood(RIGHT);
 			break;
 		case -1: // in river
 			game.~GAME();

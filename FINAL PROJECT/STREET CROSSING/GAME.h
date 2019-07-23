@@ -43,7 +43,7 @@ public:
 	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
 	int sameLineWoods();
 	vector <int> xLineWoods(int line);
-	void peopleOnWood();
+	void peopleOnWood(DState dst);
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();
