@@ -125,10 +125,6 @@ bool Coin::isReachEdge() {
 	return false;
 }
 
-void Coin::setY(int _y) {
-	y = _y;
-}
-
 void Coin::clearImage() {
 	for (int i = 0; i < h; ++i) {
 		for (int j = 0; j < w; ++j) {
@@ -290,3 +286,20 @@ void Coin::clearMove(int step) {
 		printSpace(length);
 	}
 }
+
+int Coin::getX() {
+	return x - (W - 1) / 2;
+}
+
+int Coin::getY() {
+	return y - (H - 1) / 2;
+}
+
+void Coin::setX(int _x) {
+	x = _x + (W - 1) / 2;
+}
+
+void Coin::setY(int _y) {
+	y = _y + (H - 1) / 2;
+}
+

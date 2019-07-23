@@ -37,6 +37,9 @@ public:
 	void moveOnRiver(int step, const Wood &wo); // step < 0
 	void drawMove(int step);
 	void clearMove(int step);
+	int getX();
+	int getY();
+	void setX(int _x);
 
 private:
 	DState stateOnWood;

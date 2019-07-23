@@ -13,10 +13,6 @@ public:
 
 	int getXC();
 	int getYC();
-	int getX();
-	int getY();
-	void setX();
-	void setY();
 	void setXC(int _x);
 	void setYC(int _y);
 
