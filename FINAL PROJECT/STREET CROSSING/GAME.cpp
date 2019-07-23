@@ -133,6 +133,7 @@ void GAME::updatePosCars() {
 	int pre;
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
+			if (Cars[i][0].getY() > Y_max) break;
 			if (spdCar[i] < 0) {
 				pre = j - 1;
 				if (pre == -1) pre = numCar[i] - 1;
@@ -148,6 +149,7 @@ void GAME::updatePosCars() {
 
 void GAME::updatePosTrains() {
 	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() > Y_max) continue;
 		Trains[i].move();
 	}
 }
@@ -155,6 +157,7 @@ void GAME::updatePosTrains() {
 void GAME::updatePosWoods() {
 	for (int i = 0; i < lineWood; i++) {
 		for (int j = 0; j < numWood[i]; j++) {
+			if (Woods[i][0].getY() > Y_max) break;
 			Woods[i][j].move();
 		}
 	}
@@ -163,6 +166,7 @@ void GAME::updatePosWoods() {
 void GAME::updatePosCoinOnWoods() {
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
+			if (coinsOnWood[i][0].getY() > Y_max) break;
 			coinsOnWood[i][j].moveOnRiver(1, Woods[i][(coinsOnWood[i][j].getiX())]);
 		}
 	}

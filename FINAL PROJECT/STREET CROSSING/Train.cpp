@@ -105,7 +105,7 @@ void Train::draw() {
 }
 
 void Train::clear() {
-	if (mY < 0) {
+	if (mY < 0 ) {
 		return;
 	}
 
@@ -158,6 +158,10 @@ Train *createTrains(int yTrain[], int lineTrain, int *spdTrain, int *modeTrain) 
 }
 
 void Train::drawTraffic(int color) {
+	if (mY < 0 || mY > Y_max) {
+		return;
+	}
+
 	gotoXY((X_max - traffic[0].length()) / 2 - 1, mY - 1);
 	for (int i = 0; i < traffic[0].length(); i++) {
 		if (traffic[0][i] == '[' || traffic[0][i] == '#' || traffic[0][i] == ']') {

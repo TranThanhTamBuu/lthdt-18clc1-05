@@ -174,7 +174,7 @@ void Car::draw() {
 }
 
 void Car::clear() {
-	if (mY < 0) {
+	if (mY < 0 || mY >= Y_max) {
 		return;
 	}
 
