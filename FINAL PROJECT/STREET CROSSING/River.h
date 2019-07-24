@@ -18,7 +18,7 @@ public:
 	int getX() const;
 	void setY(int y);
 	virtual ~River();
-	void drawWave(int distance);
+	void drawWave();
 protected:
 	int mX, mY, speed;
 };
