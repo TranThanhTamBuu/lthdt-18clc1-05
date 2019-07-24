@@ -141,9 +141,9 @@ void Wood::clear() {
 
 bool Wood::isImpact(People &people) {
 	int leftX = people.getX();
-	int rightX = leftX + Wi;
+	int rightX = leftX + Wi - 1;
 
-	if (((mX <= leftX && (leftX <= mX + wood[0].length())) || (mX <= rightX && rightX <= mX + wood[0].length()))) {
+	if (((mX <= leftX && (leftX <= mX + wood[0].length() - 1)) || (mX <= rightX && rightX <= mX + wood[0].length() - 1))) {
 		return true;
 	}
 

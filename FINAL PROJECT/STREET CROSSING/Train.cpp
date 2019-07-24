@@ -22,7 +22,7 @@ Train::~Train()
 
 void Train::move() {
 	int flag = updateTraffic();
-	
+
 	if (mode == 0) {
 		speed = coreSpd;
 
@@ -105,13 +105,13 @@ void Train::draw() {
 }
 
 void Train::clear() {
-	if (mY < 0 ) {
+	if (mY < 0) {
 		return;
 	}
 
 	int length = speed;
 	int x = mX;
-	if (mX <0 && mX + speed <= 0) {
+	if (mX < 0 && mX + speed <= 0) {
 		return;
 	}
 
@@ -132,10 +132,10 @@ void Train::clear() {
 
 bool Train::isImpact(People &people) {
 	int leftX = people.getX();
-	int rightX = leftX + Wi;
+	int rightX = leftX + Wi - 1;
 
 	if ((mY <= people.getY()) && (people.getY() <= (mY + 5))) {
-		if (((mX <= leftX && leftX <= mX + train[0].length()) || (mX <= rightX && rightX <= mX + train[0].length()))) {
+		if (((mX <= leftX && leftX <= mX + train[0].length() - 1) || (mX <= rightX && rightX <= mX + train[0].length() - 1))) {
 			return true;
 		}
 	}

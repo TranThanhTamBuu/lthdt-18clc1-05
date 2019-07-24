@@ -85,7 +85,7 @@ void Car::move(Car &pre, int d) {
 				else {
 					mX = X_max - 1;
 				}
-				
+
 			}
 			else {
 				mX = X_max - 1 + (pre.mX + pre.getLength() - X_max) + d;
@@ -212,7 +212,7 @@ void Car::clear() {
 			length = X_max - mX;
 		}
 	}
-	
+
 
 	for (int i = 0; i < h; i++) {
 		gotoXY(x, mY + i);
@@ -222,10 +222,10 @@ void Car::clear() {
 
 bool Car::isImpact(People &people) {
 	int leftX = people.getX();
-	int rightX = leftX + Wi;
+	int rightX = leftX + Wi - 1;
 
 	if ((mY <= people.getY()) && (people.getY() <= (mY + 4))) {
-		if (((mX <= leftX && (leftX <= mX + pcar[0].length())) || (mX <= rightX && rightX <= mX + pcar[0].length()))) {
+		if (((mX <= leftX && (leftX <= mX + pcar[0].length() - 1)) || (mX <= rightX && rightX <= mX + pcar[0].length() - 1))) {
 			return true;
 		}
 	}
