@@ -3,7 +3,7 @@
 #include "Car.h"
 #include "Train.h"
 #include "Wood.h"
-#include <vector>
+#include "Lilypad.h";
 #include "Console.h"
 #include "Coin.h"
 #define COINVALUE 150
@@ -29,6 +29,9 @@ private:
 	unsigned nCoin;
 	vector<int> countNCoin;
 
+	vector<vector<Lilypad>> Pads;
+	int *yPad, linePad, *numPad;
+
 public:
 	GAME(int level);
 	~GAME();
@@ -42,6 +45,11 @@ public:
 	bool impactVehicle();
 	int impactWoods(); //0: not same line wood | 1: on wood | -1: in river
 	int sameLineWoods();
+
+	int impactPads(); //0: not same line wood | 1: on wood | -1: in river
+	int sameLinePads();
+	void updatePads();
+
 	vector <int> xLineWoods(int line);
 	void peopleOnWood(DState dst);
 	void drawAll();
@@ -52,5 +60,6 @@ public:
 	void createCoins();
 	void handleCoinImpact();
 
+	void createLilypads(int yPad[], int linePad, int *numPad);
 };
 

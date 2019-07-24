@@ -7,7 +7,7 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { -14, 26 };
+		int yCar[] = { -14, -22 };
 		numCar = new int[lineCar] { 4, 4 };
 		spdCar = new int[lineCar] { -1, 1 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
@@ -25,6 +25,12 @@ GAME::GAME(int level)
 		numWood = new int [lineWood] { 4 };
 		spdWood = new int [lineWood] { 1 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
+
+		//Lilypad
+		linePad = 1;
+		yPad = new int [linePad] { 27 };
+		numPad = new int [linePad] { 1 };
+		createLilypads(yPad, linePad, numPad);
 
 		// Coin
 		nCoin = 5;
@@ -227,7 +233,7 @@ void GAME::drawAll() {
 	// draw wood
 	for (int i = 0; i < lineWood; i++) {
 		if (Woods[i][0].getY() >= 0 && Woods[i][0].getY() < Y_max) {
-			Woods[i][0].drawWave(3);
+			Woods[i][0].drawWave();
 			for (int j = 0; j < numWood[i]; j++) {
 				Woods[i][j].draw();
 			}
@@ -250,6 +256,18 @@ void GAME::drawAll() {
 		}
 	}
 
+	//draw lilypad
+	for (int i = 0; i < linePad; i++) {
+		if (numPad[i] != 0) {
+			if (Pads[i][0].getY() >= 0 && Pads[i][0].getY() < Y_max) {
+				Pads[i][0].drawWave();
+				for (int j = 0; j < numPad[i]; j++) {
+					Pads[i][j].draw();
+				}
+			}
+		}
+	}
+
 	// draw coin
 	for (int i = 0; i < coins.size(); ++i) {
 		coins[i].draw();
@@ -266,14 +284,6 @@ void GAME::drawAll() {
 
 	// draw people
 	people.draw();
-	/*if (sameLineWoods() != -1) {
-		people.clearImage();
-	}*/
-
-	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
-		coinsOnWood[i].move(-1);
-		coinsOnWood[i].drawMove(-1);
-	}*/
 }
 
 bool GAME::isEndScr() {
@@ -299,6 +309,13 @@ bool GAME::isEndScr() {
 		}
 	}
 
+	//Lilypad
+	for (int i = 0; i < linePad; i++) {
+		if (Pads[i][0].getY() < 8) {
+			return false;
+		}
+	}
+
 	return true;
 }
 
@@ -320,22 +337,33 @@ void GAME::screenScroll() {
 	//Car
 	for (int i = 0; i < lineCar; i++) {
 		for (int j = 0; j < numCar[i]; j++) {
+			if (Cars[i][0].getY() > Y_max) break;
 			Cars[i][j].setY(Cars[i][j].getY() + 8);
 		}
 	}
 
 	//Train
 	for (int i = 0; i < lineTrain; i++) {
+		if (Trains[i].getY() > Y_max) continue;
 		Trains[i].setY(Trains[i].getY() + 8);
 	}
 
 	//Wood
 	for (int i = 0; i < lineWood; i++) {
 		for (int j = 0; j < numWood[i]; j++) {
+			if (Woods[i][0].getY() > Y_max) break;
 			Woods[i][j].setY(Woods[i][j].getY() + 8);
 		}
 	}
 	if (sameLineWoods() != -1) people.setYC(Woods[sameLineWoods()][0].getY());
+
+	//Lilypad
+	for (int i = 0; i < linePad; i++) {
+		for (int j = 0; j < numPad[i]; j++) {
+			if (Pads[i][0].getY() > Y_max) break;
+			Pads[i][j].setY(Pads[i][j].getY() + 8);
+		}
+	}
 
 	// Coin
 	for (int i = 0; i < coins.size(); ++i) {
@@ -345,12 +373,10 @@ void GAME::screenScroll() {
 	// coinOnWood
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
+			if (coinsOnWood[i][0].getY() > Y_max) break;
 			coinsOnWood[i][j].setYC(coinsOnWood[i][j].getYC() + 8);
 		}
 	}
-	/*for (int i = 0; i < coinsOnWood.size(); ++i) {
-		coinsOnWood[i].setYC(coinsOnWood[i].getYC() + 8);
-	}*/
 
 }
 
@@ -501,4 +527,82 @@ vector <int> GAME::xLineWoods(int line) {
 	}
 
 	return result;
+}
+
+void GAME::createLilypads(int yPad[], int linePad, int *numPad) {
+	vector <int> usedX;
+	int slot = 152 / (lilypad[0].length());
+	int randX;
+	bool flag = true;
+
+	for (int i = 0; i < linePad; i++) {
+		vector <Lilypad> sample;
+		for (int j = 0; j < numPad[i]; j++) {
+			do {
+				randX = rand() % slot;
+				flag = isUsed(randX, usedX);
+				if (flag == false) {
+					usedX.push_back(randX);
+				}
+			} while (flag);
+			sample.push_back(Lilypad(3 + randX * lilypad[0].length(), yPad[i]));
+			//Pads[i][j].set(3 + randX * lilypad[0].length(), yPad[i], 0);
+		}
+		usedX.clear();
+		Pads.push_back(sample);
+	}
+}
+
+int GAME::sameLinePads() {
+	for (int i = 0; i < linePad; i++) {
+		if (numPad[i] != 0) {
+			if ((Pads[i][0].getY() - 4 <= people.getY()) && (people.getY() <= (Pads[i][0].getY() + 4))) {
+				return i;
+			}
+		}
+		else {
+			if ((yPad[i] - 4 <= people.getY()) && (people.getY() <= (yPad[i] + 4))) {
+				return i;
+			}
+		}
+	}
+	return -1;
+}
+
+int GAME::impactPads() {
+	int line = sameLinePads();
+
+	if (line == -1) {
+		return 0;
+	}
+
+	for (int j = 0; j < numPad[line]; j++) {
+		if (Pads[line][j].isImpact(people)) {
+			Pads[line][j].startTime();
+			Pads[line][j].setOn();
+			return 1;
+		}
+	}
+
+	return -1;
+}
+
+void GAME::updatePads() {
+	for (int i = 0; i < linePad; i++) {
+		if (numPad[i] != 0) {
+			for (int j = 0; j < numPad[i]; j++) {
+				if (Pads[i][j].getY() > Y_max) break;
+				if (Pads[i][j].getState()) {
+					Pads[i][j].setTime();
+					if (Pads[i][j].timeLeft() > 5) {
+						Pads[i][j].clear();
+						Pads[i][j].drawWave();
+						Pads[i].erase(Pads[i].begin() + j);
+						Pads[i].shrink_to_fit();
+						numPad[i] -= 1;
+					}
+				}
+			}
+		}
+	}
 }
