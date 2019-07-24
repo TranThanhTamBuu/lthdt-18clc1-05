@@ -138,7 +138,7 @@ void Coin::clearImage() {
 void Coin::clearImageOnWood() {
 	for (int i = 0; i < h; ++i) {
 		for (int j = 0; j < w; ++j) {
-			gotoXY(x - (w - 1) / 2 + j + 3, y - (h - 1) / 2 + i + 1);
+			gotoXY(x - (w - 1) / 2 + j + 2, y - (h - 1) / 2 + i + 1);
 			wcout << " ";
 		}
 	}

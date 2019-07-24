@@ -89,7 +89,7 @@ void GAME::updatePosPeople(char key) {
 	case 'W': case 'w': case 72: {
 		if (sameLineWoods() != -1) {
 			people.clearImage();
-			people.goUp(STEPUPDOWN - 1);
+			people.goUp(STEPUPDOWN - 2);
 		}
 		else {
 			people.goUp(STEPUPDOWN);
@@ -101,7 +101,7 @@ void GAME::updatePosPeople(char key) {
 	case 'S': case 's': case 80: {
 		if (sameLineWoods() != -1) {
 			people.clearImage();
-			people.goDown(STEPUPDOWN + 1);
+			people.goDown(STEPUPDOWN + 2);
 		}
 		else {
 			people.goDown(STEPUPDOWN);
@@ -390,7 +390,7 @@ void GAME::createCoins() {
 	}
 
 	// coins on wood 
-	vector<int> sampleYWood = { -4 };
+	vector<int> sampleYWood = { -5 };
 	vector<vector<int>> sampleXWood;
 	for (int i = 0; i < lineWood; ++i) {
 		sampleXWood.push_back(xLineWoods(i));
@@ -474,6 +474,7 @@ void GAME::handleCoinImpact() {
 		}
 	}
 
+	// coins on wood
 	for (int i = 0; i < lineWood; ++i) {
 		for (int j = 0; j < coinsOnWood[i].size(); ++j) {
 			if (coinsOnWood[i][0].getYC() < 0 || coinsOnWood[i][0].getYC() > Y_max) break;
