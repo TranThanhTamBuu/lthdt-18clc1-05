@@ -33,7 +33,7 @@ void Menu::ShowTitle()
 		Sleep(300);
 
 	};
-	
+
 	int key = _getch();
 }
 
@@ -50,7 +50,7 @@ void Menu::printMenu(wstring menu[], int n)
 	wcout << "\t\t\t   \\ `\\____\\ \\__\\\\ \\_\\\\ \\____\\ \\____\\\\ \\__\\    \\ \\____/\\ \\_\\\\ \\____/\\/\\____/\\/\\____/\\ \\_\\ \\_\\ \\_\\ \\____ \\ " << endl;
 	wcout << "\t\t\t    \\/_____/\\/__/ \\/_/ \\/____/\\/____/ \\/__/     \\/___/  \\/_/ \\/___/  \\/___/  \\/___/  \\/_/\\/_/\\/_/\\/___L\\ \\" << endl;
 	wcout << "\t\t\t                                                                                                   /\\____/" << endl;
-	wcout << "\t\t\t                                                                                                   \\_/__/ " << endl;	
+	wcout << "\t\t\t                                                                                                   \\_/__/ " << endl;
 
 
 	gotoXY(67, 22);
@@ -119,7 +119,7 @@ int Menu::Choice()
 				wcout << ">>";
 				break;
 			}
-			case 13: 
+			case 13:
 			{
 				return line;
 				break;
@@ -139,7 +139,7 @@ int Menu::Do(GAME &game) {
 		break;
 	}
 
-	case 30:{
+	case 30: {
 		system("cls");
 		//continue
 		break;
@@ -152,8 +152,8 @@ int Menu::Do(GAME &game) {
 		key = 27;
 		break;
 	}
-		
-	case 32:{
+
+	case 32: {
 		system("cls");
 		gotoXY(78, 15);
 		wcout << "Use A, S, D, E to play";
@@ -169,7 +169,7 @@ int Menu::Do(GAME &game) {
 		break;
 	}
 
-	case 34:{
+	case 34: {
 		system("cls");
 		gotoXY(78, 15);
 		wcout << "Bye";
@@ -181,7 +181,7 @@ int Menu::Do(GAME &game) {
 	}
 
 	while (key != 27) {
-		if(_kbhit()) {
+		if (_kbhit()) {
 			key = _getch();
 		}
 	}
@@ -214,6 +214,19 @@ void SubThread(GAME &game)
 			break;
 		}
 
+		switch (game.impactPads()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+
+			//game.peopleOnWood(RIGHT); // lam cai on Lilipad
+			break;
+		case -1: // in river
+			game.~GAME();
+			exit(0);
+			break;
+		}
+
 		char key = ' ';
 		if (_kbhit())
 		{
@@ -227,7 +240,7 @@ void SubThread(GAME &game)
 		game.updatePosTrains();
 		game.updatePosCoinOnWoods();
 		game.updatePosWoods();
-
+		game.updatePads();
 
 		// game.updatePos...
 		game.screenScroll();

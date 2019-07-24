@@ -5,6 +5,7 @@
 #include "Console.h"
 #include "Menu.h"
 #include "Wood.h"
+#include "Lilypad.h"
 
 char MOVING = ' ';
 
@@ -34,14 +35,12 @@ int main() {
 		Sleep(50);
 	}*/
 
-	
-
 
 	GAME game(1);
 	SubThread(game);
 
-	
-	
+
+
 	//system("pause");
 
 
