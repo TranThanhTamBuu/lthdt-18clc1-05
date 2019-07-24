@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <thread>
 #include <time.h>
+#include <vector>
 
 #define WIDTH 158
 #define HEIGHT 42
