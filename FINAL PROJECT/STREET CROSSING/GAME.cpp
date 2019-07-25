@@ -40,6 +40,8 @@ GAME::GAME(int level)
 			vector<Coin> temp;
 			coinsOnWood.push_back(temp);
 		}
+		sampleYWood = { -5 };
+		sampleY = { 10 + H_VEHICLE-2, -30 + H_VEHICLE - 2 ,-14 + H_VEHICLE - 2, -22 + H_VEHICLE - 2 };
 		createCoins();
 
 		break;
@@ -93,7 +95,7 @@ void GAME::updatePosPeople(char key) {
 
 	switch (key) {
 	case 'W': case 'w': case 72: {
-		if (sameLineWoods() != -1) {
+		if (sameLineWoods() != -1 || sameLinePads() != -1) {
 			people.clearImage();
 			people.goUp(STEPUPDOWN - 2);
 		}
@@ -105,7 +107,7 @@ void GAME::updatePosPeople(char key) {
 		break;
 	}
 	case 'S': case 's': case 80: {
-		if (sameLineWoods() != -1) {
+		if (sameLineWoods() != -1 || sameLinePads() != -1) {
 			people.clearImage();
 			people.goDown(STEPUPDOWN + 2);
 		}
@@ -380,6 +382,10 @@ void GAME::screenScroll() {
 
 }
 
+void GAME::peopleOnPad() {
+	people.setYC(Pads[sameLinePads()][0].getY());
+}
+
 void GAME::peopleOnWood(DState dst) {
 	people.setYC(Woods[sameLineWoods()][0].getY());
 	switch (dst) {
@@ -403,7 +409,6 @@ void GAME::createCoins() {
 	int randX, randY;
 
 	// coin
-	vector<int> sampleY = { 29,-11,13 };
 	vector<vector<int>> sampleX;
 	vector<int> sampleX_temp;
 	int a = 0;
@@ -416,7 +421,6 @@ void GAME::createCoins() {
 	}
 
 	// coins on wood 
-	vector<int> sampleYWood = { -5 };
 	vector<vector<int>> sampleXWood;
 	for (int i = 0; i < lineWood; ++i) {
 		sampleXWood.push_back(xLineWoods(i));

@@ -219,6 +219,7 @@ void SubThread(GAME &game)
 			break;
 		case 1: // on wood
 
+			game.peopleOnPad();
 			//game.peopleOnWood(RIGHT); // lam cai on Lilipad
 			break;
 		case -1: // in river

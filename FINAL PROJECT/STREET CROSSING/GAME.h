@@ -7,6 +7,7 @@
 #include "Console.h"
 #include "Coin.h"
 #define COINVALUE 150
+#define H_VEHICLE 5
 
 
 class GAME
@@ -28,6 +29,8 @@ private:
 	vector<vector<Coin>> coinsOnWood;
 	unsigned nCoin;
 	vector<int> countNCoin;
+	vector<int> sampleY;
+	vector<int> sampleYWood;
 
 	vector<vector<Lilypad>> Pads;
 	int *yPad, linePad, *numPad;
@@ -52,6 +55,7 @@ public:
 
 	vector <int> xLineWoods(int line);
 	void peopleOnWood(DState dst);
+	void peopleOnPad();
 	void drawAll();
 	bool isEndScr();
 	void screenScroll();
