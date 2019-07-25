@@ -15,10 +15,22 @@ Lilypad::~Lilypad(){
 }
 
 void Lilypad::draw() {
+	setColor(2, 0);
+	if (people) {
+		if (timeLeft() > 2) {
+			setColor(14, 0);
+		}
+		if (timeLeft() > 4) {
+			setColor(12, 0);
+		}
+	}
+
 	for (int i = 0; i < 3; i++) {
 		gotoXY(mX, mY + i);
 		wcout << ppad[i];
 	}
+
+	setColor(7, 0);
 }
 
 void Lilypad::setOn() {
