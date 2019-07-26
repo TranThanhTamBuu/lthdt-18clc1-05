@@ -224,8 +224,9 @@ bool Car::isImpact(People &people) {
 	int leftX = people.getX();
 	int rightX = leftX + Wi - 1;
 
+	int flag = mX + pcar[0].length() - 1;
 	if ((mY <= people.getY()) && (people.getY() <= (mY + 4))) {
-		if (((mX <= leftX && (leftX <= mX + pcar[0].length() - 1)) || (mX <= rightX && rightX <= mX + pcar[0].length() - 1))) {
+		if ((((mX <= leftX) && ((leftX <= flag))) || ((mX <= rightX) && (rightX <= flag)))) {
 			return true;
 		}
 	}

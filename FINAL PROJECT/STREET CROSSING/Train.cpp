@@ -133,9 +133,10 @@ void Train::clear() {
 bool Train::isImpact(People &people) {
 	int leftX = people.getX();
 	int rightX = leftX + Wi - 1;
+	int flag = mX + train[0].length() - 1;
 
 	if ((mY <= people.getY()) && (people.getY() <= (mY + 5))) {
-		if (((mX <= leftX && leftX <= mX + train[0].length() - 1) || (mX <= rightX && rightX <= mX + train[0].length() - 1))) {
+		if ((((mX <= leftX) && (leftX <= flag)) || ((mX <= rightX) && (rightX <= flag)))) {
 			return true;
 		}
 	}

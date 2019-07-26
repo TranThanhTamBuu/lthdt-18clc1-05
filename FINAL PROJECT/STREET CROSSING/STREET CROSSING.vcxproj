@@ -129,6 +129,7 @@
     <ClCompile Include="Down.cpp" />
     <ClCompile Include="GAME.cpp" />
     <ClCompile Include="Left.cpp" />
+    <ClCompile Include="Lilypad.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="Down.h" />
     <ClInclude Include="GAME.h" />
     <ClInclude Include="Left.h" />
+    <ClInclude Include="Lilypad.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="People.h" />

@@ -7,7 +7,7 @@ GAME::GAME(int level)
 	case 1: {
 		//Car
 		lineCar = 2;
-		int yCar[] = { -14, -22 };
+		int yCar[] = { -14, -22 }; //-14, -22
 		numCar = new int[lineCar] { 4, 4 };
 		spdCar = new int[lineCar] { -1, 1 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
@@ -28,8 +28,8 @@ GAME::GAME(int level)
 
 		//Lilypad
 		linePad = 1;
-		yPad = new int [linePad] { 27 };
-		numPad = new int [linePad] { 1 };
+		yPad = new int [linePad] { 27 }; //27
+		numPad = new int [linePad] { 5 };
 		createLilypads(yPad, linePad, numPad);
 
 		// Coin
@@ -187,6 +187,7 @@ bool GAME::impactVehicle() {
 	for (int i = 0; i < lineCar; i++) {
 		if ((Cars[i][0].getY() <= people.getY()) && (people.getY() <= (Cars[i][0].getY() + 4))) {
 			for (int j = 0; j < numCar[i]; j++) {
+				if (Cars[i][0].getY() < 0 || Cars[i][0].getY() > Y_max) break;
 				if (Cars[i][j].isImpact(people)) {
 					return true;
 				}
@@ -196,9 +197,10 @@ bool GAME::impactVehicle() {
 
 	//Train
 	for (int i = 0; i < lineTrain; i++) {
-		if (Trains[i].getY() > Y_max) continue;
-		if (Trains[i].isImpact(people)) {
-			return true;
+		if (Trains[i].getY() < Y_max  && Trains[i].getY() > 0) {
+			if (Trains[i].isImpact(people)) {
+				return true;
+			}
 		}
 	}
 
@@ -582,8 +584,10 @@ int GAME::impactPads() {
 
 	for (int j = 0; j < numPad[line]; j++) {
 		if (Pads[line][j].isImpact(people)) {
-			Pads[line][j].startTime();
-			Pads[line][j].setOn();
+			if (!Pads[line][j].getState()) {
+				Pads[line][j].startTime();
+				Pads[line][j].setOn();
+			}
 			return 1;
 		}
 	}

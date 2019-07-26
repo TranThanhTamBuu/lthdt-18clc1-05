@@ -12,6 +12,7 @@ Lilypad::Lilypad(int x, int y) : River(x, y, 0) {
 
 Lilypad::~Lilypad(){
 	ppad = nullptr;
+	people = false;
 }
 
 void Lilypad::draw() {
