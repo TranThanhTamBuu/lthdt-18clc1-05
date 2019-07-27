@@ -13,6 +13,8 @@
 class GAME
 {
 private:
+	int level;
+
 	Car **Cars;
 	int lineCar, *numCar, *spdCar, *distance;
 

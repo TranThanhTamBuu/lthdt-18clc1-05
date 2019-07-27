@@ -3,6 +3,7 @@
 
 GAME::GAME(int level)
 {
+	this->level = level;
 	switch (level) {
 	case 1: {
 		//Car
