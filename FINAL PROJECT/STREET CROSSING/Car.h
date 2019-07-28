@@ -63,7 +63,8 @@ public:
 	void setSpd(int spd);
 	void set(int x, int y);
 	int getLength();
-	void move(Car &pre, int d); 
+	void move(Car &pre, int d);
+	void moveLose();
 	void draw();
 	void clear();
 	bool isImpact(People &people);

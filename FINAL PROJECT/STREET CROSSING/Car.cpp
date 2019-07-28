@@ -265,3 +265,13 @@ Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar, int *&distan
 
 	return carPtr;
 }
+
+void Car::moveLose() {
+	mX += speed;
+
+	int flag = mX + pcar[0].length();
+	if (flag < 0) {
+		clear();
+		mX = X_max - 1;
+	}
+}
