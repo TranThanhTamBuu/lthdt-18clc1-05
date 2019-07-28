@@ -16,11 +16,13 @@ People::~People()
 	delete currentDirectionState;
 }
 
+int People::getModel() {
+	return model;
+}
+
 unsigned int People::getX() {
 	return x - (Wi-1)/2;
 }
-
-
 
 unsigned int People::getY() {
 	return y - (He-1)/2;
@@ -184,4 +186,9 @@ bool People::chooseModel() {
 		}
 		}
 	}
+}
+
+void People::loadPeople(unsigned long _money, unsigned int _model) {
+	money = _money;
+	model = _model;
 }

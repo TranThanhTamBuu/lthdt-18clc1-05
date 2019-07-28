@@ -250,7 +250,7 @@ void SubThread(GAME &game)
 
 		Sleep(25);
 
-
+		//game.save();
 	}
 }
 

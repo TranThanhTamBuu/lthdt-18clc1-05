@@ -6,7 +6,9 @@ GAME::GAME(int level)
 	this->level = level;
 	switch (level) {
 	case 1: {
-		//Car
+		load();
+
+		/*//Car
 		lineCar = 2;
 		int yCar[] = { -14, -22 }; //-14, -22
 		numCar = new int[lineCar] { 4, 4 };
@@ -35,8 +37,8 @@ GAME::GAME(int level)
 
 		// Coin
 		nCoin = 5;
-		vector<int> countNCoin_temp(1, 0);
-		countNCoin = countNCoin_temp;
+		vector<int> nCoinOnWood_temp(lineWood, 0);
+		nCoinOnWood = nCoinOnWood_temp;
 		for (int i = 0; i < lineWood; ++i) {
 			vector<Coin> temp;
 			coinsOnWood.push_back(temp);
@@ -44,7 +46,7 @@ GAME::GAME(int level)
 		sampleYWood = { -5 };
 		sampleY = { 10 + H_VEHICLE-2, -30 + H_VEHICLE - 2 ,-14 + H_VEHICLE - 2, -22 + H_VEHICLE - 2 };
 		createCoins();
-
+		*/
 		break;
 	}
 	case 2: {
@@ -459,7 +461,7 @@ void GAME::createCoins() {
 
 		case 1: {	// Line wood
 			int iY = rand() % sampleYWood.size();
-			if (countNCoin[iY] > 5) {
+			if (nCoinOnWood[iY] > 5) {
 				--i;
 			}
 			else {
@@ -471,7 +473,7 @@ void GAME::createCoins() {
 
 				coinsOnWood[iY].push_back(Coin(randX - 3, randY - 1, LEFT, iY));
 				// Count nCoin on one line	
-				++countNCoin[iY];
+				++nCoinOnWood[iY];
 				break;
 			}
 		}
@@ -514,7 +516,7 @@ void GAME::handleCoinImpact() {
 			if (coinsOnWood[i][j].isImpactOnWood(people.getXC(), people.getYC())) {
 				people.changeMoney(COINVALUE);
 				coinsOnWood[i][j].clearImageOnWood();
-				--countNCoin[coinsOnWood[i][j].getiY()];
+				--nCoinOnWood[coinsOnWood[i][j].getiY()];
 				coinsOnWood[i].erase(coinsOnWood[i].begin() + j);
 				coinsOnWood[i].shrink_to_fit();
 				--j;
@@ -615,3 +617,390 @@ void GAME::updatePads() {
 		}
 	}
 }
+
+void GAME::save(bool saveAS) {
+	SaveLoad saveStruct;
+	
+	if (saveAS) {
+		// enter file save name
+	}
+	ofstream outFile("save.sr", ios::binary);
+	if (!outFile) {
+		wcout << "Can not open file to save" << endl;
+	}
+
+	saveStruct.level = level;
+	saveStruct.people.model = people.getModel();
+	saveStruct.people.money = people.getMoney();
+	saveStruct.people.people.x = people.getXC();
+	saveStruct.people.people.y = people.getYC();
+	outFile.write(reinterpret_cast<char*>(&saveStruct), sizeof(saveStruct.level) + sizeof(saveStruct.people));
+
+	// Car
+	saveStruct.cars.lineCar = lineCar;
+	saveStruct.cars.numCar = new int32_t[lineCar];
+	saveStruct.cars.spdCar = new int32_t[lineCar];
+	saveStruct.cars.distance = new int32_t[lineCar];
+	saveStruct.cars.Cars = new Point*[lineCar];
+	for (int i = 0; i < lineCar; ++i) {
+		saveStruct.cars.numCar[i] = numCar[i];
+		saveStruct.cars.spdCar[i] = spdCar[i];
+		saveStruct.cars.distance[i] = distance[i];
+		
+		saveStruct.cars.Cars[i] = new Point[numCar[i]];
+		for (int j = 0; j < numCar[i]; ++j) {
+			Point temp1;
+			saveStruct.cars.Cars[i][j].x = Cars[i][j].getX();
+			saveStruct.cars.Cars[i][j].y = Cars[i][j].getY();
+		}
+	}
+	outFile.write(reinterpret_cast<char*>(&saveStruct.cars.lineCar), sizeof(saveStruct.cars.lineCar));
+	outFile.write(reinterpret_cast<char*>(saveStruct.cars.numCar), lineCar*sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.cars.spdCar), lineCar * sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.cars.distance), lineCar * sizeof(int32_t));
+	for (int i = 0; i < lineCar; ++i) {
+		outFile.write(reinterpret_cast<char*>(saveStruct.cars.Cars[i]), numCar[i]*sizeof(Point));
+	}
+
+	// Train
+	saveStruct.trains.lineTrain = lineTrain;
+	saveStruct.trains.spdTrain = new int32_t[lineTrain];
+	saveStruct.trains.modeTrain = new int32_t[lineTrain];
+	saveStruct.trains.Trains = new Point[lineTrain];
+	for (int i = 0; i < lineTrain; ++i) {
+		saveStruct.trains.spdTrain[i] = spdTrain[i];
+		saveStruct.trains.modeTrain[i] = modeTrain[i];		
+		saveStruct.trains.Trains[i].x = Trains[i].getX();
+		saveStruct.trains.Trains[i].y = Trains[i].getY();
+	}
+	outFile.write(reinterpret_cast<char*>(&saveStruct.trains.lineTrain), sizeof(saveStruct.trains.lineTrain));
+	outFile.write(reinterpret_cast<char*>(saveStruct.trains.spdTrain), lineTrain*sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.trains.modeTrain), lineTrain * sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.trains.Trains), lineTrain * sizeof(Point));
+
+
+	// Wood
+	saveStruct.woods.lineWood = lineWood;
+	saveStruct.woods.numWood = new int32_t[lineWood];
+	saveStruct.woods.spdWood = new int32_t[lineWood];
+	saveStruct.woods.Woods = new Point*[lineWood];
+	for (int i = 0; i < lineWood; ++i) {
+		saveStruct.woods.numWood[i]= numWood[i];
+		saveStruct.woods.spdWood[i] = spdWood[i];
+
+		saveStruct.woods.Woods[i] = new Point[numWood[i]];
+		for (int j = 0; j < numWood[i]; ++j) {
+			saveStruct.woods.Woods[i][j].x = Woods[i][j].getX();
+			saveStruct.woods.Woods[i][j].y = Woods[i][j].getY();
+		}
+	}
+	outFile.write(reinterpret_cast<char*>(&saveStruct.woods.lineWood), sizeof(saveStruct.woods.lineWood));
+	outFile.write(reinterpret_cast<char*>(saveStruct.woods.numWood), lineWood * sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.woods.spdWood), lineWood * sizeof(int32_t));
+	for (int i = 0; i < lineWood; ++i) {
+		outFile.write(reinterpret_cast<char*>(saveStruct.woods.Woods[i]), numWood[i] * sizeof(Point));
+	}
+
+	// Lilypad
+	saveStruct.pads.linePad = linePad;
+	saveStruct.pads.yPad = new int32_t[linePad];
+	saveStruct.pads.numPad = new int32_t[linePad];
+	saveStruct.pads.Pads = new Point*[linePad];
+	for (int i = 0; i < linePad; ++i) {
+		saveStruct.pads.yPad[i] = yPad[i];
+		saveStruct.pads.numPad[i] = numPad[i];
+
+		saveStruct.pads.Pads[i] = new Point[numPad[i]];
+		for (int j = 0; j < numPad[i]; ++j) {
+			saveStruct.pads.Pads[i][j].x = Pads[i][j].getX();
+			saveStruct.pads.Pads[i][j].y = Pads[i][j].getY();
+		}
+	}
+	outFile.write(reinterpret_cast<char*>(&saveStruct.pads.linePad), sizeof(saveStruct.pads.linePad));
+	outFile.write(reinterpret_cast<char*>(saveStruct.pads.yPad), linePad * sizeof(int32_t));
+	outFile.write(reinterpret_cast<char*>(saveStruct.pads.numPad), linePad * sizeof(int32_t));
+	for (int i = 0; i < linePad; ++i) {
+		outFile.write(reinterpret_cast<char*>(saveStruct.pads.Pads[i]), numPad[i] * sizeof(Point));
+	}
+
+	// Coin
+	saveStruct.coins.nCoinOnStreet = coins.size();
+	saveStruct.coins.Coins = new Point[saveStruct.coins.nCoinOnStreet];
+	for (int i = 0; i < coins.size(); ++i)  {
+		saveStruct.coins.Coins[i].x = coins[i].getXC();
+		saveStruct.coins.Coins[i].y = coins[i].getYC();
+	}
+	outFile.write(reinterpret_cast<char*>(&saveStruct.coins.nCoinOnStreet), sizeof(saveStruct.coins.nCoinOnStreet));
+	outFile.write(reinterpret_cast<char*>(saveStruct.coins.Coins), coins.size()*sizeof(Point));
+
+	// Coin on wood
+	saveStruct.coinsOnWood.nCoinOnWood = new int32_t[lineWood];
+	saveStruct.coinsOnWood.CoinsOnWood = new Point*[lineWood];
+	saveStruct.coinsOnWood.iLineNum = new Point*[lineWood];
+
+	for (int i = 0; i < lineWood; ++i) {
+		saveStruct.coinsOnWood.nCoinOnWood[i] = nCoinOnWood[i];
+		saveStruct.coinsOnWood.CoinsOnWood[i] = new Point[nCoinOnWood[i]];
+		saveStruct.coinsOnWood.iLineNum[i] = new Point[nCoinOnWood[i]];
+
+		for (int j = 0; j < nCoinOnWood[i]; ++j) {
+			saveStruct.coinsOnWood.CoinsOnWood[i][j].x = coinsOnWood[i][j].getXC();
+			saveStruct.coinsOnWood.CoinsOnWood[i][j].y = coinsOnWood[i][j].getYC();
+
+			
+			saveStruct.coinsOnWood.iLineNum[i][j].x = coinsOnWood[i][j].getiX();
+			saveStruct.coinsOnWood.iLineNum[i][j].y = coinsOnWood[i][j].getiY();
+		}
+	}
+	outFile.write(reinterpret_cast<char*>(saveStruct.coinsOnWood.nCoinOnWood), lineWood*sizeof(int32_t));
+	for (int i = 0; i < lineWood; ++i) {
+		outFile.write(reinterpret_cast<char*>(saveStruct.coinsOnWood.CoinsOnWood[i]), nCoinOnWood[i] * sizeof(Point));
+	}
+	for (int i = 0; i < lineWood; ++i) {
+		outFile.write(reinterpret_cast<char*>(saveStruct.coinsOnWood.iLineNum[i]), nCoinOnWood[i] * sizeof(Point));
+	}
+
+	outFile.close();
+
+	delete[] saveStruct.cars.numCar;
+	delete[] saveStruct.cars.spdCar;
+	delete[] saveStruct.trains.spdTrain;
+	delete[] saveStruct.trains.modeTrain;
+	delete[] saveStruct.trains.Trains;
+	delete[] saveStruct.woods.numWood;
+	delete[] saveStruct.woods.spdWood;
+	delete[] saveStruct.pads.numPad;
+	delete[] saveStruct.pads.yPad;
+	delete[] saveStruct.coins.Coins;
+	delete[] saveStruct.coinsOnWood.nCoinOnWood;
+
+	for (int i = 0; i < lineCar; ++i) {
+		delete[] saveStruct.cars.Cars[i];
+	}
+	for (int i = 0; i < lineWood; ++i) {
+		delete[] saveStruct.woods.Woods[i];
+	}
+	for (int i = 0; i < linePad; ++i) {
+		delete saveStruct.pads.Pads[i];
+	}
+	for (int i = 0; i < lineWood; ++i) {
+		delete[] saveStruct.coinsOnWood.CoinsOnWood[i];
+		delete[] saveStruct.coinsOnWood.iLineNum[i];
+	}
+}
+
+void GAME::load(bool loadFrom) {
+	SaveLoad loadStruct;
+
+	if (loadFrom) {
+		// enter file load name
+	}
+
+	ifstream inFile("save.sr", ios::binary);
+	if (!inFile) {
+		wcout << "Can not open file to load" << endl;
+	}
+
+	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people) + sizeof(loadStruct.cars.lineCar));
+	// Car
+	loadStruct.cars.numCar = new int32_t[loadStruct.cars.lineCar];
+	loadStruct.cars.spdCar = new int32_t[loadStruct.cars.lineCar];
+	loadStruct.cars.distance = new int32_t[loadStruct.cars.lineCar];
+	loadStruct.cars.Cars = new Point*[loadStruct.cars.lineCar];
+
+	inFile.read(reinterpret_cast<char*>(loadStruct.cars.numCar), loadStruct.cars.lineCar * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.cars.spdCar), loadStruct.cars.lineCar * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.cars.distance), loadStruct.cars.lineCar * sizeof(int32_t));
+	for (int i = 0; i < loadStruct.cars.lineCar; ++i) {
+		loadStruct.cars.Cars[i] = new Point[loadStruct.cars.numCar[i]];
+		inFile.read(reinterpret_cast<char*>(loadStruct.cars.Cars[i]), loadStruct.cars.numCar[i] * sizeof(Point));
+	}
+
+	// Train
+	inFile.read(reinterpret_cast<char*>(&loadStruct.trains.lineTrain), sizeof(int32_t));
+	loadStruct.trains.spdTrain = new int32_t[loadStruct.trains.lineTrain];
+	loadStruct.trains.modeTrain = new int32_t[loadStruct.trains.lineTrain];
+	loadStruct.trains.Trains = new Point[loadStruct.trains.lineTrain];
+
+	inFile.read(reinterpret_cast<char*>(loadStruct.trains.spdTrain), loadStruct.trains.lineTrain * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.trains.modeTrain), loadStruct.trains.lineTrain * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.trains.Trains), loadStruct.trains.lineTrain * sizeof(Point));
+	
+	// Wood
+	inFile.read(reinterpret_cast<char*>(&loadStruct.woods.lineWood), sizeof(int32_t));
+	loadStruct.woods.numWood = new int32_t[loadStruct.woods.lineWood];
+	loadStruct.woods.spdWood = new int32_t[loadStruct.woods.lineWood];
+	loadStruct.woods.Woods = new Point*[loadStruct.woods.lineWood];
+
+	inFile.read(reinterpret_cast<char*>(loadStruct.woods.numWood), loadStruct.woods.lineWood * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.woods.spdWood), loadStruct.woods.lineWood * sizeof(int32_t));
+	for (int i = 0; i < loadStruct.woods.lineWood; ++i) {
+		loadStruct.woods.Woods[i] = new Point[loadStruct.woods.numWood[i]];
+		inFile.read(reinterpret_cast<char*>(loadStruct.woods.Woods[i]), loadStruct.woods.numWood[i] * sizeof(Point));
+	}
+
+	// Lilypad
+	inFile.read(reinterpret_cast<char*>(&loadStruct.pads.linePad), sizeof(int32_t));
+	loadStruct.pads.yPad = new int32_t[loadStruct.pads.linePad];
+	loadStruct.pads.numPad = new int32_t[loadStruct.pads.linePad];
+	loadStruct.pads.Pads = new Point*[loadStruct.pads.linePad];
+
+	inFile.read(reinterpret_cast<char*>(loadStruct.pads.yPad), loadStruct.pads.linePad * sizeof(int32_t));
+	inFile.read(reinterpret_cast<char*>(loadStruct.pads.numPad), loadStruct.pads.linePad * sizeof(int32_t));
+	for (int i = 0; i < loadStruct.pads.linePad; ++i) {
+		loadStruct.pads.Pads[i] = new Point[loadStruct.pads.numPad[i]];
+		inFile.read(reinterpret_cast<char*>(loadStruct.pads.Pads[i]), loadStruct.pads.numPad[i] * sizeof(Point));
+	}
+
+	// Coin
+	inFile.read(reinterpret_cast<char*>(&loadStruct.coins.nCoinOnStreet), sizeof(int32_t));
+	loadStruct.coins.Coins = new Point[loadStruct.coins.nCoinOnStreet];
+	inFile.read(reinterpret_cast<char*>(loadStruct.coins.Coins), loadStruct.coins.nCoinOnStreet * sizeof(Point));
+
+	// Coin on wood
+	loadStruct.coinsOnWood.nCoinOnWood = new int32_t[loadStruct.woods.lineWood];
+	loadStruct.coinsOnWood.CoinsOnWood = new Point*[loadStruct.woods.lineWood];
+	loadStruct.coinsOnWood.iLineNum = new Point*[loadStruct.woods.lineWood];
+	
+	inFile.read(reinterpret_cast<char*>(loadStruct.coinsOnWood.nCoinOnWood), loadStruct.woods.lineWood * sizeof(int32_t));
+	for (int i = 0; i < loadStruct.woods.lineWood; ++i) {
+		loadStruct.coinsOnWood.CoinsOnWood[i] = new Point[loadStruct.coinsOnWood.nCoinOnWood[i]];
+		inFile.read(reinterpret_cast<char*>(loadStruct.coinsOnWood.CoinsOnWood[i]), loadStruct.coinsOnWood.nCoinOnWood[i] * sizeof(Point));
+	}
+	for (int i = 0; i < loadStruct.woods.lineWood; ++i) {
+		loadStruct.coinsOnWood.iLineNum[i] = new Point[loadStruct.coinsOnWood.nCoinOnWood[i]];
+		inFile.read(reinterpret_cast<char*>(loadStruct.coinsOnWood.iLineNum[i]), loadStruct.coinsOnWood.nCoinOnWood[i] * sizeof(Point));
+	}
+
+	inFile.close();
+
+	// LOAD
+	// Car
+	lineCar = loadStruct.cars.lineCar;
+	Cars = new Car*[lineCar];
+	numCar = new int[lineCar];
+	spdCar = new int[lineCar];
+	distance = new int[lineCar];
+	for (int i = 0; i < lineCar; ++i) {
+		numCar[i] = loadStruct.cars.numCar[i];
+		spdCar[i] = loadStruct.cars.spdCar[i];
+		distance[i] = loadStruct.cars.distance[i];
+		Cars[i] = new Car[numCar[i]];
+
+		for (int j = 0; j < numCar[i]; ++j) {
+			Cars[i][j].set(loadStruct.cars.Cars[i][j].x,loadStruct.cars.Cars[i][j].y);
+			Cars[i][j].setSpd(spdCar[i]);
+		}
+	}
+	
+	// Train
+	lineTrain = loadStruct.trains.lineTrain;
+	Trains = new Train[lineTrain];
+	spdTrain = new int[lineTrain];
+	modeTrain = new int[lineTrain];
+	for (int i = 0; i < lineTrain; ++i) {
+		spdTrain[i] = loadStruct.trains.spdTrain[i];
+		modeTrain[i] = loadStruct.trains.modeTrain[i];
+		Trains[i].set(loadStruct.trains.Trains[i].x, loadStruct.trains.Trains[i].y, spdTrain[i],modeTrain[i]);
+	}
+	
+	// Wood
+	lineWood = loadStruct.woods.lineWood;
+	Woods = new Wood*[lineWood];
+	numWood = new int[lineWood];
+	spdWood = new int[lineWood];
+	for (int i = 0; i < lineWood; ++i) {
+		numWood[i] = loadStruct.woods.numWood[i];
+		spdWood[i] = loadStruct.woods.spdWood[i];
+		Woods[i] = new Wood[numWood[i]];
+
+		for (int j = 0; j < numWood[i]; ++j) {
+			Woods[i][j].set(loadStruct.woods.Woods[i][j].x, loadStruct.woods.Woods[i][j].y, loadStruct.woods.spdWood[i]);
+		}
+	}
+
+	// Lilypad
+	linePad = loadStruct.pads.linePad;
+	numPad = new int[linePad];
+	yPad = new int[linePad];
+	for (int i = 0; i < linePad; ++i) {
+		numPad[i] = loadStruct.pads.numPad[i];
+		yPad[i] = loadStruct.pads.yPad[i];
+		vector<Lilypad> temp;
+
+		for (int j = 0; j < numPad[i]; ++j) {
+			Lilypad temp1;
+			temp1.set(loadStruct.pads.Pads[i][j].x, loadStruct.pads.Pads[i][j].y, 0);
+			temp.push_back(temp1);
+		}
+		Pads.push_back(temp);
+	}
+
+	// Coin on wood
+	for (int i = 0; i < lineWood; ++i) {
+		int temp2 = loadStruct.coinsOnWood.nCoinOnWood[i];
+		nCoinOnWood.push_back(temp2);
+		vector<Coin> temp;
+
+		for (int j = 0; j < nCoinOnWood[i]; ++j) {
+			Coin temp1;
+			temp1.setXC(loadStruct.coinsOnWood.CoinsOnWood[i][j].x);
+			temp1.setYC(loadStruct.coinsOnWood.CoinsOnWood[i][j].y);
+			temp1.setiX(loadStruct.coinsOnWood.iLineNum[i][j].x);
+			temp1.setiY(loadStruct.coinsOnWood.iLineNum[i][j].y);
+
+			temp.push_back(temp1);
+		}
+		coinsOnWood.push_back(temp);
+	}
+
+	// Coin
+	int count = 0;
+	for (int i = 0; i < lineWood; ++i) {
+		count += loadStruct.coinsOnWood.nCoinOnWood[i];
+	}
+	nCoin = count + loadStruct.coins.nCoinOnStreet;
+	for (int i = 0; i < loadStruct.coins.nCoinOnStreet; ++i) {
+		Coin temp;
+		temp.setXC(loadStruct.coins.Coins[i].x);
+		temp.setYC(loadStruct.coins.Coins[i].y);
+		coins.push_back(temp);
+	}
+
+	// People
+	people.setXC(loadStruct.people.people.x);
+	people.setYC(loadStruct.people.people.y);
+	people.loadPeople(loadStruct.people.money, loadStruct.people.model);
+
+	// Game
+	level = loadStruct.level;
+	
+	delete[] loadStruct.cars.numCar;
+	delete[] loadStruct.cars.spdCar;
+	delete[] loadStruct.cars.distance;
+	delete[] loadStruct.trains.spdTrain;
+	delete[] loadStruct.trains.modeTrain;
+	delete[] loadStruct.trains.Trains;
+	delete[] loadStruct.woods.numWood;
+	delete[] loadStruct.woods.spdWood;
+	delete[] loadStruct.pads.numPad;
+	delete[] loadStruct.pads.yPad;
+	delete[] loadStruct.coins.Coins;
+	delete[] loadStruct.coinsOnWood.nCoinOnWood;
+
+	for (int i = 0; i < lineCar; ++i) {
+		delete[] loadStruct.cars.Cars[i];
+	}
+	for (int i = 0; i < lineWood; ++i) {
+		delete[] loadStruct.woods.Woods[i];
+	}
+	for (int i = 0; i < linePad; ++i) {
+		delete loadStruct.pads.Pads[i];
+	}
+	for (int i = 0; i < lineWood; ++i) {
+		delete[] loadStruct.coinsOnWood.CoinsOnWood[i];
+		delete[] loadStruct.coinsOnWood.iLineNum[i];
+	}
+}
+// for (int i = 0; i < lineCar; ++i)
+// for (int j = 0; j < numCar[i]; ++j)

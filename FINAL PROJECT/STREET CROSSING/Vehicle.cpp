@@ -20,6 +20,10 @@ int Vehicle::getY() {
 	return mY;
 }
 
+int Vehicle::getX() {
+	return mX;
+}
+
 void Vehicle::setY(int y) {
 	mY = y;
 }

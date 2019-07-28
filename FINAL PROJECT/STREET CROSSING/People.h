@@ -38,6 +38,8 @@ public:
 	unsigned long getMoney();
 	void changeMoney(int amount);
 	void setY(unsigned int _y);
+	int getModel();
+	void loadPeople(unsigned long money, unsigned int model);
 
 private:
 	unsigned long money;
