@@ -196,6 +196,7 @@ void SubThread(GAME &game)
 	}
 
 	while (true) {
+<<<<<<< HEAD
 		game.handleCoinImpact();
 		//if (game.impactVehicle()) {
 		//	game.~GAME();
@@ -227,6 +228,40 @@ void SubThread(GAME &game)
 		//	exit(0);
 		//	break;
 		//}
+=======
+		/*
+		if (game.impactVehicle()) {
+			game.~GAME();
+			exit(0);
+		}
+
+		switch (game.impactWoods()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+			game.peopleOnWood(RIGHT);
+			break;
+		case -1: // in river
+			game.~GAME();
+			exit(0);
+			break;
+		}
+
+		switch (game.impactPads()) {
+		case 0: // not same line wood
+			break;
+		case 1: // on wood
+
+			game.peopleOnPad();
+			//game.peopleOnWood(RIGHT); // lam cai on Lilipad
+			break;
+		case -1: // in river
+			game.~GAME();
+			exit(0);
+			break;
+		}
+		*/
+>>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
 
 		char key = ' ';
 		if (_kbhit())

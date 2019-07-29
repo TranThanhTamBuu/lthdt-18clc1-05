@@ -69,9 +69,9 @@ void Train::move() {
 }
 
 void Train::draw() {
-	if (stop) {
+	/*if (stop) {
 		return;
-	}
+	}*/
 
 	wstring temp;
 	int length;
@@ -196,7 +196,7 @@ int Train::updateTraffic() {
 
 	if (diff <= 10) {
 		if (mY >= 0) {
-			drawTraffic(14); // Green
+			drawTraffic(14); // Yellow
 		}
 		stop = false;
 		return TRF_YELLOW;
@@ -204,7 +204,7 @@ int Train::updateTraffic() {
 
 	if (diff <= 15) {
 		if (mY >= 0) {
-			drawTraffic(12); // Green
+			drawTraffic(12); // Red
 		}
 		stop = true;
 		return TRF_RED;
