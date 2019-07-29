@@ -196,7 +196,7 @@ void SubThread(GAME &game)
 	}
 
 	while (true) {
-
+		/*
 		if (game.impactVehicle()) {
 			game.~GAME();
 			exit(0);
@@ -227,6 +227,7 @@ void SubThread(GAME &game)
 			exit(0);
 			break;
 		}
+		*/
 
 		char key = ' ';
 		if (_kbhit())

@@ -36,7 +36,7 @@ int main() {
 	}*/
 
 
-	GAME game(1);
+	GAME game(4);
 	SubThread(game);
 
 	//system("pause");
