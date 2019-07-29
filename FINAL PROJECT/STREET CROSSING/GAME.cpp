@@ -801,7 +801,8 @@ void GAME::load(bool loadFrom) {
 		wcout << "Can not open file to load" << endl;
 	}
 
-	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people) + sizeof(loadStruct.cars.lineCar));
+	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people));
+	inFile.read(reinterpret_cast<char*>(&loadStruct.cars.lineCar), sizeof(loadStruct.cars.lineCar));
 	// Car
 	loadStruct.cars.numCar = new int32_t[loadStruct.cars.lineCar];
 	loadStruct.cars.spdCar = new int32_t[loadStruct.cars.lineCar];
