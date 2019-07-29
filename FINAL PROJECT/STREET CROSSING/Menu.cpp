@@ -196,37 +196,37 @@ void SubThread(GAME &game)
 	}
 
 	while (true) {
+		game.handleCoinImpact();
+		//if (game.impactVehicle()) {
+		//	game.~GAME();
+		//	exit(0);
+		//}
 
-		if (game.impactVehicle()) {
-			game.~GAME();
-			exit(0);
-		}
+		//switch (game.impactWoods()) {
+		//case 0: // not same line wood
+		//	break;
+		//case 1: // on wood
+		//	game.peopleOnWood();
+		//	break;
+		//case -1: // in river
+		//	game.~GAME();
+		//	exit(0);
+		//	break;
+		//}
 
-		switch (game.impactWoods()) {
-		case 0: // not same line wood
-			break;
-		case 1: // on wood
-			game.peopleOnWood(RIGHT);
-			break;
-		case -1: // in river
-			game.~GAME();
-			exit(0);
-			break;
-		}
+		//switch (game.impactPads()) {
+		//case 0: // not same line wood
+		//	break;
+		//case 1: // on wood
 
-		switch (game.impactPads()) {
-		case 0: // not same line wood
-			break;
-		case 1: // on wood
-
-			game.peopleOnPad();
-			//game.peopleOnWood(RIGHT); // lam cai on Lilipad
-			break;
-		case -1: // in river
-			game.~GAME();
-			exit(0);
-			break;
-		}
+		//	game.peopleOnPad();
+		//	//game.peopleOnWood(RIGHT); // lam cai on Lilipad
+		//	break;
+		//case -1: // in river
+		//	game.~GAME();
+		//	exit(0);
+		//	break;
+		//}
 
 		char key = ' ';
 		if (_kbhit())
@@ -245,7 +245,6 @@ void SubThread(GAME &game)
 
 		// game.updatePos...
 		game.screenScroll();
-		game.handleCoinImpact();
 		game.drawAll();
 
 		Sleep(25);

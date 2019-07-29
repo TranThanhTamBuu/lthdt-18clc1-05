@@ -58,7 +58,7 @@ public:
 	void updatePads();
 
 	vector <int> xLineWoods(int line);
-	void peopleOnWood(DState dst);
+	void peopleOnWood();
 	void peopleOnPad();
 	void drawAll();
 	bool isEndScr();
@@ -74,6 +74,9 @@ public:
 	// Save and Load
 	void save(bool saveAs = false);
 	void load(bool loadFrom = false);
+
+	// Operator
+	GAME& operator=(const GAME& rhs);
 };
 
 
@@ -126,6 +129,7 @@ struct StructCoinOnWood {
 struct StructPeople {
 	int32_t money;
 	int32_t model;
+	int32_t ownedModel[5];
 	Point people;
 };
 

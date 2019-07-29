@@ -16,6 +16,7 @@ public:
 	virtual bool isImpact(People &people) = 0;
 	int getY() const;
 	int getX() const;
+	int getSpd() const;
 	void setY(int y);
 	virtual ~River();
 	void drawWave();

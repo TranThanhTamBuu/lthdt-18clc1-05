@@ -30,6 +30,10 @@ int River::getX() const {
 	return mX;
 }
 
+int River::getSpd() const {
+	return speed;
+}
+
 void River::drawWave() {
 	int y = mY + 1;
 	if (y < 0 || y > Y_max) {

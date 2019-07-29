@@ -39,14 +39,15 @@ public:
 	void changeMoney(int amount);
 	void setY(unsigned int _y);
 	int getModel();
-	void loadPeople(unsigned long money, unsigned int model);
+	void loadPeople(unsigned long money, unsigned int model, int* owned);
 	void displayMoney();
+	int* getOwnedModel();
 
 private:
 	unsigned long money;
 	bool state;
 	unsigned int model;
 	int ownedModel[5] = { 1 };
-	int prizeModel[4] = {800, 950, 800 ,1200};
+	int prizeModel[5] = { 1500, 1800, 2500, 3200 ,4200 };
 	DirectionState *currentDirectionState;
 };

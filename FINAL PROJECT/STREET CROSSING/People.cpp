@@ -7,7 +7,7 @@
 
 
 People::People()
-	: Object(X_max/2, 37, Wi), state(true), model(0), money(0)  {
+	: Object(X_max/2, 37, Wi), state(true), model(0), money(5000) {
 	currentDirectionState = new Down();
 }
 
@@ -145,10 +145,11 @@ bool People::chooseModel() {
 	while (true) {
 		clrscr();
 		
-		displayMoney();
+		gotoXY(xOri, yOri + 15);
+		wcout << L"MONEY: " << money;
+		gotoXY(xOri, yOri + 17);
+		wcout << L"STATUS: " << (ownedModel[currentChoice] ? L"OWNED" : to_wstring(prizeModel[currentChoice]));
 		for (int i = 0; i < max; i++) {
-			gotoXY(xOri + 20 * i - 2, yOri - 5);
-			wcout << (ownedModel[i] ? L"OWNED" : to_wstring(prizeModel[i - 1]));
 			gotoXY(xOri + 20 * i, yOri);
 			currentDirectionState->draw(this, xOri + 20 * i, yOri, i);
 			gotoXY(xOri + 20 * i - 3, yOri + 5);
@@ -161,6 +162,7 @@ bool People::chooseModel() {
 				wcout << nameOpt[i];
 			}
 		}
+
 
 		int key = _getch();
 		if (key == 224) {
@@ -188,9 +190,9 @@ bool People::chooseModel() {
 				clrscr();
 				return true;
 			}
-			else if (money > prizeModel[currentChoice-1]) {
-				money -= 800;
-				ownedModel[currentChoice - 1] = 1;
+			else if (money > prizeModel[currentChoice]) {
+				money -= prizeModel[currentChoice];
+				ownedModel[currentChoice] = 1;
 
 				model = currentChoice;
 				gotoXY(xOri + 20 * currentChoice - 3, yOri + 5);
@@ -203,12 +205,19 @@ bool People::chooseModel() {
 	}
 }
 
-void People::loadPeople(unsigned long _money, unsigned int _model) {
+void People::loadPeople(unsigned long _money, unsigned int _model, int* p) {
 	money = _money;
 	model = _model;
+	for (int i = 0; i < 5; ++i) {
+		ownedModel[i] = p[i];
+	}
 }
 
 void People::displayMoney() {
 	gotoXY(3, Y_max - 1);
 	wcout << "Money: " << money;
+}
+
+int* People::getOwnedModel() {
+	return ownedModel;
 }
