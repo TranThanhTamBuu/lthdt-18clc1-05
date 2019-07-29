@@ -131,53 +131,91 @@ GAME::GAME(int level)
 	}
 	case 4: {
 		//Car
-		lineCar = 3;
-		int yCar[] = { -30, -38, -54 }; //-14, -22
-		numCar = new int[lineCar] { 4, 2, 4 };
-		spdCar = new int[lineCar] { -1, 4, -2 };
+		lineCar = 4;
+		int yCar[] = { -30, -38, -54, - 117 }; //-14, -22
+		numCar = new int[lineCar] { 4, 2, 4,3 };
+		spdCar = new int[lineCar] { -1, 4, -2, -4 };
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
 
 		//Train
-		lineTrain = 2;
-		int yTrain[] = { -46, -62 };
-		spdTrain = new int[lineTrain] { 8, 10};
-		modeTrain = new int[lineTrain] { 0, 1};
+		lineTrain = 4;
+		int yTrain[] = { -46, -62, -86, -102 };
+		spdTrain = new int[lineTrain] { 8, 10, 6, 10};
+		modeTrain = new int[lineTrain] { 0, 0, 0, 1};
 		Trains = createTrains(yTrain, lineTrain, spdTrain, modeTrain);
 
 		//Wood
-		lineWood = 6;
-		int yWood[] = { 27, 19, 11, 3,-5,-13 };
-		numWood = new int [lineWood] { 2,3,1,2,1,3 };
-		spdWood = new int [lineWood] { 5,-2,3,-3,2,-5 };
+		lineWood = 7;
+		int yWood[] = { 27, 19, 11, 3,-5,-13, -109 };
+		numWood = new int [lineWood] { 2,3,1,2,1,3,4 };
+		spdWood = new int [lineWood] { 5,-2,3,-3,2,-5,4 };
 		Woods = createWoods(yWood, lineWood, numWood, spdWood);
 
 		//Lilypad
-		linePad = 0;
-		yPad = new int [linePad] { 27 }; //27
-		numPad = new int [linePad] { 5 };
+		linePad = 2;
+		yPad = new int [linePad] { -77,-93 };
+		numPad = new int [linePad] { 5, 3 };
 		createLilypads(yPad, linePad, numPad);
 
 		// Coin
-		nCoin = 0;
+		nCoin = 30;
 		vector<int> nCoinOnWood_temp(lineWood, 0);
 		nCoinOnWood = nCoinOnWood_temp;
 		for (int i = 0; i < lineWood; ++i) {
 			vector<Coin> temp;
 			coinsOnWood.push_back(temp);
 		}
-		sampleYWood = { 27, 19, 11, 3,-5,-13 };
-		sampleY = { 10 + H_VEHICLE - 2, -30 + H_VEHICLE - 2 ,-14 + H_VEHICLE - 2, -22 + H_VEHICLE - 2 };
+		sampleYWood = { 27, 19, 11, 3,-5,-13, -109 };
+		sampleY = { -30 + H_VEHICLE - 2, -38 + H_VEHICLE - 2 ,-54 + H_VEHICLE - 2, -117 + H_VEHICLE - 2,
+			-46 + H_VEHICLE - 2, -62 + H_VEHICLE - 2 ,-86 + H_VEHICLE - 2, -102 + H_VEHICLE - 2 };
 		createCoins();
 
 		break;
 	}
 	case 5: {
+		lineCar = 6;
+		int yCar[] = { 26, 10,-62,-70,-78, -126 }; //-14, -22
+		numCar = new int[lineCar] { 4, 4,1,1,1,3 };
+		spdCar = new int[lineCar] { -1, 1,8,-8,8,-6 };
+		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
+
+		//Train
+		lineTrain = 3;
+		int yTrain[] = { -30, -38,- 46 };
+		spdTrain = new int[lineTrain] { 6, 12, 10 };
+		modeTrain = new int[lineTrain] { 0, 0, 1 };
+		Trains = createTrains(yTrain, lineTrain, spdTrain, modeTrain);
+
+		//Wood
+		lineWood = 6;
+		int yWood[] = { 19,3,-13,-101,-109,-117 };
+		numWood = new int [lineWood] { 3,2,1,1,4,1 };
+		spdWood = new int [lineWood] { 3,-4,5,8,-1, 6 };
+		Woods = createWoods(yWood, lineWood, numWood, spdWood);
+
+		//Lilypad
+		linePad = 3;
+		yPad = new int [linePad] { -5,-21,-93 }; //27
+		numPad = new int [linePad] { 5,5,8 };
+		createLilypads(yPad, linePad, numPad);
+
+		// Coin
+		nCoin = 40;
+		vector<int> nCoinOnWood_temp(lineWood, 0);
+		nCoinOnWood = nCoinOnWood_temp;
+		for (int i = 0; i < lineWood; ++i) {
+			vector<Coin> temp;
+			coinsOnWood.push_back(temp);
+		}
+		sampleYWood = { 19,3,-13,-101,-109,-117 };
+		sampleY = { 26 + H_VEHICLE - 2, 10 + H_VEHICLE - 2 ,-62 + H_VEHICLE - 2, -70 + H_VEHICLE - 2,
+			-78 + H_VEHICLE - 2, -126 + H_VEHICLE - 2 ,-30 + H_VEHICLE - 2, -38 + H_VEHICLE - 2, -46 + H_VEHICLE - 2 };
+		createCoins();
 
 		break;
 	}
 	}
 }
-
 
 GAME::~GAME() {
 	//Car 
@@ -1217,4 +1255,22 @@ GAME& GAME::operator=(const GAME& rhs) {
 		}
 	}
 	return *this;
+}
+
+void GAME::levelUp() {
+	GAME up(this->level + 1);
+	*this = up;
+}
+
+int GAME::getLevel() {
+	return level;
+}
+
+bool GAME::isEndLevel() {
+	if (people.getY() == 4) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }

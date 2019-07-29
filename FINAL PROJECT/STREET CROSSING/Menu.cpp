@@ -134,8 +134,31 @@ int Menu::Do(GAME &game) {
 	switch (c) {
 	case 29: {
 		//New game
+		bool flag = true;
 		system("cls");
-		SubThread(game);
+		while (flag) {
+			flag = SubThread(game);
+			if (flag) {
+				if (game.getLevel() != 5) {
+					game.levelUp();
+				}
+				else {
+					break;
+				}
+			}
+		}
+		
+		if (flag) {
+			//victory
+			
+		}
+		else {
+			lose();
+			GAME reset(1);
+			game = reset;
+			return 1;
+		}
+
 		break;
 	}
 
@@ -188,8 +211,30 @@ int Menu::Do(GAME &game) {
 	return 1;
 }
 
-void SubThread(GAME &game)
+bool SubThread(GAME &game)
 {
+	switch (game.getLevel()) {
+	case 1:
+		level_1();
+		break;
+	case 2:
+		level_2();
+		break;
+	case 3:
+		level_3();
+		break;
+	case 4:
+		level_4();
+		break;
+	case 5:
+		level_5();
+		break;
+	}
+
+	setColor(7, 0);
+
+	system("cls");
+
 	//draw line
 	for (int i = 0; i <= 5; i++) {
 		gotoXY(0, 0 + 8 * i);	printLine(X_max);
@@ -197,51 +242,22 @@ void SubThread(GAME &game)
 
 	while (true) {
 		game.handleCoinImpact();
-		//if (game.impactVehicle()) {
-		//	game.~GAME();
-		//	exit(0);
-		//}
-
-		//switch (game.impactWoods()) {
-		//case 0: // not same line wood
-		//	break;
-		//case 1: // on wood
-		//	game.peopleOnWood();
-		//	break;
-		//case -1: // in river
-		//	game.~GAME();
-		//	exit(0);
-		//	break;
-		//}
-
-		//switch (game.impactPads()) {
-		//case 0: // not same line wood
-		//	break;
-		//case 1: // on wood
-
-		//	game.peopleOnPad();
-		//	//game.peopleOnWood(RIGHT); // lam cai on Lilipad
-		//	break;
-		//case -1: // in river
-		//	game.~GAME();
-		//	exit(0);
-		//	break;
-		//}
-		/*
 		if (game.impactVehicle()) {
-			game.~GAME();
-			exit(0);
+			/*game.~GAME();
+			exit(0);*/
+			return false;
 		}
 
 		switch (game.impactWoods()) {
 		case 0: // not same line wood
 			break;
 		case 1: // on wood
-			game.peopleOnWood(RIGHT);
+			game.peopleOnWood();
 			break;
 		case -1: // in river
-			game.~GAME();
-			exit(0);
+			/*game.~GAME();
+			exit(0);*/
+			return false;
 			break;
 		}
 
@@ -254,11 +270,11 @@ void SubThread(GAME &game)
 			//game.peopleOnWood(RIGHT); // lam cai on Lilipad
 			break;
 		case -1: // in river
-			game.~GAME();
-			exit(0);
+			/*game.~GAME();
+			exit(0);*/
+			return false;
 			break;
 		}
-		*/
 
 		char key = ' ';
 		if (_kbhit())
@@ -281,6 +297,9 @@ void SubThread(GAME &game)
 
 		Sleep(25);
 
+		if (game.isEndLevel()) {
+			return true;
+		}
 		//game.save();
 	}
 }
@@ -291,7 +310,7 @@ void Menu::control()
 	c = Choice();
 }
 
-void Menu::lose()
+void lose()
 {
 	system("cls");
 	setColor(14, 0);
@@ -324,7 +343,7 @@ void Menu::lose()
 	int key = _getch();
 }
 
-void Menu::level_1() {
+void level_1() {
 
 	system("cls");
 	int i = 0;
@@ -349,7 +368,7 @@ void Menu::level_1() {
 
 }
 
-void Menu::level_2() {
+void level_2() {
 	system("cls");
 	int i = 0;
 	while (i < 5){ 
@@ -468,7 +487,7 @@ void Menu::level_2() {
 	};
 }
 
-void Menu::level_3() {
+void level_3() {
 
 	system("cls"); 
 	int i = 0;
@@ -483,7 +502,7 @@ void Menu::level_3() {
 	
 }
 
-void Menu::level_4() {
+void level_4() {
 	
 	int i = 0;
 	while (i < 5) {
@@ -511,7 +530,7 @@ void Menu::level_4() {
 
 }
 
-void Menu::level_5() {
+void level_5() {
 	system("cls");
 	int i = 0;
 	while (i < 5) {

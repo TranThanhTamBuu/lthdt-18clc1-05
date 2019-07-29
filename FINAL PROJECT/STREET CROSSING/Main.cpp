@@ -38,22 +38,22 @@ int main() {
 	/*GAME game(1);
 	SubThread(game);*/
 
-	GAME game(4);
-	SubThread(game);
+	/*GAME game(5);
+	SubThread(game);*/
 
 	//system("pause");
 
 
 
 	// menu work
-	/*GAME game(1);
+	GAME game(1);
 	Menu m;
 	m.ShowTitle();
 	int key = 1;
 	while (key != 0) {
 		m.control();
 		key = m.Do(game);
-	}*/
+	}
 }
 
 

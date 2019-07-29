@@ -77,6 +77,10 @@ public:
 
 	// Operator
 	GAME& operator=(const GAME& rhs);
+	void levelUp();
+
+	int getLevel();
+	bool isEndLevel();
 };
 
 

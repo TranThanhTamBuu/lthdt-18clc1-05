@@ -109,12 +109,6 @@ public:
 	int Choice();
 	int Do(GAME &game);
 	void control();
-	void lose();
-	void level_1();
-	void level_2();
-	void level_3();
-	void level_4();
-	void level_5();
 	~Menu();
 
 private:
@@ -123,4 +117,10 @@ private:
 	int c;
 };
 
-void SubThread(GAME &game);
+void lose();
+void level_1();
+void level_2();
+void level_3();
+void level_4();
+void level_5();
+bool SubThread(GAME &game);
