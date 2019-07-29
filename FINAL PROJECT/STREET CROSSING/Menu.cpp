@@ -1,4 +1,4 @@
-#include "Menu.h"
+﻿#include "Menu.h"
 
 Menu::Menu()
 {
@@ -258,6 +258,199 @@ void Menu::control()
 {
 	printMenu(menu, 6);
 	c = Choice();
+}
+
+void Menu::lose()
+{
+	system("cls");
+	setColor(14, 0);
+	gotoXY(5, 6);
+	wcout << "                                                                                                                                       _____   " << endl;
+	wcout << "\t\t ______   _____         ____      ______   _____             _____                    ____                  _____      _____\\    \\ " << endl;
+	wcout << "\t\t|\\     \\ |     |    ____\\_  \\__   \\     \\  \\    \\           |\\    \\               ____\\_  \\__          _____\\    \\    /    / |    | " << endl;
+	wcout << "\t\t\\ \\     \\|     |   /     /     \\   \\    |  |    |            \\\\    \\             /     /     \\        /    / \\    |  /    /  /___/| " << endl;
+	wcout << "\t\t \\ \\           |  /     /\\      |   |   |  |    |             \\\\    \\           /     /\\      |      |    |  /___/| |    |__ |___|/ " << endl;
+	wcout << "\t\t  \\ \\____      | |     |  |     |   |    \\_/   /|              \\|    | ______  |     |  |     |   ____\\    \\ |   || |       \\       " << endl;
+	wcout << "\t\t   \\|___/     /| |     |  |     |   |\\         \\|               |    |/      \\ |     |  |     |  /    /\\    \\|___|/ |     __/ __    " << endl;
+	wcout << "\t\t       /     / | |     | /     /|   | \\         \\__             /            | |     | /     /| |    |/ \\    \\      |\\    \\  /  \\   " << endl;
+	wcout << "\t\t      /_____/  / |\\     \\_____/ |    \\ \\_____/\\    \\           /_____/\\_____/| |\\     \\_____/ | |\\____\\ /____/|     | \\____\\/    |  " << endl;
+	wcout << "\t\t      |     | /  | \\_____\\   | /      \\ |    |/___/|          |      | |    || | \\_____\\   | /  | |   ||    | |     | |    |____/|  " << endl;
+	wcout << "\t\t      |_____|/    \\ |    |___|/        \\|____|   | |          |______|/|____|/  \\ |    |___|/    \\|___||____|/       \\|____|   | |  " << endl;
+	wcout << "\t\t                   \\|____|                   |___|/                              \\|____|                                   |___|/   " << endl;
+	Sleep(300);
+	gotoXY(66, 24);
+	setColor(14, 0);
+	wcout << "\tPRESS ANY KEY TO CONTINUE!";
+	Sleep(300);
+
+	Car c(ambulance, -15, 30, 2);
+	while (!_kbhit()) {
+		c.moveLose();
+		c.draw();
+		Sleep(50);
+
+	};
+	int key = _getch();
+}
+
+void Menu::level_1() {
+
+	system("cls");
+	int i = 0;
+	while (i < 5) {
+		setColor(14, 0);
+
+		for (int i = 0; i < 9; i++) {
+			gotoXY((X_max - level1[0].length()) / 2, 15 + i);
+			wcout << level1[i] << endl;
+		}
+		Sleep(300);
+
+		setColor(11, 0);
+		for (int i = 0; i < 9; i++) {
+			gotoXY((X_max - level1[0].length()) / 2, 15 + i);
+			wcout << level1[i] << endl;
+		}
+		Sleep(300);
+		
+		i++;
+	};
+
+}
+
+void Menu::level_2() {
+	system("cls");
+	int i = 0;
+	while (i < 5){ 
+
+		setColor(11, 0);
+		for (int i = 0; i < 8; i++) {
+			gotoXY((X_max - level2[0].length()) / 2, 15 + i);
+			wcout << level2[i] << endl;
+		}
+		Sleep(300);
+
+		setColor(14, 0);
+		gotoXY(120, 4);
+		wcout << "       .''.      .       " << endl;
+		gotoXY(120, 5);
+		wcout << "      :_\\/_:   _\\(/_  .:." << endl;
+		gotoXY(120, 6);
+		wcout << "  .''.: /\\ :   ./)\\   ':'" << endl;
+		gotoXY(120, 7);
+		wcout << " :_\\/_:'.:::.    ' *''*  " << endl;
+		gotoXY(120, 8);
+		wcout << " : /\\ : :::::     *_\\/_* " << endl;
+		gotoXY(120, 9);
+		wcout << "  '..'  ':::'     * /\\ * " << endl;
+		gotoXY(120, 10);
+		wcout << "                   *..*   " << endl;
+		Sleep(300);
+
+		setColor(4, 0);
+		gotoXY(120, 4);
+		wcout << "       .''.      .       " << endl;
+		gotoXY(120, 5);
+		wcout << "      :_\\/_:   _\\(/_  .:." << endl;
+		gotoXY(120, 6);
+		wcout << "  .''.: /\\ :   ./)\\   ':'" << endl;
+		gotoXY(120, 7);
+		wcout << " :_\\/_:'.:::.    ' *''*  " << endl;
+		gotoXY(120, 8);
+		wcout << " : /\\ : :::::     *_\\/_* " << endl;
+		gotoXY(120, 9);
+		wcout << "  '..'  ':::'     * /\\ * " << endl;
+		gotoXY(120, 10);
+		wcout << "                   *..*   " << endl;
+		Sleep(300);
+
+		setColor(11, 0);
+		gotoXY(120, 4);
+		wcout << "       .''.      .       " << endl;
+		gotoXY(120, 5);
+		wcout << "      :_\\/_:   _\\(/_  .:." << endl;
+		gotoXY(120, 6);
+		wcout << "  .''.: /\\ :   ./)\\   ':'" << endl;
+		gotoXY(120, 7);
+		wcout << " :_\\/_:'.:::.    ' *''*  " << endl;
+		gotoXY(120, 8);
+		wcout << " : /\\ : :::::     *_\\/_* " << endl;
+		gotoXY(120, 9);
+		wcout << "  '..'  ':::'     * /\\ * " << endl;
+		gotoXY(120, 10);
+		wcout << "                   *..*   " << endl;
+		Sleep(300);
+		i++;
+	};
+}
+
+void Menu::level_3() {
+
+	system("cls"); 
+	int i = 0;
+	setColor(12, 0);
+	Car c(level3, 160, 17, -2);
+	while (i < 60) {
+		c.movelevel();
+		c.draw();
+		Sleep(50);
+		i++;
+	};
+	
+}
+
+void Menu::level_4() {
+	
+	int i = 0;
+	while (i < 5) {
+
+		system("cls");
+
+		setColor(11, 0);
+		for (int i = 0; i < 9; i++) {
+			gotoXY((X_max - level4_1[0].length()) / 2, 15 + i);
+			wcout << level4_1[i] << endl;
+		}
+		Sleep(500);
+
+		system("cls");
+
+		setColor(14, 0);
+		for (int i = 0; i < 9; i++) {
+			gotoXY((X_max - level4[0].length()) / 2, 15 + i);
+			wcout << level4[i] << endl;
+		}
+		Sleep(500);
+
+		i++;
+	}
+
+}
+
+void Menu::level_5() {
+	system("cls");
+	int i = 0;
+	while (i < 5) {
+
+		system("cls");
+		setColor(11, 0);
+		for (int i = 0; i < 9; i++) {
+			gotoXY(70, 5 + i);
+			wcout << level5[i] << endl;
+		}
+		Sleep(500);
+
+		system("cls");
+
+		setColor(14, 0);
+		for (int i = 0; i < 9; i++) {
+			gotoXY(4, 26 + i);
+			wcout << level5[i] << endl;
+		}
+		Sleep(500);
+
+		i++;
+	}
 }
 
 Menu::~Menu()

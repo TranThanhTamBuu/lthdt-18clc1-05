@@ -49,6 +49,17 @@ static wstring truck_1[5] = {
 	L" '(o)'------'(o)'",
 };
 
+static wstring ambulance[7] = {
+	L"                 \\|/         ",
+	L"     _____________[\\_        ",
+	L"    /  _|_    .--..--\\       ",
+	L"    |)  |     [__][___\\___   ",
+	L"    |        |   -|-   __ `\\ ",
+	L"  _(  .----. |    |   /  \\ [)",
+	L"  `'---\\__/-----------\\__/--'",
+};
+
+
 class Car : public Vehicle
 {
 private:
@@ -65,6 +76,7 @@ public:
 	int getLength();
 	void move(Car &pre, int d);
 	void moveLose();
+	void movelevel();
 	void draw();
 	void clear();
 	bool isImpact(People &people);

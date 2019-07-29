@@ -7,6 +7,7 @@ Car::Car()
 
 Car::Car(wstring *pcar, int x, int y, int speed) : Vehicle(x, y, speed) {
 	this->pcar = pcar;
+	h = 7;
 }
 
 Car::Car(int x, int y, int speed) : Vehicle(x, y, speed)
@@ -107,6 +108,28 @@ void Car::move(Car &pre, int d) {
 			}
 		}
 	}
+}
+
+void Car::moveLose()
+{
+	
+	mX += speed;
+
+	if (mX >= X_max) {
+		mX = 0 - pcar[0].length();
+	}
+}
+
+void Car::movelevel()
+{
+	mX += speed;
+
+	int flag = mX + pcar[0].length();
+	if (flag < 0) {
+		clear();
+		mX = X_max - 1;
+	}
+
 }
 
 void Car::draw() {
@@ -264,14 +287,4 @@ Car** createCars(int yCar[], int lineCar, int *numCar, int *spdCar, int *&distan
 	}
 
 	return carPtr;
-}
-
-void Car::moveLose() {
-	mX += speed;
-
-	int flag = mX + pcar[0].length();
-	if (flag < 0) {
-		clear();
-		mX = X_max - 1;
-	}
 }
