@@ -347,6 +347,24 @@ void Menu::level_2() {
 		wcout << "                   *..*   " << endl;
 		Sleep(300);
 
+		gotoXY(5, 4);
+		wcout << "          .''.           " << endl;
+		gotoXY(5, 5);
+		wcout << " *''*    :_\\/_:     .    " << endl;
+		gotoXY(5, 6);
+		wcout << "*_\\/_*   : /\\ :  .'.:.'. " << endl;
+		gotoXY(5, 7);
+		wcout << "* /\\ * :  '..'.  -=:o:=- " << endl;
+		gotoXY(5, 8);
+		wcout << "  * '.\\'/.' _\\(/_'.':'.' " << endl;
+		gotoXY(5, 9);
+		wcout << "    -= o =-  /)\\    '  * " << endl;
+		gotoXY(5, 10);
+		wcout << "    .'/.\\'.   '          " << endl;
+		gotoXY(5, 11);
+		wcout << "       :" << endl;
+		Sleep(300);
+
 		setColor(4, 0);
 		gotoXY(120, 4);
 		wcout << "       .''.      .       " << endl;
@@ -364,6 +382,23 @@ void Menu::level_2() {
 		wcout << "                   *..*   " << endl;
 		Sleep(300);
 
+		gotoXY(5, 4);
+		wcout << "          .''.           " << endl;
+		gotoXY(5, 5);
+		wcout << " *''*    :_\\/_:     .    " << endl;
+		gotoXY(5, 6);
+		wcout << "*_\\/_*   : /\\ :  .'.:.'. " << endl;
+		gotoXY(5, 7);
+		wcout << "* /\\ * :  '..'.  -=:o:=- " << endl;
+		gotoXY(5, 8);
+		wcout << "  * '.\\'/.' _\\(/_'.':'.' " << endl;
+		gotoXY(5, 9);
+		wcout << "    -= o =-  /)\\    '  * " << endl;
+		gotoXY(5, 10);
+		wcout << "    .'/.\\'.   '          " << endl;
+		gotoXY(5, 11);
+		wcout << "       :" << endl;
+
 		setColor(11, 0);
 		gotoXY(120, 4);
 		wcout << "       .''.      .       " << endl;
@@ -380,6 +415,24 @@ void Menu::level_2() {
 		gotoXY(120, 10);
 		wcout << "                   *..*   " << endl;
 		Sleep(300);
+
+		gotoXY(5, 4);
+		wcout << "          .''.           " << endl;
+		gotoXY(5, 5);
+		wcout << " *''*    :_\\/_:     .    " << endl;
+		gotoXY(5, 6);
+		wcout << "*_\\/_*   : /\\ :  .'.:.'. " << endl;
+		gotoXY(5, 7);
+		wcout << "* /\\ * :  '..'.  -=:o:=- " << endl;
+		gotoXY(5, 8);
+		wcout << "  * '.\\'/.' _\\(/_'.':'.' " << endl;
+		gotoXY(5, 9);
+		wcout << "    -= o =-  /)\\    '  * " << endl;
+		gotoXY(5, 10);
+		wcout << "    .'/.\\'.   '          " << endl;
+		gotoXY(5, 11);
+		wcout << "       :" << endl;
+
 		i++;
 	};
 }
