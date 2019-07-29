@@ -7,10 +7,6 @@ GAME::GAME(int level)
 	switch (level) {
 	case 1: {
 		//load();
-<<<<<<< HEAD
-
-=======
->>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
 		//Car
 		lineCar = 2;
 		int yCar[] = { 26, 10 };
@@ -78,21 +74,6 @@ GAME::GAME(int level)
 		yPad = new int [linePad] { -29, -45 }; //27
 		numPad = new int [linePad] { 8, 5 };
 		createLilypads(yPad, linePad, numPad);
-<<<<<<< HEAD
-=======
-
-		// Coin
-		nCoin = 15;
-		vector<int> nCoinOnWood_temp(lineWood, 0);
-		nCoinOnWood = nCoinOnWood_temp;
-		for (int i = 0; i < lineWood; ++i) {
-			vector<Coin> temp;
-			coinsOnWood.push_back(temp);
-		}
-		sampleYWood = { -21, -37 };
-		sampleY = { 26 + H_VEHICLE - 2, 18 + H_VEHICLE - 2 , 10 + H_VEHICLE - 2, -6 + H_VEHICLE - 2 };
-		createCoins();
->>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
 
 		// Coin
 		nCoin = 15;
@@ -110,23 +91,12 @@ GAME::GAME(int level)
 	case 3: {
 		//Car
 		lineCar = 4;
-<<<<<<< HEAD
 		int yCar[] = { 26, -14, -22, -30 }; //-14, -22
-=======
-		int yCar[] = { 26, -14, -22, - 30 }; //-14, -22
->>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
 		numCar = new int[lineCar] { 4, 2, 3, 4 };
 		spdCar = new int[lineCar] { -3, 4, 3, 2, };
 		Cars = createCars(yCar, lineCar, numCar, spdCar, distance);
 
 		//Train
-<<<<<<< HEAD
-		lineTrain = 1;
-		int yTrain[] = { 2 };
-		spdTrain = new int[lineTrain] { 8 };
-		modeTrain = new int[lineTrain] { 1 };
-		Trains = createTrains(yTrain, lineTrain, spdTrain, modeTrain);
-=======
 		lineTrain = 2;
 		int yTrain[] = { 2, -78 };
 		spdTrain = new int[lineTrain] { 8, 10 };
@@ -156,32 +126,6 @@ GAME::GAME(int level)
 		}
 		sampleYWood = { 19, 11, -53 };
 		sampleY = { 26 + H_VEHICLE - 2, -14 + H_VEHICLE - 2 ,-22 + H_VEHICLE - 2, -30 + H_VEHICLE - 2,-78 + H_VEHICLE - 2 };
-		createCoins();
->>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
-
-		//Wood
-		lineWood = 2;
-		int yWood[] = { 19, 11 };
-		numWood = new int [lineWood] { 4, 3 };
-		spdWood = new int [lineWood] { 2, -5 };
-		Woods = createWoods(yWood, lineWood, numWood, spdWood);
-
-		//Lilypad
-		linePad = 0;
-		yPad = new int [linePad] { 27 }; //27
-		numPad = new int [linePad] { 5 };
-		createLilypads(yPad, linePad, numPad);
-
-		// Coin
-		nCoin = 15;
-		vector<int> nCoinOnWood_temp(lineWood, 0);
-		nCoinOnWood = nCoinOnWood_temp;
-		for (int i = 0; i < lineWood; ++i) {
-			vector<Coin> temp;
-			coinsOnWood.push_back(temp);
-		}
-		sampleYWood = { 19, 11 };
-		sampleY = { 26 + H_VEHICLE - 2, -14 + H_VEHICLE - 2 ,-22 + H_VEHICLE - 2, -30 + H_VEHICLE - 2 };
 		createCoins();
 		break;
 	}

@@ -196,7 +196,6 @@ void SubThread(GAME &game)
 	}
 
 	while (true) {
-<<<<<<< HEAD
 		game.handleCoinImpact();
 		//if (game.impactVehicle()) {
 		//	game.~GAME();
@@ -228,7 +227,6 @@ void SubThread(GAME &game)
 		//	exit(0);
 		//	break;
 		//}
-=======
 		/*
 		if (game.impactVehicle()) {
 			game.~GAME();
@@ -261,7 +259,6 @@ void SubThread(GAME &game)
 			break;
 		}
 		*/
->>>>>>> 3c62e0496fa5b23d00a59f0ed2dbe7a7926ed8ad
 
 		char key = ' ';
 		if (_kbhit())
