@@ -40,10 +40,13 @@ public:
 	void setY(unsigned int _y);
 	int getModel();
 	void loadPeople(unsigned long money, unsigned int model);
+	void displayMoney();
 
 private:
 	unsigned long money;
 	bool state;
 	unsigned int model;
+	int ownedModel[5] = { 1 };
+	int prizeModel[4] = {800, 950, 800 ,1200};
 	DirectionState *currentDirectionState;
 };

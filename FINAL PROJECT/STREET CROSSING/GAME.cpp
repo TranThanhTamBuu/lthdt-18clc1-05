@@ -291,6 +291,7 @@ void GAME::drawAll() {
 
 	// draw people
 	people.draw();
+	people.displayMoney();
 }
 
 bool GAME::isEndScr() {
@@ -618,13 +619,14 @@ void GAME::updatePads() {
 	}
 }
 
-void GAME::save(bool saveAS) {
+void GAME::save(bool saveAs) {
 	SaveLoad saveStruct;
-	
-	if (saveAS) {
+	string fileName = "save.sr";
+
+	if (saveAs) {
 		// enter file save name
 	}
-	ofstream outFile("save.sr", ios::binary);
+	ofstream outFile(fileName, ios::binary);
 	if (!outFile) {
 		wcout << "Can not open file to save" << endl;
 	}
@@ -791,17 +793,19 @@ void GAME::save(bool saveAS) {
 
 void GAME::load(bool loadFrom) {
 	SaveLoad loadStruct;
+	string fileName = "save.sr";
 
 	if (loadFrom) {
 		// enter file load name
 	}
 
-	ifstream inFile("save.sr", ios::binary);
+	ifstream inFile(fileName, ios::binary);
 	if (!inFile) {
 		wcout << "Can not open file to load" << endl;
 	}
 
-	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people) + sizeof(loadStruct.cars.lineCar));
+	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people));
+	inFile.read(reinterpret_cast<char*>(&loadStruct.cars.lineCar), sizeof(loadStruct.cars.lineCar));
 	// Car
 	loadStruct.cars.numCar = new int32_t[loadStruct.cars.lineCar];
 	loadStruct.cars.spdCar = new int32_t[loadStruct.cars.lineCar];
