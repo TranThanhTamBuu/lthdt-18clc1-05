@@ -224,6 +224,8 @@ int* People::getOwnedModel() {
 
 People& People::operator=(const People& rhs) {
 	if (this != &rhs) {
+		x = rhs.x;
+		y = rhs.y;
 		money = rhs.money;
 		state = rhs.state;
 		model = rhs.model;
