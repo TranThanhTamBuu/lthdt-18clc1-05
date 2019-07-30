@@ -117,6 +117,7 @@ private:
 	int c;
 };
 
+void saveScr(GAME &game);
 void lose();
 void level_1();
 void level_2();

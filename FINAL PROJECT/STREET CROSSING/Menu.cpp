@@ -132,10 +132,12 @@ int Menu::Choice()
 int Menu::Do(GAME &game) {
 	char key = ' ';
 	switch (c) {
-	case 29: {
-		//New game
+	case 29: case 30: {
 		bool flag = true;
 		system("cls");
+		if (c == 30) {
+			game.load();
+		}
 		while (flag) {
 			flag = SubThread(game);
 			if (flag) {
@@ -159,12 +161,6 @@ int Menu::Do(GAME &game) {
 			return 1;
 		}
 
-		break;
-	}
-
-	case 30: {
-		system("cls");
-		//continue
 		break;
 	}
 
@@ -281,7 +277,18 @@ bool SubThread(GAME &game)
 		{
 			int key = _getch();
 
-			game.updatePosPeople(key);
+			if (key != 27) {
+				game.updatePosPeople(key);
+			}
+			else {
+				system("cls");
+				saveScr(game);
+				system("cls");
+				//draw line
+				for (int i = 0; i <= 5; i++) {
+					gotoXY(0, 0 + 8 * i);	printLine(X_max);
+				}
+			}
 
 		}
 
@@ -554,6 +561,24 @@ void level_5() {
 
 		i++;
 	}
+}
+
+void saveScr(GAME &game) {
+	wcout << "Do you want to overwrite save file? [Y/N]" << endl;
+	int key = _getch();
+	switch (key) {
+	case 89: case 121: {
+		game.save();
+		wcout << "Your progress has been saved!" << endl;
+		break;
+	}
+	case 78: case 110: {
+		wcout << "Your progress hasn't been saved!" << endl;
+		break;
+	}
+	}
+	wcout << "PRESS ANY KEY TO CONTINUE" << endl;
+	key = _getch();
 }
 
 Menu::~Menu()
