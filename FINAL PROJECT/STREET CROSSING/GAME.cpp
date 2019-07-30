@@ -776,10 +776,13 @@ void GAME::updatePads() {
 
 void GAME::save(bool saveAs) {
 	SaveLoad saveStruct;
-	string fileName = "save.sr";
+	wstring fileName = L"save.sr";
 
 	if (saveAs) {
 		// enter file save name
+		gotoXY(X_max / 2, Y_max / 2);
+		wcout << "Enter file save name: ";
+		wcin >> fileName;
 	}
 	ofstream outFile(fileName, ios::binary);
 	if (!outFile) {
@@ -952,10 +955,13 @@ void GAME::save(bool saveAs) {
 
 void GAME::load(bool loadFrom) {
 	SaveLoad loadStruct;
-	string fileName = "save.sr";
+	wstring fileName = L"save.sr";
 
 	if (loadFrom) {
 		// enter file load name
+		gotoXY(X_max / 2, Y_max / 2);
+		wcout << "Enter file load name: ";
+		wcin >> fileName;
 	}
 
 	ifstream inFile(fileName, ios::binary);
