@@ -221,3 +221,36 @@ void People::displayMoney() {
 int* People::getOwnedModel() {
 	return ownedModel;
 }
+
+People& People::operator=(const People& rhs) {
+	if (this != &rhs) {
+		money = rhs.money;
+		state = rhs.state;
+		model = rhs.model;
+		for (int i = 0; i < 5; ++i) {
+			ownedModel[i] = rhs.ownedModel[i];
+			prizeModel[i] = rhs.prizeModel[i];
+		}
+		DState oldState = currentDirectionState->getCurrentState();
+		delete currentDirectionState;
+		switch (oldState) {
+		case UP: {
+			currentDirectionState = new Up();
+			break;
+		}
+		case DOWN: {
+			currentDirectionState = new Down();
+			break;
+		}
+		case LEFT: {
+			currentDirectionState = new Left();
+			break;
+		}
+		case RIGHT: {
+			currentDirectionState = new Right();
+			break;
+		}
+		}
+	}
+	return *this;
+}

@@ -42,6 +42,7 @@ public:
 	void loadPeople(unsigned long money, unsigned int model, int* owned);
 	void displayMoney();
 	int* getOwnedModel();
+	People& operator=(const People& rhs);
 
 private:
 	unsigned long money;
