@@ -6,7 +6,6 @@ GAME::GAME(int level)
 	this->level = level;
 	switch (level) {
 	case 1: {
-		//load();
 		//Car
 		lineCar = 2;
 		int yCar[] = { 26, 10 };
@@ -784,9 +783,11 @@ void GAME::save(bool saveAs) {
 		wcout << "Enter file save name: ";
 		wcin >> fileName;
 	}
+
 	ofstream outFile(fileName, ios::binary);
 	if (!outFile) {
 		wcout << "Can not open file to save" << endl;
+		return;
 	}
 
 	saveStruct.level = level;
@@ -964,9 +965,10 @@ void GAME::load(bool loadFrom) {
 		wcin >> fileName;
 	}
 
-	ifstream inFile(fileName, ios::binary);
+	ifstream inFile(fileName.c_str(), ios::binary);
 	if (!inFile) {
 		wcout << "Can not open file to load" << endl;
+		return;
 	}
 
 	inFile.read(reinterpret_cast<char*>(&loadStruct), sizeof(loadStruct.level) + sizeof(loadStruct.people));
@@ -1044,6 +1046,20 @@ void GAME::load(bool loadFrom) {
 	inFile.close();
 
 	// LOAD
+	delete[] numCar;
+	delete[] spdCar;
+	delete[] distance;
+	delete[] Trains;
+	delete[]spdTrain;
+	delete[] modeTrain;
+	for (int i = 0; i < lineWood; ++i) {
+		delete[] Woods[i];
+	}
+	delete[] numWood;
+	delete[] spdWood;
+	delete[] numPad;
+	delete[] yPad;
+
 	// Car
 	lineCar = loadStruct.cars.lineCar;
 	Cars = new Car*[lineCar];
@@ -1089,6 +1105,7 @@ void GAME::load(bool loadFrom) {
 	}
 
 	// Lilypad
+	Pads.clear();
 	linePad = loadStruct.pads.linePad;
 	numPad = new int[linePad];
 	yPad = new int[linePad];
@@ -1106,6 +1123,8 @@ void GAME::load(bool loadFrom) {
 	}
 
 	// Coin on wood
+	coinsOnWood.clear();
+	nCoinOnWood.clear();
 	for (int i = 0; i < lineWood; ++i) {
 		int temp2 = loadStruct.coinsOnWood.nCoinOnWood[i];
 		nCoinOnWood.push_back(temp2);
@@ -1124,6 +1143,7 @@ void GAME::load(bool loadFrom) {
 	}
 
 	// Coin
+	coins.clear();
 	int count = 0;
 	for (int i = 0; i < lineWood; ++i) {
 		count += loadStruct.coinsOnWood.nCoinOnWood[i];
@@ -1223,7 +1243,9 @@ GAME& GAME::operator=(const GAME& rhs) {
 		}
 
 		// People
+		int oldMoney = people.getMoney();
 		people = rhs.people;
+		people.changeMoney(oldMoney);
 
 		// Wood
 		lineWood = rhs.lineWood;
