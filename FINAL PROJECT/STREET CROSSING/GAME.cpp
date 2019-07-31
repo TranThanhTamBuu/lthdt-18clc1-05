@@ -1125,6 +1125,8 @@ void GAME::load(bool loadFrom) {
 	// Coin on wood
 	coinsOnWood.clear();
 	nCoinOnWood.clear();
+	sampleY.clear();
+	sampleYWood.clear();
 	for (int i = 0; i < lineWood; ++i) {
 		int temp2 = loadStruct.coinsOnWood.nCoinOnWood[i];
 		nCoinOnWood.push_back(temp2);
