@@ -615,7 +615,10 @@ void GAME::createCoins() {
 			}
 			else {
 				randY = sampleYWood[iY];
-				int iX = rand() % (sampleXWood[iY].size());
+				int iX = 0; 
+				if (sampleXWood[iY].size() != 0) {
+					iX = rand() % (sampleXWood[iY].size());
+				}
 				randX = sampleXWood[iY][iX];
 				sampleXWood[iY].erase(sampleXWood[iY].begin() + iX);
 				sampleXWood[iY].shrink_to_fit();
