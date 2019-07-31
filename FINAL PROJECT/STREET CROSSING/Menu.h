@@ -124,4 +124,5 @@ void level_2();
 void level_3();
 void level_4();
 void level_5();
+void MenuSave();
 bool SubThread(GAME &game);

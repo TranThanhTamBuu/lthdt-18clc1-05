@@ -581,6 +581,119 @@ void saveScr(GAME &game) {
 	key = _getch();
 }
 
+void MenuSave() {
+
+	system("cls");
+	gotoXY(60, 13);
+	wcout << " ____  ____  ____  _  _  _  _  ____ " << endl;
+	gotoXY(60, 14);
+	wcout << "(  _ \\(  __)/ ___)/ )( \\( \\/ )(  __)" << endl;
+	gotoXY(60, 15);
+	wcout << " )   / ) _) \\___ \\) \\/ (/ \\/ \\ ) _) " << endl;
+	gotoXY(60, 16);
+	wcout << "(__\\_)(____)(____/\\____/\\_)(_/(____)" << endl;
+
+	gotoXY(51, 19);
+	wcout << " ____   __   _  _  ____         ___   __   _  _  ____ " << endl;
+	gotoXY(51, 20);
+	wcout << "/ ___) / _\\ / )( \\(  __)       / __) / _\\ ( \\/ )(  __)" << endl;
+	gotoXY(51, 21);
+	wcout << "\\___ \\/    \\\\ \\/ / ) _)       ( (_ \\/    \\/ \\/ \\ ) _) " << endl;
+	gotoXY(51, 22);
+	wcout << "(____/\\_/\\_/ \\__/ (____)       \\___/\\_/\\_/\\_)(_/(____)" << endl;
+
+	gotoXY(51, 25);
+	wcout << "  ___  _  _   __   ____   __    ___  ____  ____  ____ " << endl;
+	gotoXY(51, 26);
+	wcout << " / __)/ )( \\ / _\\ (  _ \\ / _\\  / __)(_  _)(  __)(  _ \\ " << endl;
+	gotoXY(51, 27);
+	wcout << "( (__ ) __ (/    \\ )   //    \\( (__   )(   ) _)  )   /" << endl;
+	gotoXY(51, 28);
+	wcout << " \\___)\\_)(_/\\_/\\_/(__\\_)\\_/\\_/ \\___) (__) (____)(__\\_)" << endl;
+
+	char x;
+	int line = 7;
+	gotoXY(0, line);
+
+	while (true) {
+		if (_kbhit) {
+			x = _getch();
+			switch (x) {
+			case 80:
+			case 83:
+			case 115:
+			{
+				gotoXY(30, line);
+				wcout << "              ";
+				gotoXY(30, line + 1);
+				wcout << "              ";
+				gotoXY(30, line + 2);
+				wcout << "              ";
+				gotoXY(30, line + 3);
+				wcout << "              ";
+				line += 6;
+				if (line > 28) { line = 13; }
+				gotoXY(30, line);
+				wcout << " __    __   ";
+				gotoXY(30, line + 1);
+				wcout << " \\ \\   \\ \\  ";
+				gotoXY(30, line + 2);
+				wcout << "  ) )   ) ) ";
+				gotoXY(30, line + 3);
+				wcout << " /_/   /_/  ";
+				break;
+			}
+			case 72:
+			case 87:
+			case 119:
+			{
+				gotoXY(30, line);
+				wcout << "              ";
+				gotoXY(30, line + 1);
+				wcout << "              ";
+				gotoXY(30, line + 2);
+				wcout << "              ";
+				gotoXY(30, line + 3);
+				wcout << "              ";
+				line -= 6;
+				if (line < 13) line = 25;
+				gotoXY(30, line);
+				wcout << " __    __   ";
+				gotoXY(30, line + 1);
+				wcout << " \\ \\   \\ \\  ";
+				gotoXY(30, line + 2);
+				wcout << "  ) )   ) ) ";
+				gotoXY(30, line + 3);
+				wcout << " /_/   /_/  ";
+				break;
+			}
+			case 13:
+			{
+				char key = ' ';
+				switch (line) {
+				case 13: {
+					//resume
+					break;
+				}
+
+				case 19: {
+					//SAVE GAME
+					break;
+				}
+
+				case 25: {
+					//CHARACTER
+					break;
+				}
+				}
+				break;
+			}
+			}
+		}
+	}
+}
+
+
 Menu::~Menu()
 {
 
