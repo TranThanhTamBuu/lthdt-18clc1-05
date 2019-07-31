@@ -609,16 +609,17 @@ void GAME::createCoins() {
 		}
 
 		case 1: {	// Line wood
-			int iY = rand() % sampleYWood.size();
+			int iY = 0;
+			do {
+				iY = rand() % sampleYWood.size();
+			} while (sampleXWood[iY].size() == 0);
 			if (nCoinOnWood[iY] > 5) {
 				--i;
 			}
 			else {
 				randY = sampleYWood[iY];
-				int iX = 0; 
-				if (sampleXWood[iY].size() != 0) {
-					iX = rand() % (sampleXWood[iY].size());
-				}
+				int iX = 0;
+				iX = rand() % (sampleXWood[iY].size());
 				randX = sampleXWood[iY][iX];
 				sampleXWood[iY].erase(sampleXWood[iY].begin() + iX);
 				sampleXWood[iY].shrink_to_fit();
