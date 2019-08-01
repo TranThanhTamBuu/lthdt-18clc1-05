@@ -119,6 +119,7 @@ private:
 
 void saveScr(GAME &game);
 void lose();
+void win();
 void level_1();
 void level_2();
 void level_3();

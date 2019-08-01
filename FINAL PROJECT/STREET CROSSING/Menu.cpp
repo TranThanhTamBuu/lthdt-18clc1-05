@@ -340,6 +340,8 @@ void lose()
 	wcout << "\tPRESS ANY KEY TO CONTINUE!";
 	Sleep(300);
 
+	PlaySound("ambulance.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
 	Car c(ambulance, -15, 30, 2);
 	while (!_kbhit()) {
 		c.moveLose();
@@ -348,6 +350,51 @@ void lose()
 
 	};
 	int key = _getch();
+}
+
+void win(){
+	system("cls");
+	PlaySound("applause3.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+	while (!_kbhit()) {
+		setColor(14, 0);
+		gotoXY(5, 15);
+		wcout << "\t\t\t\t      ___           ___           ___                    ___                       ___     " << endl;
+		wcout << "\t\t\t\t     |\\__\\         /\\  \\         /\\__\\                  /\\__\\          ___        /\\__\\    " << endl;
+		wcout << "\t\t\t\t     |:|  |       /::\\  \\       /:/  /                 /:/ _/_        /\\  \\      /::|  |   " << endl;
+		wcout << "\t\t\t\t     |:|  |      /:/\\:\\  \\     /:/  /                 /:/ /\\__\\       \\:\\  \\    /:|:|  |   " << endl;
+		wcout << "\t\t\t\t     |:|__|__   /:/  \\:\\  \\   /:/  /  ___            /:/ /:/ _/_      /::\\__\\  /:/|:|  |__ " << endl;
+		wcout << "\t\t\t\t     /::::\\__\\ /:/__/ \\:\\__\\ /:/__/  /\\__\\          /:/_/:/ /\\__\\  __/:/\\/__/ /:/ |:| /\\__\\" << endl;
+		wcout << "\t\t\t\t    /:/~~/~    \\:\\  \\ /:/  / \\:\\  \\ /:/  /          \\:\\/:/ /:/  / /\\/:/  /    \\/__|:|/:/  /" << endl;
+		wcout << "\t\t\t\t   /:/  /       \\:\\  /:/  /   \\:\\  /:/  /            \\::/_/:/  /  \\::/__/         |:/:/  / " << endl;
+		wcout << "\t\t\t\t   \\/__/         \\:\\/:/  /     \\:\\/:/  /              \\:\\/:/  /    \\:\\__\\         |::/  /  " << endl;
+		wcout << "\t\t\t\t                  \\::/  /       \\::/  /                \\::/  /      \\/__/         /:/  /   " << endl;
+		wcout << "\t\t\t\t                   \\/__/         \\/__/                  \\/__/                     \\/__/    " << endl;
+
+		Sleep(300);
+		gotoXY(64, 35);
+		wcout << "\tPRESS ANY KEY TO CONTINUE!";
+		Sleep(300);
+
+
+		setColor(4, 0);
+		gotoXY(5, 15);
+		wcout << "\t\t\t\t                    ___           ___                    ___                       ___     " << endl;
+		wcout << "\t\t\t\t                   /\\  \\         /\\  \\                  /\\  \\                     /\\  \\    " << endl;
+		wcout << "\t\t\t\t        ___       /::\\  \\        \\:\\  \\                _\\:\\  \\       ___          \\:\\  \\   " << endl;
+		wcout << "\t\t\t\t       /|  |     /:/\\:\\  \\        \\:\\  \\              /\\ \\:\\  \\     /\\__\\          \\:\\  \\  " << endl;
+		wcout << "\t\t\t\t      |:|  |    /:/  \\:\\  \\   ___  \\:\\  \\            _\\:\\ \\:\\  \\   /:/__/      _____\\:\\  \\ " << endl;
+		wcout << "\t\t\t\t      |:|  |   /:/__/ \\:\\__\\ /\\  \\  \\:\\__\\          /\\ \\:\\ \\:\\__\\ /::\\  \\     /::::::::\\__\\" << endl;
+		wcout << "\t\t\t\t    __|:|__|   \\:\\  \\ /:/  / \\:\\  \\ /:/  /          \\:\\ \\:\\/:/  / \\/\\:\\  \\__  \\:\\~~\\~~\\/__/" << endl;
+		wcout << "\t\t\t\t   /::::\\  \\    \\:\\  /:/  /   \\:\\  /:/  /            \\:\\ \\::/  /   ~~\\:\\/\\__\\  \\:\\  \\      " << endl;
+		wcout << "\t\t\t\t   ~~~~\\:\\  \\    \\:\\/:/  /     \\:\\/:/  /              \\:\\/:/  /       \\::/  /   \\:\\  \\     " << endl;
+		wcout << "\t\t\t\t        \\:\\__\\    \\::/  /       \\::/  /                \\::/  /        /:/  /     \\:\\__\\    " << endl;
+		wcout << "\t\t\t\t         \\/__/     \\/__/         \\/__/                  \\/__/         \\/__/       \\/__/    " << endl;
+
+		Sleep(300);
+		gotoXY(64, 35);
+		wcout << "\tPRESS ANY KEY TO CONTINUE!";
+		Sleep(300);
+	}
 }
 
 void level_1() {
