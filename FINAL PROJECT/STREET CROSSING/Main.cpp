@@ -7,6 +7,8 @@
 #include "Wood.h"
 #include "Lilypad.h"
 
+#pragma comment (lib, "winmm.lib")
+
 char MOVING = ' ';
 
 
@@ -17,6 +19,8 @@ int main() {
 	FixSizeWindow(WIDTH, HEIGHT);
 	RemoveScrollBar();
 	ShowConsoleCursor(false);
+
+	PlaySound("Menu.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 
 
 	/*Car c(-10, 0, 1);

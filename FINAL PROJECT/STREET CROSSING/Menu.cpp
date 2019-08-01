@@ -398,8 +398,10 @@ void win(){
 }
 
 void level_1() {
+	PlaySound("level1.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 
 	system("cls");
+	
 	int i = 0;
 	while (i < 5) {
 		setColor(14, 0);
@@ -423,6 +425,7 @@ void level_1() {
 }
 
 void level_2() {
+	PlaySound("level2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	system("cls");
 	int i = 0;
 	while (i < 5){ 
@@ -542,7 +545,7 @@ void level_2() {
 }
 
 void level_3() {
-
+	PlaySound("level3.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	system("cls"); 
 	int i = 0;
 	setColor(12, 0);
@@ -557,7 +560,7 @@ void level_3() {
 }
 
 void level_4() {
-	
+	PlaySound("level4.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 	int i = 0;
 	while (i < 5) {
 
@@ -585,6 +588,8 @@ void level_4() {
 }
 
 void level_5() {
+	PlaySound("level5.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+
 	system("cls");
 	int i = 0;
 	while (i < 5) {
