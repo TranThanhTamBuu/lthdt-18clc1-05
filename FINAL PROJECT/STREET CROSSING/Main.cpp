@@ -53,6 +53,7 @@ int main() {
 	GAME game(1);
 	Menu m;
 	m.ShowTitle();
+	bool flagTitle = true;
 	int key = 1;
 	while (key != 0) {
 		m.control();

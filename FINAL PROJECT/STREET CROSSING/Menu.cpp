@@ -151,8 +151,10 @@ int Menu::Do(GAME &game) {
 		}
 		
 		if (flag) {
-			//victory
-			
+			win();
+			GAME reset(1);
+			game = reset;
+			return 1;
 		}
 		else {
 			lose();
@@ -204,7 +206,7 @@ int Menu::Do(GAME &game) {
 			key = _getch();
 		}
 	}
-	return 1;
+	return 2;
 }
 
 bool SubThread(GAME &game)
@@ -282,7 +284,7 @@ bool SubThread(GAME &game)
 			}
 			else {
 				system("cls");
-				saveScr(game);
+				MenuSave(game);
 				system("cls");
 				//draw line
 				for (int i = 0; i <= 5; i++) {
@@ -350,6 +352,8 @@ void lose()
 
 	};
 	int key = _getch();
+	system("cls");
+	PlaySound("Menu.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 }
 
 void win(){
@@ -395,6 +399,8 @@ void win(){
 		wcout << "\tPRESS ANY KEY TO CONTINUE!";
 		Sleep(300);
 	}
+	system("cls");
+	PlaySound("Menu.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
 }
 
 void level_1() {
@@ -633,8 +639,8 @@ void saveScr(GAME &game) {
 	key = _getch();
 }
 
-void MenuSave() {
-
+void MenuSave(GAME &game) {
+	int flag = -1;
 	system("cls");
 	gotoXY(60, 13);
 	wcout << " ____  ____  ____  _  _  _  _  ____ " << endl;
@@ -729,18 +735,24 @@ void MenuSave() {
 				}
 
 				case 19: {
+					game.save();
 					//SAVE GAME
 					break;
 				}
 
 				case 25: {
+					game.chooseModel();
 					//CHARACTER
 					break;
 				}
 				}
+				flag = 1;
 				break;
 			}
 			}
+		}
+		if (flag == 1) {
+			break;
 		}
 	}
 }
