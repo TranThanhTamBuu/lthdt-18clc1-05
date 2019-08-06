@@ -46,7 +46,7 @@ private:
 	unsigned long money;
 	bool state;
 	unsigned int model;
-	int ownedModel[5] = { 1 };
+	static int ownedModel[5];
 	int prizeModel[5] = { 1500, 1800, 2500, 3200 ,4200 };
 	DirectionState *currentDirectionState;
 };

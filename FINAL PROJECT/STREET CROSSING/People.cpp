@@ -6,6 +6,8 @@
 #include "Down.h"
 
 
+int People::ownedModel[5] = { 1 };
+
 People::People()
 	: Object(X_max/2, 37, Wi), state(true), model(0), money(0) {
 	currentDirectionState = new Down();
