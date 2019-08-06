@@ -190,7 +190,7 @@ bool People::chooseModel() {
 				clrscr();
 				return true;
 			}
-			else if (money > prizeModel[currentChoice]) {
+			else if (money >= prizeModel[currentChoice]) {
 				money -= prizeModel[currentChoice];
 				ownedModel[currentChoice] = 1;
 

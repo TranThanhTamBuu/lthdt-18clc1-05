@@ -136,7 +136,7 @@ int Menu::Do(GAME &game) {
 		bool flag = true;
 		system("cls");
 		if (c == 30) {
-			game.load();
+			game.load(true);
 		}
 		while (flag) {
 			flag = SubThread(game);
@@ -626,7 +626,7 @@ void saveScr(GAME &game) {
 	int key = _getch();
 	switch (key) {
 	case 89: case 121: {
-		game.save();
+		game.save(true);
 		wcout << "Your progress has been saved!" << endl;
 		break;
 	}
@@ -735,7 +735,7 @@ void MenuSave(GAME &game) {
 				}
 
 				case 19: {
-					game.save();
+					game.save(true);
 					//SAVE GAME
 					break;
 				}

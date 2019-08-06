@@ -72,8 +72,8 @@ public:
 	void createLilypads(int yPad[], int linePad, int *numPad);
 
 	// Save and Load
-	void save(bool saveAs = false);
-	void load(bool loadFrom = false);
+	void save(bool saveAs = true);
+	void load(bool loadFrom = true);
 
 	// Operator
 	GAME& operator=(const GAME& rhs);

@@ -783,7 +783,8 @@ void GAME::save(bool saveAs) {
 
 	if (saveAs) {
 		// enter file save name
-		gotoXY(X_max / 2, Y_max / 2);
+		clrscr();
+		gotoXY(X_max / 2 - 10, Y_max / 2);
 		wcout << "Enter file save name: ";
 		wcin >> fileName;
 	}
@@ -964,7 +965,8 @@ void GAME::load(bool loadFrom) {
 
 	if (loadFrom) {
 		// enter file load name
-		gotoXY(X_max / 2, Y_max / 2);
+		clrscr();
+		gotoXY(X_max / 2 - 10, Y_max / 2);
 		wcout << "Enter file load name: ";
 		wcin >> fileName;
 	}

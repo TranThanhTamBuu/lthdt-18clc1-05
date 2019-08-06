@@ -25,9 +25,7 @@ public:
 	void goDown(int step);
 	void goLeft(int step);
 	void goRight(int step);
-	bool isImpact(const Object* &obj);
 	bool isDead();
-	bool isFinish();
 	void draw();
 	void clear();
 	void clearOnWood(DState, unsigned step);
